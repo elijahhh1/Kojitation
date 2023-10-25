@@ -115,13 +115,11 @@ const Navigation:FC = () => {
                     <Item onClick={handleCreate} label='New Koji' Icon={PlusCircle} />
                 </div>
                 <div className='flex-1 mt-4 flex flex-col overflow-hidden'>
-                    <div className='flex-1 overflow-y-auto'>
-                        <DocumentList documents={documents} />
-                    </div>
+                    <div>Todo</div>
                     <div className='h-auto'>
                         <Item onClick={handleCreate} Icon={Plus} label='Add a Koji' />
                         <Popover>
-                            <PopoverTrigger className='w-full mt-3.5'>
+                            <PopoverTrigger className='w-full'>
                                 <Item label='Archives' Icon={Recycle} />
                             </PopoverTrigger>
                             <PopoverContent className='p-0 w-72' side={isMobile?'bottom':'right'}>
@@ -129,7 +127,26 @@ const Navigation:FC = () => {
                             </PopoverContent>
                         </Popover>
                     </div>
-                    
+                    <div className='flex-1 overflow-y-auto'>
+                        <DocumentList documents={documents} />
+                    </div>
+                </div>
+                <div className='flex-1 mt-4 flex flex-col overflow-hidden'>
+                    <div>Journal</div>
+                    <div className='h-auto'>
+                        <Item onClick={handleCreate} Icon={Plus} label='Add a Koji' />
+                        <Popover>
+                            <PopoverTrigger className='w-full'>
+                                <Item label='Archives' Icon={Recycle} />
+                            </PopoverTrigger>
+                            <PopoverContent className='p-0 w-72' side={isMobile?'bottom':'right'}>
+                                <Trashbox />
+                            </PopoverContent>
+                        </Popover>
+                    </div>
+                    <div className='flex-1 overflow-y-auto'>
+                        <DocumentList documents={documents} />
+                    </div>
                 </div>
                 <div onMouseDown={handleMouseDown} onClick={resetWidth} className='hopacity-0 hover:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary right-0 top-0' />
             </aside>
