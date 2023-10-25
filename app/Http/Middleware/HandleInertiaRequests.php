@@ -41,7 +41,7 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'documents'=>Auth::check()?Document::whereNull('document_id')->where('user_id',Auth::id())->where('is_archived',0)->orderBy('id','desc')->get():[],
+            'documents'=>Auth::check()?Document::where('user_id',Auth::id())->where('is_archived',0)->orderBy('id','desc')->get():[],
             'archives'=>Auth::check()?Document::where('user_id',Auth::id())->where('is_archived',1)->orderBy('id','desc')->get():[]
         ];
     }
