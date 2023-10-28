@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { ChevronLeft, MenuIcon, Plus, PlusCircle, Recycle, Search, Settings, LineChart } from 'lucide-react'
+import { ChevronLeft, MenuIcon, Plus, PlusCircle, Recycle, Search, Settings, LineChart,CalendarCheck2 } from 'lucide-react'
 import React, { ElementRef, FC, MouseEventHandler, useEffect, useRef, useState } from 'react'
 import {useMediaQuery}  from 'usehooks-ts';
 import UserNav from '../UserNav';
@@ -15,6 +15,7 @@ import { useSearch } from '@/Hooks/useSearch';
 import { useSettings } from '@/Hooks/useSettings';
 import NavBar from '../DocumentViewComponents/NavBar';
 import { format } from 'date-fns';
+import { Separator } from '@radix-ui/react-dropdown-menu';
 const Navigation:FC = () => {
 
 
@@ -110,8 +111,11 @@ const Navigation:FC = () => {
                 </div>
                 <div>
                     <UserItem />
+                    <Item onClick={()=>router.get(route('mood.index'))} label='Mood Calendar' Icon={CalendarCheck2}  />
+                    <div className='border-b border-b-muted-foreground mx-1 pb-1' />
                     <Item onClick={onOpen} label='Search' Icon={Search} isSearch />
                     <Item onClick={openSettings} label='Settings' Icon={Settings}  />
+                    <div className='border-b border-b-muted-foreground mx-1 pb-1' />
                     {/* <Item onClick={handleCreate} label='New Koji' Icon={PlusCircle} /> */}
                     <Item onClick={()=>router.get(route('dashboard.index'))} label='Dashboard' Icon={LineChart} />
                 </div>

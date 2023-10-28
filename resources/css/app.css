@@ -86,3 +86,28 @@
 #nprogress .bar {
   @apply !shadow-lg !shadow-pink-600  !rounded-r-sm min-h-[0.3rem]
 }
+
+/* MOOD CALENDAR CLASSES */
+.rbc-today{
+  @apply !bg-secondary
+}
+
+.rbc-off-range-bg{
+  @apply !bg-secondary
+}
+
+.rbc-row-segment{
+  @apply !px-3.5 
+}
+
+.rbc-event{
+  @apply !bg-indigo-800 !text-neutral-100 !py-1.5
+}
+
+.rbc-event-content{
+  @apply !text-center  !w-full !text-2xl
+}
+
+.rbc-show-more{
+  @apply !text-primary !bg-transparent
+}
