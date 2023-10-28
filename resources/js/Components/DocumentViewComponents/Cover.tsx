@@ -10,11 +10,11 @@ import { Document } from '@/types';
 interface CoverProps{
     document?:Document;
     preview?:boolean;
-    
+
 }
 
 const Cover:FC<CoverProps> = ({preview,document}) => {
-    
+
     const {onOpen} =useCoverImageModal();
     const url = document?.cover_image;
     const onRemoveIcon = () =>{
@@ -27,7 +27,7 @@ const Cover:FC<CoverProps> = ({preview,document}) => {
     return (
         <div className={cn('relative w-full h-[35vh] group',
             !url ? 'h-[12vh]':'bg-muted')}>
-            {!!url && <img src={url} alt='Cover' className='object-fill w-full h-full' />}
+            {!!url && <img src={url} alt='Cover' className='object-cover object-top w-full h-full' />}
             {
                 (url && !preview) && (
                     <div className='opacity-0 group-hover:opacity-100 absolute bottom-5 right-5 flex items-center gap-x-2'>

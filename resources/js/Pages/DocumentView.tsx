@@ -12,16 +12,16 @@ const Editor = lazy(() => import('@/Components/Editor'));
 
 const DocumentView:FC = () => {
     const {selected_document} = usePage<PageProps>().props;
-    
+
     const onChange = (content:string) =>{
-        
+
         const {id} = selected_document!;
         router.post(route('documents.update',{id}),{
             content
         },{
             preserveState:true
         });
-        
+
     }
     //if(!selected_document) return null;
     return (

@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { ChevronLeft, MenuIcon, Plus, PlusCircle, Recycle, Search, Settings } from 'lucide-react'
+import { ChevronLeft, MenuIcon, Plus, PlusCircle, Recycle, Search, Settings, LineChart } from 'lucide-react'
 import React, { ElementRef, FC, MouseEventHandler, useEffect, useRef, useState } from 'react'
 import {useMediaQuery}  from 'usehooks-ts';
 import UserNav from '../UserNav';
@@ -16,8 +16,8 @@ import { useSettings } from '@/Hooks/useSettings';
 import NavBar from '../DocumentViewComponents/NavBar';
 import { format } from 'date-fns';
 const Navigation:FC = () => {
-    
-    
+
+
     const {selected_document} = usePage<PageProps>().props;
     const {documents} = usePage<PageProps>().props;
     const isMobile = useMediaQuery("(max-width: 768px)");
@@ -33,12 +33,12 @@ const Navigation:FC = () => {
         e.preventDefault();
         e.stopPropagation();
 
-        
+
 
         isResizingRef.current=true;
         document.addEventListener('mousemove',handleMouseMove);
         document.addEventListener('mouseup',handleMouseUp);
-        
+
     }
 
     const handleMouseMove = (e:MouseEvent) =>{
@@ -112,7 +112,8 @@ const Navigation:FC = () => {
                     <UserItem />
                     <Item onClick={onOpen} label='Search' Icon={Search} isSearch />
                     <Item onClick={openSettings} label='Settings' Icon={Settings}  />
-                    <Item onClick={handleCreate} label='New Koji' Icon={PlusCircle} />
+                    {/* <Item onClick={handleCreate} label='New Koji' Icon={PlusCircle} /> */}
+                    <Item onClick={()=>router.get(route('dashboard.index'))} label='Dashboard' Icon={LineChart} />
                 </div>
                 <div className='flex-1 mt-4 flex flex-col overflow-hidden'>
                     <div>Todo</div>
@@ -156,10 +157,10 @@ const Navigation:FC = () => {
                 )}>
                 {!!selected_document?.id?<NavBar isCollapsed={isCollapsed} onResetWidth={resetWidth} />:(
                     <nav className='bg-transparent px-3 py-2 w-full'>
-                        {isCollapsed&& <MenuIcon onClick={resetWidth} className='h-6 w-6 text-muted-foreground' role='button' />}                        
+                        {isCollapsed&& <MenuIcon onClick={resetWidth} className='h-6 w-6 text-muted-foreground' role='button' />}
                     </nav>
                 )}
-                
+
             </div>
         </>
     )
