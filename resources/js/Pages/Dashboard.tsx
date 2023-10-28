@@ -20,21 +20,19 @@ const Dashboard:FC = () => {
             <Head title='Dashboard' />
             <DashboardLayout >
                 <div className='h-full'>
-                    <header className='px-12 flex items-center h-10 bg-gray-100'>
-                        <h1>Welcome {user.name}!</h1>
+                    <header className='px-12 flex items-center h-10 bg-gray-100 dark:invert'>
+                        <h1 className='dark:invert'>Welcome {user.name}!</h1>
                     </header>
 
-                    <div className='p-12'>
-                        <div className='flex items-center'>
-
+                    <div className='p-12 bg-gray-50 dark:invert'>
+                        <div className='flex h-[20rem]'>
+                            <div className='p-4 w-2/3'>
+                                <RenderLineChart linedata={data}/>
+                            </div>
+                            <div className='p-4 w-1/3'>
+                                {/* calendar here */}
+                            </div>
                         </div>
-
-                        <div className='w-3/5 h-1/3'>
-                                <RenderLineChart linedata={data}/>
-                            </div>
-                            <div className='w-2/5 h-1/3'>
-                                <RenderLineChart linedata={data}/>
-                            </div>
                     </div>
                 </div>
             </DashboardLayout>

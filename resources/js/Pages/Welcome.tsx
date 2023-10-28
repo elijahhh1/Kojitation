@@ -14,13 +14,13 @@ const Welcome = () => {
             <Head title={`Welcome to ${APP_NAME}`} />
             <Layout>
                 <div className='min-h-full flex flex-col '>
-                    <div className='flex flex-col items-center justify-center md:justify-start text-center gap-y-8 flex-1 px-5 py-9'>
+                    <div className='relative flex flex-col items-center justify-center md:justify-start text-center gap-y-8 flex-1 px-5 py-9'>
                         <Heading />
                         <Heroes />
                     </div>
                 </div>
             </Layout>
-        </>    
+        </>
     )
 }
 
