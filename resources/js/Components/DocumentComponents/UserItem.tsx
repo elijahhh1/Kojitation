@@ -5,7 +5,7 @@ import { AvatarFallback, AvatarImage } from '../ui/avatar'
 import { router, usePage } from '@inertiajs/react'
 import { PageProps } from '@/types'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
-import { ChevronsLeftRight } from 'lucide-react'
+import { ChevronsLeftRight, ChevronDown } from 'lucide-react'
 import { APP_NAME } from '../../Pages/Welcome';
 
 const UserItem = () => {
@@ -15,15 +15,15 @@ const UserItem = () => {
             <DropdownMenuTrigger asChild>
                 <div role='button' className='flex items-center text-sm p-2.5 w-full hover:bg-primary/5'>
                     <div className=' gap-x-1.5 flex items-center max-w-[9.375rem]'>
-                        <Avatar className='h-5 w-5'>
+                        {/* <Avatar className='h-5 w-5'>
                             <AvatarImage src="" alt="@shadcn" />
                             <AvatarFallback className='bg-background'>{user.name.charAt(0)}</AvatarFallback>
-                        </Avatar>
+                        </Avatar> */}
                         <span className=' text-start font-medium line-clamp-1'>
-                            {user.name}&apos;s {APP_NAME}
+                            {APP_NAME}
                         </span>
                     </div>
-                    <ChevronsLeftRight className='rotate-90 ml-2 text-muted-foreground h-4 w-4' />
+                    <ChevronDown className='ml-2 text-muted-foreground h-4 w-4' />
                 </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-80" align="start" alignOffset={11} forceMount>

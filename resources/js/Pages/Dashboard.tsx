@@ -12,15 +12,29 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer } fro
 
 const Dashboard:FC = () => {
 
+    const user = usePage<PageProps>().props.auth.user;
     const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}, {name: 'Page B', uv: 500, pv: 2500, amt: 2500}];
 
     return (
         <>
             <Head title='Dashboard' />
             <DashboardLayout >
-                <div className='h-full flex flex-col items-center justify-center space-y-3.5'>
-                    <div className='w-1/2'>
-                        <RenderLineChart linedata={data}/>
+                <div className='h-full'>
+                    <header className='px-12 flex items-center h-10 bg-gray-100'>
+                        <h1>Welcome {user.name}!</h1>
+                    </header>
+
+                    <div className='p-12'>
+                        <div className='flex items-center'>
+
+                        </div>
+
+                        <div className='w-3/5 h-1/3'>
+                                <RenderLineChart linedata={data}/>
+                            </div>
+                            <div className='w-2/5 h-1/3'>
+                                <RenderLineChart linedata={data}/>
+                            </div>
                     </div>
                 </div>
             </DashboardLayout>

@@ -20,7 +20,7 @@ const ToolBar:FC<ToolBarProps> = ({initialData,preview}) => {
     const [isEditing,setIsEditing] = useState(false);
     const [val,setVal] = useState(initialData.title);
     const {onOpen} = useCoverImageModal();
-    
+
 
 
     const enableInput = () =>{
@@ -66,7 +66,7 @@ const ToolBar:FC<ToolBarProps> = ({initialData,preview}) => {
 
     return (
         <div className='pl-[3.375rem] group relative'>
-            {(!preview&&initialData.is_archived==0)&&<p className=' font-semibold tracking-tight text-3xl'>How Are You Feeling Today?</p>}
+            {/* {(!preview&&initialData.is_archived==0)&&<p className=' font-semibold tracking-tight text-3xl'>How Are You Feeling Today?</p>} */}
             {
                 (!!initialData.icon && !preview) && (
                     <div className='flex items-center gap-x-2 group/icon pt-6'>
@@ -96,7 +96,7 @@ const ToolBar:FC<ToolBarProps> = ({initialData,preview}) => {
                     </div>
                 )
             }
-                
+
         </div>
     )
 }
