@@ -33,3 +33,13 @@ export interface Document{
     created_at:string;
 }
 
+export interface Mood{
+    id:number;
+    user_id:number;
+    user:User;
+    icon:string;
+    description:string;
+    start:string;
+    end:string;
+}
+
