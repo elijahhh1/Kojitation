@@ -1,14 +1,17 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Button } from './ui/button'
 import { ArrowRight } from 'lucide-react'
 import { router, usePage } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import { useAuthModal } from '@/Hooks/useAuthModal';
+import RegisterModal from '@/Components/Modals/RegisterModal';
 import { APP_NAME } from '@/Pages/Welcome';
 
 const Heading:FC = () => {
     const user = usePage<PageProps>().props.auth.user;
-    const {onOpen} =useAuthModal();
+    const {onOpen} = useAuthModal();
+    const [registerOpen, setRegisterOpen] = useState(false);
+
     return (
         <div className='absolute z-10 max-w-3xl flex flex-col space-y-3.5'>
                 <h1 className='text-3xl sm:text-5xl md:text-6xl font-bold'>
@@ -24,7 +27,7 @@ const Heading:FC = () => {
 
                 {
                     !user?<div className='flex flex-col space-y-2'>
-                        <Button variant='outline' onClick={onOpen} className='bg-blue-200 mx-auto'>Hi! I'm a new user</Button>
+                        <Button variant='outline' onClick={()=>setRegisterOpen(true)} className='bg-blue-200 mx-auto'>Hi! I'm a new user</Button>
                         <a href="#" onClick={onOpen} className='text-sm mx-auto hover:underline'>I already have an account</a>
                         </div>:(
                         <Button onClick={()=>router.get(route('dashboard.index'))} className='mx-auto'>
@@ -33,6 +36,8 @@ const Heading:FC = () => {
                         </Button>
                     )
                 }
+
+                <RegisterModal isOpen={registerOpen} onClose={()=>setRegisterOpen(false)} />
 
         </div>
     )
