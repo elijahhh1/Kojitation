@@ -13,7 +13,7 @@ const SettingsModal:FC = () => {
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle className='border-b pb-2.5'>
-                        <h2 className='text-lg font-medium'>{APP_NAME} Settings</h2>
+                        <span className='text-lg font-medium'>{APP_NAME} Settings</span>
                     </DialogTitle>
                 </DialogHeader>
                 <div className='flex items-center justify-between'>
