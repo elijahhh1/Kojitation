@@ -13,7 +13,7 @@ const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) =
 
     const {data,setData,processing,errors,reset,post} = useForm({
         name:"",
-        username:"",
+        user_name:"",
         email:"",
         password:"",
         password_confirmation:""
@@ -23,7 +23,7 @@ const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) =
         if (!isOpen) {
             reset();
             errors.name="";
-            errors.username="";
+            errors.user_name="";
             errors.email="";
             errors.password="";
             errors.password_confirmation="";
@@ -35,8 +35,10 @@ const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) =
         post(route('register'),{
             onSuccess:()=>{
                 isOpen = false;
-                toast.success('Registration successful')
-            }
+                toast.success('Registration successful');
+                onClose();
+            },
+            onError:(e)=>console.log(e)
         });
     }
 
@@ -59,12 +61,12 @@ const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) =
                     {errors.name && <p className='text-destructive text-xs text-right -mt-3'>{errors.name}</p>}
 
                     <div className="flex flex-col items-start justify-center space-y-1.5">
-                        <Label htmlFor="username" className="text-right">
-                            Username
+                        <Label htmlFor="user_name" className="text-right">
+                            UserName
                         </Label>
-                        <Input required value={data.username} onChange={({target})=>setData('username',target.value)} disabled={processing} id="username" className="col-span-3" autoComplete='off'/>
+                        <Input required value={data.user_name} onChange={({target})=>setData('user_name',target.value)} disabled={processing} id="user_name" className="col-span-3" autoComplete='off'/>
                     </div>
-                    {errors.username && <p className='text-destructive text-xs text-right -mt-3'>{errors.username}</p>}
+                    {errors.user_name && <p className='text-destructive text-xs text-right -mt-3'>{errors.user_name}</p>}
 
                     <div className="flex flex-col items-start justify-center space-y-1.5">
                         <Label htmlFor="email" className="text-right">
