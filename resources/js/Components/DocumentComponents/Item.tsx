@@ -19,9 +19,10 @@ interface ItemProps{
     label:string;
     Icon:LucideIcon;
     updateDate?:Date;
+    isDone?:boolean;
 }
 
-const Item:FC<ItemProps> = ({Icon,label,onClick,id,documentIcon,active,expanded,isSearch,level=0,onExpand,updateDate}) => {
+const Item:FC<ItemProps> = ({Icon,label,onClick,id,documentIcon,active,expanded,isSearch,level=0,onExpand,updateDate,isDone}) => {
     const ChevronIcon = expanded? ChevronDown:ChevronRight;
     const handleExpand:MouseEventHandler<HTMLDivElement> = e =>{
         e.stopPropagation();

@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import { Document, PageProps } from '@/types';
 import {FC,useState,useEffect} from 'react'
 import Item from './Item';
-import { FileIcon } from 'lucide-react';
+import { CheckCircle, CheckCircle2, FileIcon } from 'lucide-react';
 import { router, usePage, useRemember } from '@inertiajs/react';
 
 interface Props{
@@ -43,10 +43,11 @@ const DocumentList:FC<Props> = ({parentDocumentId,level=0,documents}) => {
                 documents?.map(({id,...document})=>(
                     <div key={id}>
                         <Item
+                            isDone={document.is_done===1}
                             id={id} 
                             onClick={()=>navigate(id)}
                             label={document.title}
-                            Icon={FileIcon}
+                            Icon={ document.is_done? CheckCircle : FileIcon  }
                             documentIcon={document.icon}
                             active={selected_document?.id===id}
                             level={level}

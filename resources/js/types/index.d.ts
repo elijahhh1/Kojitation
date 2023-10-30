@@ -26,6 +26,7 @@ export interface Document{
     cover_image?:string;
     icon?:string;
     is_published:1|0;
+    is_done:1|0;
     user:User;
     document?:Document;
     documents:Document[];
