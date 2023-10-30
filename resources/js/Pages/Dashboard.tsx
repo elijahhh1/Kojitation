@@ -1,6 +1,6 @@
 import { Button } from '@/Components/ui/button';
 import DashboardLayout from '@/Layouts/DashboardLayout'
-import { Document, PageProps } from '@/types';
+import { Document, PageProps, Mood } from '@/types';
 import { Head, router, usePage } from '@inertiajs/react'
 import { PlusCircle } from 'lucide-react';
 import {FC,useEffect,useMemo} from 'react'
@@ -8,7 +8,6 @@ import { APP_NAME } from './Welcome';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer } from 'recharts';
-import { Mood } from '@/types';
 import { log } from 'console';
 
 const Dashboard:FC<{moods:Mood[]}> = ({moods}) => {
