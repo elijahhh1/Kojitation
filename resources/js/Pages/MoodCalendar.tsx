@@ -10,6 +10,7 @@ import MoodModal from '@/Components/Modals/MoodModal';
 import { Mood } from '@/types';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/Components/ui/dialog'
 import { format } from 'date-fns';
+import { toast } from 'sonner';
 
 const MoodCalendar:FC<{moods:Mood[]}> = ({moods}) => {
     const [open,setOpen] = useState(false);
@@ -41,6 +42,14 @@ const MoodCalendar:FC<{moods:Mood[]}> = ({moods}) => {
         }));
     }
 
+    const handleOpen = () =>{
+        const today=(new Date()).toLocaleDateString();
+        const toDtString = (dt:string) => (new Date(dt)).toLocaleDateString()
+        const moodIndex = moods.findIndex(mood=>today===toDtString(mood.start));
+        if(moodIndex>-1) return toast.error('You already set a mood today');
+        setOpen(true);
+    }
+
     return (
         <>
             <Head title='Mood Calendar' />
@@ -51,7 +60,7 @@ const MoodCalendar:FC<{moods:Mood[]}> = ({moods}) => {
                     <div className='pt-2.5 mb-3.5 border-b border-b-muted-foreground/40 pb-6 flex items-center '>
                         <p className='flex-1 font-bold tracking-tight text-xl text-start pl-7 md:pl-0 md:text-3xl md:text-center'>Mood Calendar</p>
 
-                        <Button onClick={()=>setOpen(true)} size='sm' variant='outline'>
+                        <Button onClick={handleOpen} size='sm' variant='outline'>
                             <PlusCircle  className='w-5 h-5' />
                         </Button>
 

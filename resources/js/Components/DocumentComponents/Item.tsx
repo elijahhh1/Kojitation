@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { ChevronDown, ChevronRight, LucideIcon, MoreHorizontal, Plus, Trash } from 'lucide-react';
+import { CheckCircle2, ChevronDown, ChevronRight, LucideIcon, MoreHorizontal, Plus, Trash } from 'lucide-react';
 import React, { FC,MouseEventHandler } from 'react'
 import { Skeleton } from '../ui/skeleton';
 import { router } from '@inertiajs/react';
@@ -56,6 +56,20 @@ const Item:FC<ItemProps> = ({Icon,label,onClick,id,documentIcon,active,expanded,
         });
     }
 
+
+    const handleDone:MouseEventHandler<HTMLDivElement> = e =>{
+        e.stopPropagation();
+        if(!id) return;
+        router.post(route('documents.update',{id}),{is_done:1},{
+            preserveState:true,
+            onSuccess:()=>{
+                toast.success('TODO is Done!');
+            },
+            onError:()=>toast.error('Something Went Wrong. Please try again....')
+        });
+    }
+    
+
     return (
         <div onClick={onClick} role='button' 
             style={{ paddingLeft: level >0? `${(level*0.75)+0.75}rem` :'0.75rem' }} 
@@ -63,9 +77,9 @@ const Item:FC<ItemProps> = ({Icon,label,onClick,id,documentIcon,active,expanded,
                 active && 'bg-primary/5 text-primary'
             )}>
             {!!id && <div role='button' className='h-full rounded-sm opacity-70 hover:opacity-100 hover:bg-secondary transition mr-1' onClick={handleExpand}><ChevronIcon className='h-4 w-4 shrink-0 text-muted-foreground/50' /></div>}
-            {documentIcon?<div className='shrink-0 mr-2 text-[1.125rem]'>{documentIcon}</div>:<Icon className='shrink-0 h-[1.125rem] w-[1.125rem] mr-2 text-muted-foreground' />}
+            {documentIcon?<div className='shrink-0 mr-2 text-[1.125rem]'>{documentIcon}</div>:<Icon className={cn('shrink-0 h-[1.125rem] w-[1.125rem] mr-2 text-muted-foreground',isDone&&'dark:text-green-400 text-green-500')} />}
             
-            <span className='truncate'>{label}</span>
+            <span className={cn('truncate',isDone&&'dark:text-green-400 text-green-500')}>{label}</span>
             {
                 isSearch && (
                     <kbd className='ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[0.625rem] text-muted-foreground'>
@@ -83,6 +97,10 @@ const Item:FC<ItemProps> = ({Icon,label,onClick,id,documentIcon,active,expanded,
                                 </div>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className='w-60' align='start' side='right' forceMount>
+                                <DropdownMenuItem onClick={handleDone} className='dark:text-green-400 text-green-500'>
+                                    <CheckCircle2 className='h-4 w-4 mr-2' />
+                                    <span>Done</span>
+                                </DropdownMenuItem>
                                 <DropdownMenuItem onClick={handleArchive}>
                                     <Trash className='h-4 w-4 mr-2' />
                                     <span>Delete</span>
