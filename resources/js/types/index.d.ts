@@ -42,5 +42,6 @@ export interface Mood{
     description:string;
     start:string;
     end:string;
+    mood_level:number;
 }
 
