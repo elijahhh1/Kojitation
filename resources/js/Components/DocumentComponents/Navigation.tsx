@@ -94,6 +94,8 @@ const Navigation:FC = () => {
         router.post(route('documents.store'),{
             title:`Koji: ${format(new Date(),'Pp')}`
         },{
+            preserveScroll:true,
+            preserveState:false,
             onError:()=>toast.error('Something Went Wrong. Please try again....')
         });
     }

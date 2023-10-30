@@ -13,7 +13,7 @@ interface Props{
 }
 
 const DocumentList:FC<Props> = ({parentDocumentId,level=0,documents}) => {
-    const [showDone,setShowDone] = useState(true);
+    const [showDone,setShowDone] = useState(false);
     const {selected_document} = usePage<PageProps>().props;
     const [expanded,setExpanded] = useState<Record<number,boolean>>({});
 
@@ -36,10 +36,10 @@ const DocumentList:FC<Props> = ({parentDocumentId,level=0,documents}) => {
 
     return (
         <>
-            <div className='flex items-center justify-center space-x-2 '>
+            {/* <div className='flex items-center justify-center space-x-2 '>
                 <label htmlFor='switch' className='text-sm font-light'>Show Completed</label>
                 <Switch id='switch'  checked={showDone} onCheckedChange={e=>(setShowDone(e))} />
-            </div>
+            </div> */}
             <p style={{ paddingLeft: level >0? `${(level*0.75)+1.563}rem` :undefined }} className={cn('hidden text-sm font-medium text-muted-foreground/80',
                 expanded && 'last:block',
                 level===0&&'hidden'
