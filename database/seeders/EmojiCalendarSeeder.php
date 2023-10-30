@@ -17,16 +17,24 @@ class EmojiCalendarSeeder extends Seeder
     public function run(): void
     {
         $users = User::all();
-        $arr=['😡','😞','😐','🙂','😄'];
+        $arr=[
+            ['level'=>1,'icon'=>'😡'],
+            ['level'=>2,'icon'=>'😞'],
+            ['level'=>3,'icon'=>'😐'],
+            ['level'=>4,'icon'=>'🙂'],
+            ['level'=>5,'icon'=>'😄']
+        ];
 
         foreach($users as $user){
             $faker = Factory::create();
             for($i=1;$i<102;$i++){
                 $start=Carbon::now()->subDays($i);
                 $end=$start->addHour();
+                $mood=$faker->randomElement($arr);
                 Mood::create([
-                    'user_id'=>$user->id,
-                    'icon'=>$faker->randomElement($arr),
+                    'user_id'=>$user->id,                    
+                    'mood_level'=>$mood['level'],
+                    'icon'=>$mood['icon'],
                     'description'=>$faker->sentence(),
                     'start'=>$start,
                     'end'=>$end
