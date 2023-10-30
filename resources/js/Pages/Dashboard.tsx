@@ -3,17 +3,20 @@ import DashboardLayout from '@/Layouts/DashboardLayout'
 import { Document, PageProps } from '@/types';
 import { Head, router, usePage } from '@inertiajs/react'
 import { PlusCircle } from 'lucide-react';
-import {FC,useEffect} from 'react'
+import {FC,useEffect,useMemo} from 'react'
 import { APP_NAME } from './Welcome';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer } from 'recharts';
+import { Mood } from '@/types';
+import { log } from 'console';
 
-
-const Dashboard:FC = () => {
+const Dashboard:FC<{moods:Mood[]}> = ({moods}) => {
 
     const user = usePage<PageProps>().props.auth.user;
-    const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}, {name: 'Page B', uv: 500, pv: 2500, amt: 2500}];
+    var data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}, {name: 'Page B', uv: 500, pv: 2500, amt: 2500}];
+
+    const lineMoods= useMemo(()=>moods.map(({start,user_id,icon})=>({name:new Date(start),icon,uv:icon,pv:user_id,amt:2400})),[moods]);
 
     return (
         <>

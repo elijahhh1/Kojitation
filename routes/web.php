@@ -31,7 +31,7 @@ Route::middleware(['auth'])->prefix('dashboard')->name('dashboard.')->group(func
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::prefix('documents')->name('documents.')->group(function(){
+    Route::prefix('documents')->name('documents.')->group(function () {
         Route::get('/', [DocumentController::class, 'index'])->name('index');
         Route::get('/show/{id}', [DocumentController::class, 'show'])->name('show');
         Route::post('/store', [DocumentController::class, 'store'])->name('store');
@@ -44,11 +44,10 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    Route::prefix('mood')->name('mood.')->group(function(){
+    Route::prefix('mood')->name('mood.')->group(function () {
         Route::get('/', [MoodController::class, 'index'])->name('index');
         Route::post('/store', [MoodController::class, 'store'])->name('store');
     });
-
 });
 
 
