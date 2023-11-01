@@ -11,6 +11,7 @@ use App\Http\Controllers\VideoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,10 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('videos')->name('videos.')->group(function () {
         Route::get('/', [VideoController::class, 'index'])->name('index');
         Route::post('/store', [VideoController::class, 'store'])->name('store');
+    });
+
+    Route::prefix('tasks')->name('tasks.')->group(function () {
+        Route::get('/', [TaskController::class, 'index'])->name('index');
     });
 
     Route::prefix('chatbot')->name('chatbot.')->group(function () {

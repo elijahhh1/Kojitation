@@ -54,3 +54,22 @@ export interface Video{
     updated_at:string;
 }
 
+export interface Task{
+    id:number;
+    user_id:number;
+    name:string;
+    target_date?:string;
+    created_at:string;
+    updated_at:string;
+    tasks:TaskItem[];
+}
+
+export interface TaskItem{
+    id:number;
+    task_id:number;
+    name:string;
+    target_date?:string;
+    is_completed:0|1;
+    created_at:string;
+    updated_at:string;
+}
