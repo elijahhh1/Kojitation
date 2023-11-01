@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
+use function Psy\debug;
+
 class MoodController extends Controller
 {
     /**
@@ -15,8 +17,8 @@ class MoodController extends Controller
      */
     public function index()
     {
-        return Inertia::render('MoodCalendar',[
-            'moods'=>Mood::where('user_id',Auth::id())->get()
+        return Inertia::render('MoodCalendar', [
+            'moods' => Mood::where('user_id', Auth::id())->get()
         ]);
     }
 
@@ -34,11 +36,11 @@ class MoodController extends Controller
     public function store(Request $request)
     {
         Mood::create([
-            'user_id'=>Auth::id(),
-            'icon'=>$request->icon,
-            'description'=>$request->description,
-            'start'=>now(),
-            'end'=> Carbon::now()->addHour()
+            'user_id' => Auth::id(),
+            'icon' => $request->icon,
+            'description' => $request->description,
+            'start' => now(),
+            'end' => Carbon::now()->addHour()
         ]);
     }
 
@@ -72,5 +74,12 @@ class MoodController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function test()
+    {
+        $prevMonth = (now()->month - 1);
+        $moods = Mood::where('user_id', Auth::id())->whereMonth('start', $prevMonth)->get();
+        dd($moods);
     }
 }

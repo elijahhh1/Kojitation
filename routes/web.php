@@ -29,6 +29,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/show/{month}', [DashboardController::class, 'show'])->name('show');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -48,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('mood')->name('mood.')->group(function () {
         Route::get('/', [MoodController::class, 'index'])->name('index');
         Route::post('/store', [MoodController::class, 'store'])->name('store');
+        Route::get('/test', [MoodController::class, 'test'])->name('test');
     });
 
     Route::prefix('videos')->name('videos.')->group(function () {

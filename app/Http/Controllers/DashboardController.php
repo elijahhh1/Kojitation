@@ -16,7 +16,9 @@ class DashboardController extends Controller
     public function index()
     {
         return Inertia::render('Dashboard', [
-            'moods' => Mood::where('user_id', Auth::id())->get()
+            'moods' => Mood::where('user_id', Auth::id())
+                ->whereMonth('start', now()->month)
+                ->get()
         ]);
     }
 
@@ -39,9 +41,13 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Dashboard $dashboard)
+    public function show(Request $dashboard)
     {
-        //
+        return Inertia::render('Dashboard', [
+            'moods' => Mood::where('user_id', Auth::id())
+                ->whereMonth('start', $dashboard->month)
+                ->get()
+        ]);
     }
 
     /**
