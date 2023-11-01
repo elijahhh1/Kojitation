@@ -119,7 +119,7 @@ const Navigation:FC = () => {
                     <Item onClick={()=>router.get(route('dashboard.index'))} label='Dashboard' Icon={LineChart} />
                     <Item onClick={()=>router.get(route('mood.index'))} label='Mood Calendar' Icon={CalendarCheck2}  />
                     {/* <Item onClick={handleCreate} label='New Koji' Icon={PlusCircle} /> */}
-                    <Item onClick={()=>router.get(route('video.index'))} label='Videos' Icon={Video} />
+                    <Item onClick={()=>router.get(route('videos.index'))} label='Videos' Icon={Video} />
                     <Item onClick={()=>router.get(route('chatbot.index'))} label='Chatbot' Icon={Bot} />
                     <div className='border-b border-b-[#e3e3e3] pb-1' />
                 </div>

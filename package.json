@@ -46,6 +46,7 @@
         "lucide-react": "^0.287.0",
         "react-big-calendar": "^1.8.4",
         "react-dropzone": "^14.2.3",
+        "react-responsive-carousel": "^3.2.23",
         "react-textarea-autosize": "^8.5.3",
         "recharts": "^2.9.0",
         "sonner": "^1.0.3",

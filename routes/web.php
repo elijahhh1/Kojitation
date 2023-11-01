@@ -50,8 +50,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store', [MoodController::class, 'store'])->name('store');
     });
 
-    Route::prefix('video')->name('video.')->group(function () {
+    Route::prefix('videos')->name('videos.')->group(function () {
         Route::get('/', [VideoController::class, 'index'])->name('index');
+        Route::post('/store', [VideoController::class, 'store'])->name('store');
     });
 
     Route::prefix('chatbot')->name('chatbot.')->group(function () {

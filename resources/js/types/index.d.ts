@@ -45,3 +45,12 @@ export interface Mood{
     mood_level:number;
 }
 
+export interface Video{
+    id:number;
+    user_id:number;
+    name:string;
+    path:string;
+    created_at:string;
+    updated_at:string;
+}
+
