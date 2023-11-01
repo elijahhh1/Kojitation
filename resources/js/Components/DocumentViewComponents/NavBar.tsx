@@ -23,7 +23,7 @@ const NavBar:FC<Props> = ({isCollapsed,onResetWidth}) => {
                 <div className='flex items-center justify-between w-full'>
                     <Title initialData={selected_document} />
                     <div className='flex items-center gap-x-2'>
-                        <Publish document={selected_document} />
+                        {/* <Publish document={selected_document} /> */}
                         <Menu updateDate={new Date(selected_document.updated_at)} id={selected_document.id} />
                     </div>
                 </div>

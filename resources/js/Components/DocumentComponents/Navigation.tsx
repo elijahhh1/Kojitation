@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { ChevronLeft, MenuIcon, Plus, PlusCircle, Recycle, Search, Settings, LineChart,CalendarCheck2 } from 'lucide-react'
+import { ChevronLeft, MenuIcon, Plus, PlusCircle, Recycle, Search, Settings, LineChart, CalendarCheck2, Video, Bot } from 'lucide-react'
 import React, { ElementRef, FC, MouseEventHandler, useEffect, useRef, useState } from 'react'
 import {useMediaQuery}  from 'usehooks-ts';
 import UserNav from '../UserNav';
@@ -113,13 +113,15 @@ const Navigation:FC = () => {
                 </div>
                 <div>
                     <UserItem />
-                    <Item onClick={()=>router.get(route('mood.index'))} label='Mood Calendar' Icon={CalendarCheck2}  />
-                    <div className='border-b border-b-muted-foreground mx-1 pb-1' />
                     <Item onClick={onOpen} label='Search' Icon={Search} isSearch />
                     <Item onClick={openSettings} label='Settings' Icon={Settings}  />
-                    <div className='border-b border-b-muted-foreground mx-1 pb-1' />
-                    {/* <Item onClick={handleCreate} label='New Koji' Icon={PlusCircle} /> */}
+                    <div className='border-b border-b-[#e3e3e3] pb-1' />
                     <Item onClick={()=>router.get(route('dashboard.index'))} label='Dashboard' Icon={LineChart} />
+                    <Item onClick={()=>router.get(route('mood.index'))} label='Mood Calendar' Icon={CalendarCheck2}  />
+                    {/* <Item onClick={handleCreate} label='New Koji' Icon={PlusCircle} /> */}
+                    <Item onClick={()=>router.get(route('video.index'))} label='Videos' Icon={Video} />
+                    <Item onClick={()=>router.get(route('chatbot.index'))} label='Chatbot' Icon={Bot} />
+                    <div className='border-b border-b-[#e3e3e3] pb-1' />
                 </div>
                 <div className='flex-1 mt-4 flex flex-col overflow-hidden'>
                     <div>Todo</div>

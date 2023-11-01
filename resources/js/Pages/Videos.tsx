@@ -1,27 +1,32 @@
 import Cover from '@/Components/DocumentViewComponents/Cover';
 import Editor from '@/Components/Editor';
 import ToolBar from '@/Components/ToolBar';
+import VideoLayout from '@/Layouts/VideoLayout';
 import { Document } from '@/types'
 import { Head } from '@inertiajs/react';
 import {FC} from 'react'
 
-interface Props{
-    document:Document;
-}
-
-const Public:FC<Props> = ({document}) => {
+const Videos:FC = () => {
     return (
         <>
-            <Head title={document.title} />
-            <div className='pb-40'>
-                <Cover preview document={document} />
-                <div className='md:max-w-3xl lg:max-w-4xl mx-auto'>
-                    <ToolBar preview initialData={document!} />
-                    <Editor editable={false} document={document} onChange={()=>{}} />
+            <Head title='Dashboard' />
+            <VideoLayout >
+                <div className='h-full'>
+                    <header className='p-4 flex items-center h-10 bg-gray-100 dark:invert'>
+                        <h1 className='dark:invert'>Kojitation's Video</h1>
+                    </header>
+
+                    <div className='px-4 md:p-12 bg-gray-50 dark:invert'>
+                        <div className='flex h-[25rem]'>
+                            <div className='p-4 w-full'>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </VideoLayout>
         </>
     )
 }
 
-export default Public
+export default Videos

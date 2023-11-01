@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\MoodController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ChatbotController;
+use Inertia\Inertia;
 use App\Models\Document;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\MoodController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,10 +45,17 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/permanent_destroy/{id}', [DocumentController::class, 'permanent_destroy'])->name('permanent_destroy');
     });
 
-
     Route::prefix('mood')->name('mood.')->group(function () {
         Route::get('/', [MoodController::class, 'index'])->name('index');
         Route::post('/store', [MoodController::class, 'store'])->name('store');
+    });
+
+    Route::prefix('video')->name('video.')->group(function () {
+        Route::get('/', [VideoController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('chatbot')->name('chatbot.')->group(function () {
+        Route::get('/', [ChatbotController::class, 'index'])->name('index');
     });
 });
 
