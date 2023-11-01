@@ -18,7 +18,8 @@ const MoodModal:FC<MoodModalProps> = ({open,onClose}) => {
     const [showEmojis,setShowEmojis] = useState(false);
     const {post,data,setData,processing  ,reset} = useForm({
         icon:"",
-        description:""
+        description:"",
+        mood_level:0
     });
 
     const onSubmit:FormEventHandler<HTMLFormElement> = (e) =>{
@@ -29,8 +30,8 @@ const MoodModal:FC<MoodModalProps> = ({open,onClose}) => {
         })
     }
 
-    const onSelect=(icon:string)=>{
-        setData('icon',icon);
+    const onSelect=(icon:{id:number;icon:string})=>{
+        setData(val=>({...val,mood_level:icon.id,icon:icon.icon}));
     }
 
     useEffect(()=>{
@@ -100,15 +101,15 @@ export const emojis=[
 interface EmojiChoicesProps{
     // open?:boolean;
     // onClose:()=>void;
-    onSelect:(icon:string)=>void;
+    onSelect:(icon:{id:number;icon:string})=>void;
     children:ReactNode;
 }
 
 
 
 const EmojiChoices:FC<EmojiChoicesProps> = ({children,onSelect}) =>{
-    const handleSelect= (icon:string) =>{
-        onSelect(icon);
+    const handleSelect= (emoji:{id:number;icon:string}) =>{
+        onSelect(emoji);
     }
     return (
         <Popover > 
@@ -118,7 +119,7 @@ const EmojiChoices:FC<EmojiChoicesProps> = ({children,onSelect}) =>{
             <PopoverContent side='right' >
                 <p className='w-full font-semibold'>Choose Mood Icon</p>
                 <div  className='flex items-center justify-center gap-x-1 '>
-                    {emojis.map(({id,icon})=><p role='button' onClick={()=>handleSelect(icon)} key={id} className='text-4xl p-1 text-center '>{icon}</p>)}
+                    {emojis.map((emoji)=><p role='button' onClick={()=>handleSelect(emoji)} key={emoji.id} className='text-4xl p-1 text-center '>{emoji.icon}</p>)}
                 </div>
             </PopoverContent>
         </Popover>

@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { ChevronLeft, MenuIcon, Plus, PlusCircle, Recycle, Search, Settings, LineChart, CalendarCheck2, Video, Bot } from 'lucide-react'
+import { ChevronLeft, MenuIcon, Plus, PlusCircle, Recycle, Search, Settings, LineChart, CalendarCheck2, Video, Bot, ClipboardList } from 'lucide-react'
 import React, { ElementRef, FC, MouseEventHandler, useEffect, useRef, useState } from 'react'
 import {useMediaQuery}  from 'usehooks-ts';
 import UserNav from '../UserNav';
@@ -21,6 +21,8 @@ const Navigation:FC = () => {
 
     const {selected_document} = usePage<PageProps>().props;
     const {documents} = usePage<PageProps>().props;
+    const user = usePage<PageProps>().props.auth.user;
+    
     const isMobile = useMediaQuery("(max-width: 768px)");
     const isResizingRef = useRef(false);
     const sidebarRef = useRef<ElementRef<'aside'>>(null);
@@ -100,6 +102,10 @@ const Navigation:FC = () => {
         });
     }
 
+    const handleCreateTODO = () =>{
+        
+    }
+
     return (
         <>
             <aside ref={sidebarRef} className={cn('group/sidebar max-h-screen overflow-hidden h-full bg-secondary overflow-y-auto relative flex flex-col w-60 z-[100000] ',
@@ -113,32 +119,16 @@ const Navigation:FC = () => {
                 </div>
                 <div>
                     <UserItem />
-                    <Item onClick={onOpen} label='Search' Icon={Search} isSearch />
                     <Item onClick={openSettings} label='Settings' Icon={Settings}  />
                     <div className='border-b border-b-[#e3e3e3] pb-1' />
+                    <Item onClick={()=>router.get(route('tasks.index'))} label={`${user.name}'s Tasks`} Icon={ClipboardList} />
                     <Item onClick={()=>router.get(route('dashboard.index'))} label='Dashboard' Icon={LineChart} />
                     <Item onClick={()=>router.get(route('mood.index'))} label='Mood Calendar' Icon={CalendarCheck2}  />
                     {/* <Item onClick={handleCreate} label='New Koji' Icon={PlusCircle} /> */}
                     <Item onClick={()=>router.get(route('videos.index'))} label='Videos' Icon={Video} />
                     <Item onClick={()=>router.get(route('chatbot.index'))} label='Chatbot' Icon={Bot} />
                     <div className='border-b border-b-[#e3e3e3] pb-1' />
-                </div>
-                <div className='flex-1 mt-4 flex flex-col overflow-hidden'>
-                    <div>Todo</div>
-                    <div className='h-auto'>
-                        <Item onClick={handleCreate} Icon={Plus} label='Add a Koji' />
-                        <Popover>
-                            <PopoverTrigger className='w-full'>
-                                <Item label='Archives' Icon={Recycle} />
-                            </PopoverTrigger>
-                            <PopoverContent className='p-0 w-72' side={isMobile?'bottom':'right'}>
-                                <Trashbox />
-                            </PopoverContent>
-                        </Popover>
-                    </div>
-                    <div className='flex-1 overflow-y-auto'>
-                        <DocumentList documents={documents} />
-                    </div>
+                    <Item onClick={onOpen} label='Search Journals' Icon={Search} isSearch />
                 </div>
                 <div className='flex-1 mt-4 flex flex-col overflow-hidden'>
                     <div>Journal</div>

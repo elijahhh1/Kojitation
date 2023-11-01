@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mood;
-use Carbon\Carbon;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class MoodController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('MoodCalendar',[
-            'moods'=>Mood::where('user_id',Auth::id())->get()
+        return Inertia::render('Tasks',[
+            'tasks'=>Task::where('user_id',Auth::id())->get()
         ]);
     }
 
@@ -33,14 +32,7 @@ class MoodController extends Controller
      */
     public function store(Request $request)
     {
-        Mood::create([
-            'user_id'=>Auth::id(),
-            'mood_level'=>$request->mood_level,
-            'icon'=>$request->icon,
-            'description'=>$request->description,
-            'start'=>now(),
-            'end'=> Carbon::now()->addHour()
-        ]);
+        //
     }
 
     /**
