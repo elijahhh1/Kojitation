@@ -21,8 +21,8 @@ const ChatModal:FC = () => {
                         <span className='text-lg font-medium'>Koji Bot</span>
                     </DialogTitle>
                 </DialogHeader>
-                <div className='py-2 text-sm max-h-[20rem] flex flex-col overflow-hidden'>
-                    <ScrollArea  className='flex flex-col-reverse overflow-y-auto z-40'>
+                {/* <div className='py-2 text-sm max-h-[20rem] flex flex-col-reverse overflow-hidden'>
+                    <ScrollArea >
                         <p>Hello World</p>
                         <p>Hello World</p>
                         <p>Hello World</p>
@@ -45,8 +45,8 @@ const ChatModal:FC = () => {
                         <p>Hello World</p>
                         <p>Hello World</p>
                     </ScrollArea >
-                </div>
-                {/* <RenderData /> */}
+                </div> */}
+                <RenderData />
             </DialogContent>
         </Dialog>
     )
@@ -92,22 +92,24 @@ const RenderData:FC = () => {
     }
 
     return (
-        <div className='py-2 text-sm h-full max-h-[20rem] overflow-y-auto flex flex-col-reverse space-y-1.5 space-y-reverse'>
-            {
-            (messages).map(msg =>
-                !msg.isOptions?
-                <p key={Math.floor(Math.random()*9999)}
-                    className={cn('w-fit max-w-md p-4 rounded-lg dark:invert shadow',
-                                    msg.isUser?'ml-auto bg-blue-200':'bg-white')}>
-                    {msg.message}
-                </p>
-                :
-                <button key={Math.floor(Math.random()*9999)} onClick={() => (msg.message!="menu")?selectTitle(msg):loadMenu()}
-                    className='shadow text-blue-600 text-sm w-fit max-w-md text-left rounded-full px-4 py-1 dark:invert border border-blue-300'>
+        <ScrollArea className='text-sm h-full max-h-[20rem] flex flex-col-reverse'>
+            <div className='py-2 flex flex-col-reverse overflow-y-auto space-y-1.5 space-y-reverse'>
+                {
+                (messages).map(msg =>
+                    !msg.isOptions?
+                    <p key={Math.floor(Math.random()*9999)}
+                        className={cn('w-fit max-w-md p-4 rounded-lg dark:invert shadow',
+                                        msg.isUser?'ml-auto bg-blue-200':'bg-white')}>
                         {msg.message}
-                </button>
-                )
-            }
-        </div>
+                    </p>
+                    :
+                    <button key={Math.floor(Math.random()*9999)} onClick={() => (msg.message!="menu")?selectTitle(msg):loadMenu()}
+                        className='shadow text-blue-600 text-sm w-fit max-w-md text-left rounded-full px-4 py-1 dark:invert border border-blue-300'>
+                            {msg.message}
+                    </button>
+                    )
+                }
+            </div>
+        </ScrollArea>
     );
 }
