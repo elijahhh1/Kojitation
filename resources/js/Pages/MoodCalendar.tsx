@@ -66,7 +66,7 @@ const MoodCalendar:FC<{moods:Mood[]}> = ({moods}) => {
 
                     </div>
 
-                    <div className='flex-1 py-3.5'>
+                    <div className='h-[10rem] flex-1 py-3.5'>
                         <Calendar events={MOODS} localizer={localizer} onSelectEvent={onSelect} views={['month','week','day']} />
                     </div>
 
