@@ -8,6 +8,7 @@ import { APP_NAME } from '@/Pages/Welcome'
 import { useChatbotModal } from '@/Hooks/useChatbotModal'
 import { cn } from "@/lib/utils"
 import { Bot } from 'lucide-react';
+import { ScrollArea } from '../ui/scroll-area'
 
 const ChatModal:FC = () => {
     const {isOpen,onClose} = useChatbotModal();
@@ -21,7 +22,7 @@ const ChatModal:FC = () => {
                     </DialogTitle>
                 </DialogHeader>
                 <div className='py-2 text-sm max-h-[20rem] flex flex-col overflow-hidden'>
-                    <div className='flex flex-col-reverse overflow-y-auto z-40'>
+                    <ScrollArea  className='flex flex-col-reverse overflow-y-auto z-40'>
                         <p>Hello World</p>
                         <p>Hello World</p>
                         <p>Hello World</p>
@@ -43,7 +44,7 @@ const ChatModal:FC = () => {
                         <p>Hello World</p>
                         <p>Hello World</p>
                         <p>Hello World</p>
-                    </div>
+                    </ScrollArea >
                 </div>
                 {/* <RenderData /> */}
             </DialogContent>
