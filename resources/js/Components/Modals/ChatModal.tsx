@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, Fragment, useRef } from 'react'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
 import { Button } from '../ui/button'
 import { useSettings } from '@/Hooks/useSettings'
@@ -9,6 +9,7 @@ import { useChatbotModal } from '@/Hooks/useChatbotModal'
 import { cn } from "@/lib/utils"
 import { Bot } from 'lucide-react';
 import { ScrollArea } from '../ui/scroll-area'
+import { useChatScroll } from '@/Hooks/useChatScroll'
 
 const ChatModal:FC = () => {
     const {isOpen,onClose} = useChatbotModal();
@@ -56,6 +57,9 @@ export default ChatModal
 
 const RenderData:FC = () => {
 
+    const chatRef = useRef<HTMLDivElement>(null);
+    const bottomRef = useRef<HTMLDivElement>(null);
+   
     const dataList = [
         {title: 'How do you prevent a situation from getting too stressful to manage?',
         description: "I prioritize tasks, break them into manageable steps, and ensure clear communication with my team. Regular breaks and mindfulness exercises also help."},
@@ -91,25 +95,34 @@ const RenderData:FC = () => {
         }, 1000);
     }
 
+    useChatScroll({
+        chatRef,bottomRef,count:messages.length
+    });
+
     return (
-        <ScrollArea className='text-sm h-full max-h-[20rem] flex flex-col-reverse'>
-            <div className='py-2 flex flex-col-reverse overflow-y-auto space-y-1.5 space-y-reverse'>
+        <ScrollArea ref={chatRef}  className='text-sm h-full max-h-[20rem] flex flex-col-reverse'>
+            <div  className='py-2 flex flex-col-reverse overflow-y-auto space-y-1.5 space-y-reverse'>
                 {
                 (messages).map(msg =>
-                    !msg.isOptions?
-                    <p key={Math.floor(Math.random()*9999)}
-                        className={cn('w-fit max-w-md p-4 rounded-lg dark:invert shadow',
-                                        msg.isUser?'ml-auto bg-blue-200':'bg-white')}>
-                        {msg.message}
-                    </p>
-                    :
-                    <button key={Math.floor(Math.random()*9999)} onClick={() => (msg.message!="menu")?selectTitle(msg):loadMenu()}
-                        className='shadow text-blue-600 text-sm w-fit max-w-md text-left rounded-full px-4 py-1 dark:invert border border-blue-300'>
-                            {msg.message}
-                    </button>
-                    )
+                    
+                        <Fragment key={Math.floor(Math.random()*9999)}>
+                            {!msg.isOptions?<p 
+                                className={cn('w-fit max-w-md p-4 rounded-lg dark:invert shadow',
+                                                msg.isUser?'ml-auto bg-blue-200':'bg-white')}>
+                                {msg.message}
+                            </p>
+                            :
+                            <button onClick={() => (msg.message!="menu")?selectTitle(msg):loadMenu()}
+                                className='shadow text-blue-600 text-sm w-fit max-w-md text-left rounded-full px-4 py-1 dark:invert border border-blue-300'>
+                                    {msg.message}
+                            </button>}
+                        </Fragment>
+                        )
+                    
                 }
+                
             </div>
+            <div ref={bottomRef} />
         </ScrollArea>
     );
 }

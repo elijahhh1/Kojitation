@@ -61,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('tasks')->name('tasks.')->group(function () {
         Route::get('/', [TaskController::class, 'index'])->name('index');
         Route::post('/store', [TaskController::class, 'store'])->name('store');
+        Route::post('/destroy/{id}', [TaskController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('chatbot')->name('chatbot.')->group(function () {
