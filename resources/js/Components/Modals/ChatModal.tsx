@@ -20,7 +20,7 @@ const ChatModal:FC = () => {
                         <span className='text-lg font-medium'>Koji Bot</span>
                     </DialogTitle>
                 </DialogHeader>
-                <div className='py-2 text-sm max-h-[20rem] flex flex-col'>
+                <div className='py-2 text-sm max-h-[20rem] flex flex-col overflow-hidden'>
                     <div className='flex flex-col-reverse overflow-y-auto z-40'>
                         <p>Hello World</p>
                         <p>Hello World</p>

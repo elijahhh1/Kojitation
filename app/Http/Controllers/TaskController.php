@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -32,7 +33,11 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Task::create([
+            'user_id'=>Auth::id(),
+            'name'=>$request->name,
+            'target_date'=>Carbon::parse($request->target_date)
+        ]);
     }
 
     /**
