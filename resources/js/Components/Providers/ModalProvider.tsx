@@ -2,6 +2,7 @@ import React from 'react'
 import SettingsModal from '../Modals/SettingsModal'
 import CoverImageModal from '../Modals/CoverImageModal'
 import UploadVideoModal from '../Modals/UploadVideoModal'
+import ChatModal from '../Modals/ChatModal'
 
 const ModalProvider = () => {
     return (
@@ -9,6 +10,7 @@ const ModalProvider = () => {
             <SettingsModal />
             <CoverImageModal />
             <UploadVideoModal />
+            <ChatModal/>
         </>
     )
 }

@@ -7,7 +7,11 @@ import {FC,useEffect,useMemo, useState} from 'react'
 import { APP_NAME } from './Welcome';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip, TooltipProps  } from 'recharts';
+import {
+    ValueType,
+    NameType,
+} from 'recharts/types/component/DefaultTooltipContent';
 import { log } from 'console';
 import { emojis } from '@/Components/Modals/MoodModal';
 import moment from 'moment';
@@ -23,6 +27,9 @@ import {
 
 const Dashboard:FC<{moods:Mood[]}> = ({moods}) => {
 
+    const qParam = new URLSearchParams(window.location.search)
+    const type = qParam.get("month")
+
     const user = usePage<PageProps>().props.auth.user;
     var data = [{name: 'Page A', uv: "", pv: 2400, amt: 2400}, {name: 'Page B', uv: "", pv: 2500, amt: 2500}];
 
@@ -30,17 +37,18 @@ const Dashboard:FC<{moods:Mood[]}> = ({moods}) => {
 
     const months = [{id:9,month:"September"},{id:10,month:"October"},{id:11,month:"November"}];
 
-    const [selectedMonth, setselectedMonth] = useState("November");
+    const [selectedMonth, setselectedMonth] = useState(format(new Date(2023, (type==null?new Date().getMonth():(parseInt(type)-1)), 1), "MMMM"));
 
     const onMonthChange = (month:number) => {
         const found = months.find(f=>month==f.id);
         if (found) {
-            setselectedMonth(found?.month);
-
             router.get(route('dashboard.show', {month}),{
                 month
             },{
-                preserveState:true
+                preserveState:false,
+                onSuccess:()=>{
+                    setselectedMonth(found?.month);
+                }
             });
         }
     }
@@ -50,13 +58,13 @@ const Dashboard:FC<{moods:Mood[]}> = ({moods}) => {
             <Head title='Dashboard' />
             <DashboardLayout >
                 <div className='h-full'>
-                    <header className='p-4 flex items-center h-10 bg-gray-100 dark:invert'>
-                        <h1 className='dark:invert'>Dashboard</h1>
+                    <header className='p-4 flex items-center justify-center h-10 bg-gray-100 dark:invert'>
+                        <h1 className='text-md font-bold dark:invert'>{user.name}'s Dashboard</h1>
                     </header>
 
-                    <div className='px-4 md:p-12 bg-gray-50 dark:invert'>
+                    <div className='m-4 py-4 pr-4 md:px-8 md:py-0 bg-gray-50 dark:invert shadow-md rounded-md'>
                         <div className='flex items-center justify-center'>
-                            <p className='mx-2'>Select month:</p>
+                            <p className='mx-2 dark:invert'>Select month:</p>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Button variant="outline">
@@ -70,23 +78,12 @@ const Dashboard:FC<{moods:Mood[]}> = ({moods}) => {
                                             {m.month}
                                         </DropdownMenuItem>)
                                     }
-
-                                    {/* <DropdownMenuItem onClick={() => onMonthChange(11)}>
-                                        November
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem onClick={() => onMonthChange(10)}>
-                                        October
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem onClick={() => onMonthChange(9)}>
-                                        September
-                                    </DropdownMenuItem> */}
-
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </div>
 
-                        <div className='flex h-[25rem]'>
-                            <div className='py-4 w-full'>
+                        <div className='flex h-[20rem] md:h-[25rem] dark:invert'>
+                            <div className='py-4 w-full '>
                                 <RenderLineChart linedata={lineMoods}/>
                             </div>
                         </div>
@@ -100,14 +97,71 @@ const Dashboard:FC<{moods:Mood[]}> = ({moods}) => {
 export default Dashboard;
 
 const RenderLineChart:FC<{linedata:{"name":string; "icon":number;}[]}> = ({linedata}) => {
+
+    const renderCustomAxisTick = (payload:any) => {
+        console.log(payload);
+
+        var mood = "";
+
+        switch (payload.index) {
+            case 1:
+                mood = "😡";
+                break;
+            case 2  :
+                mood = "😞";
+                break;
+            case 3:
+                mood = "😐";
+                break;
+            case 4:
+                mood = "🙂";
+                break;
+            case 5:
+                mood = "😄";
+                break;
+        }
+
+        return(<text x={payload.x - 30} y={payload.y + 10} width={24} height={24} className='text-2xl'>{mood}</text>);
+    };
+
+    const CustomTooltip = ({active,payload,label}: TooltipProps<ValueType, NameType>) => {
+        var mood = "";
+        switch (payload?.[0]?.value) {
+            case 1:
+                mood = "😡";
+                break;
+            case 2  :
+                mood = "😞";
+                break;
+            case 3:
+                mood = "😐";
+                break;
+            case 4:
+                mood = "🙂";
+                break;
+            case 5:
+                mood = "😄";
+                break;
+            default:
+                mood = "";
+                break;
+        }
+        return (
+            <div className='dark:invert bg-white bg-opacity-80 w-[6rem] text-center shadow-md rounded-md p-4'>
+                <p className='text-2xl'>{mood}</p>
+                <p>{label}</p>
+            </div>
+          );
+    }
+
     return (
         <ResponsiveContainer>
-            <LineChart width={600} height={300} data={linedata}>
-                <CartesianGrid strokeDasharray="3 3" />
+            <LineChart width={500} height={300} data={linedata}>
+                <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                 <Line type="monotone" dataKey="icon" stroke="#8884d8" />
-                <XAxis dataKey="name" angle={-40} textAnchor={"end"} height={50} interval={0} />
-                <YAxis dataKey="icon" type="number" ticks={[0,1,2,3,4,5]} domain={[0, 5]}/>
-                <Tooltip />
+                <XAxis dataKey="name" angle={-40} textAnchor={"end"} height={50} interval={5} />
+                <YAxis dataKey="icon" ticks={[0,1,2,3,4,5]} domain={[0, 5]} tick={renderCustomAxisTick}/>
+                <Tooltip labelClassName='dark:invert' content={<CustomTooltip/>} />
             </LineChart>
         </ResponsiveContainer>
   );}

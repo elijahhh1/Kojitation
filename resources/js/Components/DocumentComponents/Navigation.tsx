@@ -13,6 +13,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import Trashbox from './Trashbox';
 import { useSearch } from '@/Hooks/useSearch';
 import { useSettings } from '@/Hooks/useSettings';
+import { useChatbotModal } from '@/Hooks/useChatbotModal';
 import NavBar from '../DocumentViewComponents/NavBar';
 import { format } from 'date-fns';
 import { Separator } from '@radix-ui/react-dropdown-menu';
@@ -22,7 +23,7 @@ const Navigation:FC = () => {
     const {selected_document} = usePage<PageProps>().props;
     const {documents} = usePage<PageProps>().props;
     const user = usePage<PageProps>().props.auth.user;
-    
+
     const isMobile = useMediaQuery("(max-width: 768px)");
     const isResizingRef = useRef(false);
     const sidebarRef = useRef<ElementRef<'aside'>>(null);
@@ -31,6 +32,7 @@ const Navigation:FC = () => {
     const [isCollapsed,setIsCollapsed] = useState(isMobile);
     const {onOpen} = useSearch();
     const {onOpen:openSettings} = useSettings();
+    const {onOpen:openChat} = useChatbotModal();
 
     const handleMouseDown:MouseEventHandler<HTMLDivElement> = e =>{
         e.preventDefault();
@@ -103,7 +105,7 @@ const Navigation:FC = () => {
     }
 
     const handleCreateTODO = () =>{
-        
+
     }
 
     return (
@@ -126,7 +128,8 @@ const Navigation:FC = () => {
                     <Item onClick={()=>router.get(route('mood.index'))} label='Mood Calendar' Icon={CalendarCheck2}  />
                     {/* <Item onClick={handleCreate} label='New Koji' Icon={PlusCircle} /> */}
                     <Item onClick={()=>router.get(route('videos.index'))} label='Videos' Icon={Video} />
-                    <Item onClick={()=>router.get(route('chatbot.index'))} label='Chatbot' Icon={Bot} />
+                    {/* <Item onClick={()=>router.get(route('chatbot.index'))} label='Chatbot' Icon={Bot} /> */}
+                    <Item onClick={openChat} label='Chatbot' Icon={Bot}  />
                     <div className='border-b border-b-[#e3e3e3] pb-1' />
                     <Item onClick={onOpen} label='Search Journals' Icon={Search} isSearch />
                 </div>

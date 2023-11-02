@@ -79,8 +79,7 @@ class MoodController extends Controller
 
     public function test()
     {
-        $prevMonth = (now()->month - 1);
-        $moods = Mood::where('user_id', Auth::id())->whereMonth('start', $prevMonth)->get();
+        $moods = Mood::where('user_id', Auth::id())->whereMonth('start', now()->month)->get();
         dd($moods);
     }
 }
