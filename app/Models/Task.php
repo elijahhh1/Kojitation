@@ -9,4 +9,8 @@ class Task extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function task_items(){
+        return $this->hasMany(TaskItem::class);
+    }
 }

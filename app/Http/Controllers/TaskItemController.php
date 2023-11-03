@@ -2,22 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
-use Carbon\Carbon;
+use App\Models\TaskItem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
 
-class TaskController extends Controller
+class TaskItemController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Tasks',[
-            'tasks'=>Task::with(['task_items'])->where('user_id',Auth::id())->get()
-        ]);
+        //
     }
 
     /**
@@ -33,10 +28,9 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        Task::create([
-            'user_id'=>Auth::id(),
+        TaskItem::create([
+            'task_id'=>$request->task_id,
             'name'=>$request->name,
-            'target_date'=>Carbon::parse($request->target_date)
         ]);
     }
 
@@ -61,9 +55,12 @@ class TaskController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $task_item=TaskItem::findOrFail($id);
+        $task_item->update([
+            'is_completed'=>$request->is_completed
+        ]);
 
-        $task=Task::findOrFail($id);
-        $task->update(['name'=>$request->name]);
+        
     }
 
     /**
@@ -71,7 +68,7 @@ class TaskController extends Controller
      */
     public function destroy(string $id)
     {
-        $task=Task::findOrFail($id);
-        $task->delete();
+        $task_item=TaskItem::findOrFail($id);
+        $task_item->delete();
     }
 }

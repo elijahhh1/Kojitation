@@ -61,10 +61,10 @@ export interface Task{
     target_date?:string;
     created_at:string;
     updated_at:string;
-    tasks:TaskItem[];
+    task_items:TaskItem[];
 }
 
-export interface TaskItem{
+export interface TaskIndividualItem{
     id:number;
     task_id:number;
     name:string;

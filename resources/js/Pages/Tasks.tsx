@@ -1,3 +1,4 @@
+import NewTaskItemModal from '@/Components/Modals/NewTaskItemModal';
 import TaskContainer from '@/Components/TaskComponents/TaskContainer';
 import { Button } from '@/Components/ui/button';
 import { Calendar } from '@/Components/ui/calendar';
@@ -39,6 +40,7 @@ const Tasks:FC<{tasks:Task[]}> = ({tasks}) => {
                     }
                 </div>
             </DocumentsLayout>
+            <NewTaskItemModal />
         </>
     )
 }
@@ -81,7 +83,7 @@ const NewTaskList:FC<{children:ReactNode}> = ({children}) =>{
                         <Label>
                             Task List Name
                         </Label>
-                        <Input required onChange={({target})=>setData('name',target.value)} autoComplete='off' disabled={processing} />
+                        <Input value={data.name} required onChange={({target})=>setData('name',target.value)} autoComplete='off' disabled={processing} />
                     </div>
                     <div className='flex flex-col space-y-1'>
                         <Label>

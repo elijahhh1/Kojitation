@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TaskItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [TaskController::class, 'index'])->name('index');
         Route::post('/store', [TaskController::class, 'store'])->name('store');
         Route::post('/destroy/{id}', [TaskController::class, 'destroy'])->name('destroy');
+        Route::post('/update/{id}', [TaskController::class, 'update'])->name('update');
+    });
+
+    Route::prefix('task_list')->name('task_list.')->group(function () {
+        Route::post('/store', [TaskItemController::class, 'store'])->name('store');
+        Route::post('/destroy/{id}', [TaskItemController::class, 'destroy'])->name('destroy');
+        Route::post('/update/{id}', [TaskItemController::class, 'update'])->name('update');
     });
 
     Route::prefix('chatbot')->name('chatbot.')->group(function () {
