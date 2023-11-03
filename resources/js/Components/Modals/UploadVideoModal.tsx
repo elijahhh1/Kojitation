@@ -30,7 +30,10 @@ const UploadVideoModal = () => {
                 setFile(undefined);
                 onClose();
             },
-            onError:()=>toast.error('Something Went Wrong. Please try again....'),
+            onError:e=>{
+                toast.error('Something Went Wrong. Please try again....'),
+                console.log(e);
+            },
             onFinish:()=>setLoading(false)
         });
     } 

@@ -1,9 +1,9 @@
 {
-  "_DocumentsLayout-65afa2d7.js": {
-    "file": "assets/DocumentsLayout-65afa2d7.js",
+  "_DocumentsLayout-31d3c969.js": {
+    "file": "assets/DocumentsLayout-31d3c969.js",
     "imports": [
       "_index-cea910a0.js",
-      "_SearchCommand-ee88822e.js"
+      "_SearchCommand-38bd3203.js"
     ]
   },
   "_Heading-8b7a51f8.js": {
@@ -17,8 +17,8 @@
     ],
     "isDynamicEntry": true
   },
-  "_SearchCommand-ee88822e.js": {
-    "file": "assets/SearchCommand-ee88822e.js",
+  "_SearchCommand-38bd3203.js": {
+    "file": "assets/SearchCommand-38bd3203.js",
     "imports": [
       "_index-cea910a0.js",
       "_index-e642f915.js",
@@ -167,10 +167,10 @@
     "src": "resources/js/Pages/Auth/Register.tsx"
   },
   "resources/js/Pages/Chatbot.tsx": {
-    "file": "assets/Chatbot-50c12d32.js",
+    "file": "assets/Chatbot-5840ddcc.js",
     "imports": [
       "_index-cea910a0.js",
-      "_SearchCommand-ee88822e.js",
+      "_SearchCommand-38bd3203.js",
       "_index-e642f915.js",
       "_dropdown-menu-175520ef.js",
       "_index-3d2f0431.js",
@@ -184,11 +184,11 @@
     "src": "resources/js/Pages/Chatbot.tsx"
   },
   "resources/js/Pages/Dashboard.tsx": {
-    "file": "assets/Dashboard-f31187bc.js",
+    "file": "assets/Dashboard-6703b2dc.js",
     "imports": [
       "_index-cea910a0.js",
       "_index-e642f915.js",
-      "_SearchCommand-ee88822e.js",
+      "_SearchCommand-38bd3203.js",
       "_moment-fbc5633a.js",
       "_dropdown-menu-175520ef.js",
       "_useCoverImageModal-fd4f681d.js",
@@ -207,18 +207,18 @@
     "dynamicImports": [
       "resources/js/Components/Editor.tsx"
     ],
-    "file": "assets/DocumentView-c0e6a676.js",
+    "file": "assets/DocumentView-3e64ac0d.js",
     "imports": [
       "resources/js/app.tsx",
       "_index-cea910a0.js",
       "_ToolBar-bd63dc30.js",
-      "_DocumentsLayout-65afa2d7.js",
+      "_DocumentsLayout-31d3c969.js",
       "_index-e642f915.js",
       "_useCoverImageModal-fd4f681d.js",
       "_index-bfc9ab35.js",
       "_index-3d2f0431.js",
       "_objectWithoutPropertiesLoose-ccd23c61.js",
-      "_SearchCommand-ee88822e.js",
+      "_SearchCommand-38bd3203.js",
       "_dropdown-menu-175520ef.js",
       "_check-00a7ea0d.js",
       "_Heading-8b7a51f8.js",
@@ -228,15 +228,15 @@
     "src": "resources/js/Pages/DocumentView.tsx"
   },
   "resources/js/Pages/Documents.tsx": {
-    "file": "assets/Documents-376860a1.js",
+    "file": "assets/Documents-457fc4a7.js",
     "imports": [
       "_index-cea910a0.js",
       "_index-e642f915.js",
-      "_DocumentsLayout-65afa2d7.js",
+      "_DocumentsLayout-31d3c969.js",
       "_Heading-8b7a51f8.js",
       "_plus-circle-d9579bcb.js",
       "_useCoverImageModal-fd4f681d.js",
-      "_SearchCommand-ee88822e.js",
+      "_SearchCommand-38bd3203.js",
       "_dropdown-menu-175520ef.js",
       "_index-3d2f0431.js",
       "_index-bfc9ab35.js",
@@ -254,16 +254,16 @@
     "css": [
       "assets/MoodCalendar-bd556087.css"
     ],
-    "file": "assets/MoodCalendar-46c6620e.js",
+    "file": "assets/MoodCalendar-a7bb2bbd.js",
     "imports": [
       "_index-cea910a0.js",
       "_moment-fbc5633a.js",
       "_useCoverImageModal-fd4f681d.js",
       "_objectWithoutPropertiesLoose-ccd23c61.js",
       "_index-e642f915.js",
-      "_SearchCommand-ee88822e.js",
+      "_SearchCommand-38bd3203.js",
       "_createPopper-ea072df4.js",
-      "_DocumentsLayout-65afa2d7.js",
+      "_DocumentsLayout-31d3c969.js",
       "_dropdown-menu-175520ef.js",
       "_input-bbe87084.js",
       "_Heading-8b7a51f8.js",
@@ -293,7 +293,7 @@
     "src": "resources/js/Pages/Public.tsx"
   },
   "resources/js/Pages/Tasks.tsx": {
-    "file": "assets/Tasks-ba97e662.js",
+    "file": "assets/Tasks-f3f3eafb.js",
     "imports": [
       "_index-cea910a0.js",
       "_dropdown-menu-175520ef.js",
@@ -301,9 +301,9 @@
       "_index-e642f915.js",
       "_index-3d2f0431.js",
       "_index-bfc9ab35.js",
-      "_SearchCommand-ee88822e.js",
+      "_SearchCommand-38bd3203.js",
       "_useCoverImageModal-fd4f681d.js",
-      "_DocumentsLayout-65afa2d7.js",
+      "_DocumentsLayout-31d3c969.js",
       "_check-00a7ea0d.js",
       "_Heading-8b7a51f8.js"
     ],
@@ -318,11 +318,11 @@
     "css": [
       "assets/Videos-5440303d.css"
     ],
-    "file": "assets/Videos-831e6e0b.js",
+    "file": "assets/Videos-9fb3e80c.js",
     "imports": [
       "_index-cea910a0.js",
       "_index-e642f915.js",
-      "_SearchCommand-ee88822e.js",
+      "_SearchCommand-38bd3203.js",
       "_index-cdcc97ad.js",
       "_useCoverImageModal-fd4f681d.js",
       "_dropdown-menu-175520ef.js",
@@ -370,7 +370,7 @@
       "resources/js/Pages/Videos.tsx",
       "_Heading-8b7a51f8.js"
     ],
-    "file": "assets/app-9eec144d.js",
+    "file": "assets/app-0221a499.js",
     "imports": [
       "_index-cea910a0.js"
     ],
