@@ -59,7 +59,7 @@ const RenderData:FC = () => {
 
     const chatRef = useRef<HTMLDivElement>(null);
     const bottomRef = useRef<HTMLDivElement>(null);
-   
+
     const dataList = [
         {title: 'How do you prevent a situation from getting too stressful to manage?',
         description: "I prioritize tasks, break them into manageable steps, and ensure clear communication with my team. Regular breaks and mindfulness exercises also help."},
@@ -104,9 +104,9 @@ const RenderData:FC = () => {
             <div  className='py-2 flex flex-col-reverse overflow-y-auto space-y-1.5 space-y-reverse'>
                 {
                 (messages).map(msg =>
-                    
+
                         <Fragment key={Math.floor(Math.random()*9999)}>
-                            {!msg.isOptions?<p 
+                            {!msg.isOptions?<p
                                 className={cn('w-fit max-w-md p-4 rounded-lg dark:invert shadow',
                                                 msg.isUser?'ml-auto bg-blue-200':'bg-white')}>
                                 {msg.message}
@@ -118,9 +118,9 @@ const RenderData:FC = () => {
                             </button>}
                         </Fragment>
                         )
-                    
+
                 }
-                
+
             </div>
             <div ref={bottomRef} />
         </ScrollArea>
