@@ -22,31 +22,6 @@ const ChatModal:FC = () => {
                         <span className='text-lg font-medium'>Koji Bot</span>
                     </DialogTitle>
                 </DialogHeader>
-                {/* <div className='py-2 text-sm max-h-[20rem] flex flex-col-reverse overflow-hidden'>
-                    <ScrollArea >
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                        <p>Hello World</p>
-                    </ScrollArea >
-                </div> */}
                 <RenderData />
             </DialogContent>
         </Dialog>
@@ -61,27 +36,55 @@ const RenderData:FC = () => {
     const bottomRef = useRef<HTMLDivElement>(null);
 
     const dataList = [
-        {title: 'How do you prevent a situation from getting too stressful to manage?',
-        description: "I prioritize tasks, break them into manageable steps, and ensure clear communication with my team. Regular breaks and mindfulness exercises also help."},
-        {title: 'How would you respond if your manager gave you negative feedback in front of your peers?',
-        description: "I would listen calmly, ask for specific examples, and request a private meeting to discuss further. It’s essential to focus on improvement rather than reacting defensively."}];
+        {
+            title: 'Hello, Welcome to your personal stress assessment chatbot.',
+            description: "",
+            isOptions: false
+        },
+        {
+            title: 'Great to have you here! To ensure we gather comprehensive and reliable data for your stress assessment, our assessment is divided into two parts',
+            description: "",
+            isOptions: false
+        },
+        {
+            title: "Part 1: You'll answer 10 brief questions to provide an initial assessment of your stress level",
+            description: "",
+            isOptions: false
+        },
+        {
+            title: "Part 2: The more in-depth assessment consists of 30 questions to further refine the data.",
+            description: "",
+            isOptions: false
+        },
+        {
+            title: "Are you ready to take your stress assessment with me?",
+            description: "",
+            isOptions: false
+        },
+        {
+            title: "Yes, I'm ready!",
+            description: "",
+            isOptions: true
+        }];
 
     const [messages, setMessages] = useState(dataList.map(data=>({isOptions:true, isUser:false, message:data.title})))
-    const [isThinking, setIsThinking] = useState(false);
 
     const selectTitle = (msg:{isOptions:boolean,isUser:boolean,message:string}) =>{
         const found = dataList.find(f=>f.title==msg.message);
-        setMessages(m=>([{isOptions:false,isUser:true,message:msg.message},...m]));
+        
+        setMessages(m=>([...m,{isOptions:false,isUser:true,message:msg.message}]));
 
+        console.log(found);
+        
         if (found){
             const ss = setTimeout(() => {
-                setMessages(m=>([{isOptions:false,isUser:false,message:found.description},...m]));
-                setMessages(m=>([{isOptions:true,isUser:false,message:"menu"},...m]));
+                setMessages(m=>([...m,{isOptions:false,isUser:false,message:found.description}]));
+                setMessages(m=>([...m,{isOptions:true,isUser:false,message:"menu"}]));
                 clearTimeout(ss);
             }, 1000);
         }else{
             const ss = setTimeout(() => {
-                setMessages(m=>([{isOptions:false,isUser:false,message:"Sorry, I did not get that"},...m]));
+                setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Sorry, I did not get that"}]));
                 clearTimeout(ss);
             }, 1000);
         }
@@ -100,11 +103,10 @@ const RenderData:FC = () => {
     });
 
     return (
-        <ScrollArea ref={chatRef}  className='text-sm h-full max-h-[20rem] flex flex-col-reverse'>
-            <div  className='py-2 flex flex-col-reverse overflow-y-auto space-y-1.5 space-y-reverse'>
+        <ScrollArea ref={chatRef}  className='text-sm h-full max-h-[20rem]'>
+            <div  className='py-2 flex flex-col overflow-y-auto space-y-1.5 space-y-reverse'>
                 {
                 (messages).map(msg =>
-
                         <Fragment key={Math.floor(Math.random()*9999)}>
                             {!msg.isOptions?<p
                                 className={cn('w-fit max-w-md p-4 rounded-lg dark:invert shadow',
@@ -118,7 +120,6 @@ const RenderData:FC = () => {
                             </button>}
                         </Fragment>
                         )
-
                 }
 
             </div>

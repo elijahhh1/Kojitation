@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('chatbots', function (Blueprint $table) {
             $table->id();
+            $table->string("message");
+            $table->boolean('is_user')->nullable()->default(false);
+            $table->boolean('has_menu')->nullable()->default(false);
             $table->timestamps();
         });
     }

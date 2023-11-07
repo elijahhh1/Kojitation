@@ -41,13 +41,33 @@ export default Chatbot;
 const RenderData:FC = () => {
 
     const dataList = [
-        {title: 'How do you prevent a situation from getting too stressful to manage?',
-        description: "I prioritize tasks, break them into manageable steps, and ensure clear communication with my team. Regular breaks and mindfulness exercises also help."},
-        {title: 'How would you respond if your manager gave you negative feedback in front of your peers?',
-        description: "I would listen calmly, ask for specific examples, and request a private meeting to discuss further. It’s essential to focus on improvement rather than reacting defensively."}];
+        {
+            title: 'Hello, Welcome to your personal stress assessment chatbot.',
+            description: ""
+        },
+        {
+            title: 'Great to have you here! To ensure we gather comprehensive and reliable data for your stress assessment, our assessment is divided into two parts',
+            description: ""
+        },
+        {
+            title: "Part 1: You'll answer 10 brief questions to provide an initial assessment of your stress level",
+            description: ""
+        },
+        {
+            title: "Part 2: The more in-depth assessment consists of 30 questions to further refine the data.",
+            description: ""
+        },
+        {
+            title: "Are you ready to take your stress assessment with me?",
+            description: ""
+        },
+        {
+            title: "Yes, I'm ready!",
+            description: "",
+            isOptions: true
+        }];
 
     const [messages, setMessages] = useState(dataList.map(data=>({isOptions:true, isUser:false, message:data.title})))
-    const [isThinking, setIsThinking] = useState(false);
 
     const selectTitle = (msg:{isOptions:boolean,isUser:boolean,message:string}) =>{
         const found = dataList.find(f=>f.title==msg.message);
