@@ -13,6 +13,10 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
     archives:Document[];
     selected_document?:Document;
     expanded_docs?:number[];
+    pss_questions:Question[];
+    questionnaire_questions:Question[];
+    pss_choices:Choice[];
+    questionnaire_choices:Choice[];
 };
 
 
@@ -70,6 +74,22 @@ export interface TaskIndividualItem{
     name:string;
     target_date?:string;
     is_completed:0|1;
+    created_at:string;
+    updated_at:string;
+}
+
+export interface Question{
+    id:number;
+    question:string;
+    created_at:string;
+    updated_at:string;
+}
+
+
+
+export interface Choice{
+    id:number;
+    choice:string;
     created_at:string;
     updated_at:string;
 }

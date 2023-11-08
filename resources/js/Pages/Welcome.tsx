@@ -2,12 +2,23 @@ import Heading from '@/Components/Heading'
 import Heroes from '@/Components/Heroes'
 import { Button } from '@/Components/ui/button'
 import Layout from '@/Layouts/WelcomeLayout'
-import { Head } from '@inertiajs/react'
-import React from 'react'
+import { PageProps } from '@/types'
+import { Head, usePage } from '@inertiajs/react'
+import React, { useEffect } from 'react'
 
 export const APP_NAME = `${import.meta.env.VITE_APP_NAME}`
 
 const Welcome = () => {
+    const {pss_choices,pss_questions,questionnaire_choices,questionnaire_questions} = usePage<PageProps>().props;
+
+    useEffect(()=>{
+        console.log([
+            {pss_choices:pss_choices},
+            {pss_questions:pss_questions},
+            {questionnaire_choices:questionnaire_choices},
+            {questionnaire_questions:questionnaire_questions},
+        ]);
+    },[])
 
     return (
         <>
