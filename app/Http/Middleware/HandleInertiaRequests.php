@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 
@@ -42,7 +43,8 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
             ],
             'documents'=>Auth::check()?Document::where('user_id',Auth::id())->where('is_archived',0)->orderBy('id','desc')->get():[],
-            'archives'=>Auth::check()?Document::where('user_id',Auth::id())->where('is_archived',1)->orderBy('id','desc')->get():[]
+            'archives'=>Auth::check()?Document::where('user_id',Auth::id())->where('is_archived',1)->orderBy('id','desc')->get():[],
+            'app_name'=>Config::get('app.name')
         ];
     }
 }
