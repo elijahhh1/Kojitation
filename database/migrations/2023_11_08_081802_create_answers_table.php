@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('result_id')->index();
             $table->unsignedBigInteger('question_id')->index();
             $table->unsignedBigInteger('choice_id')->index();
+            $table->integer('points');
             $table->timestamps();
 
 
