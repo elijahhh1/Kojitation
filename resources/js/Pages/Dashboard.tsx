@@ -99,7 +99,6 @@ export default Dashboard;
 const RenderLineChart:FC<{linedata:{"name":string; "icon":number;}[]}> = ({linedata}) => {
 
     const renderCustomAxisTick = (payload:any) => {
-        console.log(payload);
 
         var mood = "";
 

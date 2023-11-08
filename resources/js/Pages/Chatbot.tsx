@@ -7,6 +7,8 @@ import { log } from 'console';
 import { cn } from "@/lib/utils"
 import { setSeconds } from 'date-fns';
 import Title from '../Components/DocumentViewComponents/Title';
+import { usePage } from '@inertiajs/react';
+import { PageProps } from '@/types';
 
 const Chatbot:FC = () => {
 
@@ -68,6 +70,7 @@ const RenderData:FC = () => {
         }];
 
     const [messages, setMessages] = useState(dataList.map(data=>({isOptions:true, isUser:false, message:data.title})))
+    const {pss_choices,pss_questions,questionnaire_choices,questionnaire_questions} = usePage<PageProps>().props;
 
     const selectTitle = (msg:{isOptions:boolean,isUser:boolean,message:string}) =>{
         const found = dataList.find(f=>f.title==msg.message);

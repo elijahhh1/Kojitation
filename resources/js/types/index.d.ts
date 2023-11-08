@@ -89,6 +89,7 @@ export interface Question{
 
 export interface Choice{
     id:number;
+    level:number;
     choice:string;
     created_at:string;
     updated_at:string;
