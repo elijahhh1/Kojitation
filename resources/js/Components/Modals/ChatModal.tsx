@@ -18,9 +18,10 @@ const ChatModal:FC = () => {
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent>
+            <DialogContent className='bg-gradient-to-b from-[#DDEDEA] via-[#DAEAFF] to-[#E8DFF5]'>
                 <DialogHeader>
-                    <DialogTitle className='border-b pb-2.5'>
+                    <DialogTitle className='flex border-b pb-2.5 dark:text-gray-700'>
+                        <Bot className='mr-2'/>
                         <span className='text-lg font-medium'>Koji Bot</span>
                     </DialogTitle>
                 </DialogHeader>
@@ -234,8 +235,11 @@ const RenderData:FC = () => {
             var sum2 = getSum(test2);
 
             var secondTestResult = (sum2-30) / 90
+            var sumResult = Math.abs(secondTestResult).toFixed(2);
 
-            setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Your overall score is " + Math.abs(secondTestResult)}]));
+            console.log(sumResult);
+
+            setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Your overall score is " + sumResult}]));
 
             if (sum1 >= 0 && sum1 <= 13) {
                 setMessages(m=>([...m,{isOptions:false,isUser:false,message:"You are having very low stress and doing well as of the moment. You are managing and handling stress appropriately."}]));
@@ -264,20 +268,20 @@ const RenderData:FC = () => {
     }
 
     return (
-        <ScrollArea ref={chatRef}  className='text-sm h-full max-h-[28rem]'>
+        <ScrollArea ref={chatRef}  className='text-sm h-full max-h-[30rem] px-4'>
             <div  className='py-2 flex flex-col overflow-y-auto space-y-1.5'>
                 {
                 (messages).map((msg, index) =>
                         <Fragment key={index}>
                             {!msg.isOptions?
                             <p
-                                className={cn('whitespace-pre-line w-fit max-w-md p-4 rounded-lg dark:invert shadow',
-                                                msg.isUser?'ml-auto bg-blue-200':'bg-white')}>
+                                className={cn('whitespace-pre-line w-fit max-w-md p-4 rounded-lg shadow text-gray-900',
+                                                msg.isUser?'ml-auto bg-blue-300':'bg-white')}>
                                 {msg.message}
                             </p>
                             :
                             <button onClick={() => (msg.message!="menu")?selectTitle(msg):loadMenu()}
-                                className='shadow text-blue-600 text-sm w-fit max-w-md text-left rounded-full px-4 py-1 dark:invert border border-blue-300'>
+                                className='text-sm w-fit max-w-md text-left rounded-2xl px-4 py-1.5 shadow border border-blue-500 bg-blue-300 text-gray-900'>
                                     {msg.message}
                             </button>}
                         </Fragment>

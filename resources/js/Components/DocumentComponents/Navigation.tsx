@@ -121,22 +121,19 @@ const Navigation:FC = () => {
                 </div>
                 <div>
                     <UserItem />
-                    <Item onClick={openSettings} label='Settings' Icon={Settings}  />
-                    <div className='border-b border-b-[#e3e3e3] pb-1' />
-                    <Item onClick={()=>router.get(route('tasks.index'))} label={`${user.name}'s Tasks`} Icon={ClipboardList} />
-                    <Item onClick={()=>router.get(route('dashboard.index'))} label='Dashboard' Icon={LineChart} />
+                    <Item onClick={()=>router.get(route('dashboard.index'))} label='Dashboard' Icon={LineChart} iconColor=''/>
                     <Item onClick={()=>router.get(route('mood.index'))} label='Mood Calendar' Icon={CalendarCheck2}  />
-                    {/* <Item onClick={handleCreate} label='New Koji' Icon={PlusCircle} /> */}
+                    <Item onClick={()=>router.get(route('tasks.index'))} label='Task Manager' Icon={ClipboardList} />
+                    <Item onClick={openSettings} label='Settings' Icon={Settings} />
+                    <div className='border-b border-b-[#e3e3e3] my-2' />
                     <Item onClick={()=>router.get(route('videos.index'))} label='Videos' Icon={Video} />
-                    {/* <Item onClick={()=>router.get(route('chatbot.index'))} label='Chatbot' Icon={Bot} /> */}
                     <Item onClick={openChat} label='Chatbot' Icon={Bot}  />
-                    <div className='border-b border-b-[#e3e3e3] pb-1' />
-                    <Item onClick={onOpen} label='Search Journals' Icon={Search} isSearch />
+                    <div className='border-b border-b-[#e3e3e3] my-2' />
+                    <div className='px-3 pt-3 pb-2 text-primary dark:text-[#E8DFF5]'>Gratitude Journal</div>
+                    <Item onClick={onOpen} label='Search' Icon={Search} isSearch />
                 </div>
-                <div className='flex-1 mt-4 flex flex-col overflow-hidden'>
-                    <div>Journal</div>
+                <div className='flex-1 flex flex-col overflow-hidden'>
                     <div className='h-auto'>
-                        <Item onClick={handleCreate} Icon={Plus} label='Add a Koji' />
                         <Popover>
                             <PopoverTrigger className='w-full'>
                                 <Item label='Archives' Icon={Recycle} />
@@ -145,12 +142,14 @@ const Navigation:FC = () => {
                                 <Trashbox />
                             </PopoverContent>
                         </Popover>
+                        <Item onClick={handleCreate} Icon={Plus} label='Add a Koji' />
                     </div>
                     <div className='flex-1 overflow-y-auto'>
                         <DocumentList documents={documents} />
                     </div>
                 </div>
-                <div onMouseDown={handleMouseDown} onClick={resetWidth} className='hopacity-0 hover:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary right-0 top-0' />
+                <div onMouseDown={handleMouseDown} onClick={resetWidth} 
+                    className='hopacity-0 hover:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-gradient-to-b from-pink-300 via-purple-300 to-indigo-400 right-0 top-0' />
             </aside>
             <div ref={navBarRef} className={cn('absolute top-0 z-[100000] left-60 w-[calc(100%-15rem)]',
                     isResetting && 'transition-all ease-in-out duration-300',

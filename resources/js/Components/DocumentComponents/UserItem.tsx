@@ -19,7 +19,7 @@ const UserItem = () => {
                             <AvatarImage src="" alt="@shadcn" />
                             <AvatarFallback className='bg-background'>{user.name.charAt(0)}</AvatarFallback>
                         </Avatar> */}
-                        <span className=' text-start font-medium line-clamp-1'>
+                        <span className='text-lg text-start font-medium line-clamp-1'>
                             {APP_NAME}
                         </span>
                     </div>

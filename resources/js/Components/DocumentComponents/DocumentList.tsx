@@ -40,7 +40,7 @@ const DocumentList:FC<Props> = ({parentDocumentId,level=0,documents}) => {
                 <label htmlFor='switch' className='text-sm font-light'>Show Completed</label>
                 <Switch id='switch'  checked={showDone} onCheckedChange={e=>(setShowDone(e))} />
             </div> */}
-            <p style={{ paddingLeft: level >0? `${(level*0.75)+1.563}rem` :undefined }} className={cn('hidden text-sm font-medium text-muted-foreground/80',
+            <p style={{ paddingLeft: level >0? `${(level*0.75)+1.563}rem` :undefined }} className={cn('px-4 py-2 hidden text-sm font-medium text-muted-foreground/80',
                 expanded && 'last:block',
                 level===0&&'hidden'
             )}>No Pages Inside...</p>
