@@ -1,0 +1,51 @@
+DigitalOcean and ubuntu 23.10
+ -for website hosting
+MySQL
+ -database
+laravel 10 and Php 8.2
+ -for backend. A php framework
+react 18
+ -front end library of kojitation
+zustand 
+ -react state management
+inertiajs 
+ -for easy rendering of pages from laravel(backend)
+tailwind
+ -for easy styling css framework. Instead of doing css manually
+typescript
+ -for react strict data type
+vite
+ -frontend tooling and bundling
+blocknote
+ -for journal
+radixUI
+ -frontend components
+date-fns
+ -for easy date formatter
+emoji-picker-react
+ -emoji picker
+lucide icons
+ -icons
+recharts
+ -dashboard chart
+react-big-calendar
+ -for mood calendar
+react-dropzone
+ -for drag and drop of file on upload
+react-responsive-carousel
+ -for video carousel
+ 
+
+Vince
+OS  :    Windows 11 Home Single Language 64-bit
+CPU :    11th Gen Intel Core i5-11400H @ 2.70GHz
+RAM :    16GB RAM
+GPU :    NVIDIA GeForce RTX 3060 Laptop GPU
+Storage: NVMe SAMSUNG 500GB
+
+Lace
+OS  :    Windows 11 Home
+CPU :    10th Gen Intel Core i5-10300H
+RAM :    8GB RAM
+GPU :    NVIDIA GeForce RTX 1650 Laptop GPU
+Storage: NVMe SAMSUNG 1TB

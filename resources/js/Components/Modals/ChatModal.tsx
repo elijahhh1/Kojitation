@@ -75,14 +75,14 @@ const RenderData:FC = () => {
     const {pss_choices,pss_questions,questionnaire_choices,questionnaire_questions} = usePage<PageProps>().props;
 
     const [qcounter, setQcounter] = useState(1);
-    
+
     const [test1, setTest1] = useState<{id:number,answer:number}[]>([]);
     const [test2, setTest2] = useState<{id:number,answer:number}[]>([]);
 
     const selectTitle = (msg:{isOptions:boolean,isUser:boolean,message:string}) =>{
 
         setMessages(m=>([...m,{isOptions:false,isUser:true,message:msg.message}]));
-        
+
         if (msg.message == "Yes, I'm ready!") {
             const ss = setTimeout(() => {
                 const found = pss_questions.find(f=>f.id==qcounter);
@@ -98,22 +98,14 @@ const RenderData:FC = () => {
                     clearTimeout(ss);
                 }
             }, 1000);
-        }else{           
-            
+        }else{
+
+            const answerLevel:number = +msg.message.split("-")[0];
+
             // PSS QUESTION WAS FINISHED
             if ((qcounter-1) < 11) {
-                const answerLevel:number = +msg.message.split("-")[0];
                 switch (qcounter-1) {
-                    case 4:
-                        setTest1([...test1,{id:(qcounter-1),answer:convertScoreTest1(answerLevel)}]);
-                        break;
-                    case 5:
-                        setTest1([...test1,{id:(qcounter-1),answer:convertScoreTest1(answerLevel)}]);
-                        break;
-                    case 7:
-                        setTest1([...test1,{id:(qcounter-1),answer:convertScoreTest1(answerLevel)}]);
-                        break;
-                    case 8:
+                    case 4: case 5: case 7: case 8:
                         setTest1([...test1,{id:(qcounter-1),answer:convertScoreTest1(answerLevel)}]);
                         break;
                     default:
@@ -121,53 +113,36 @@ const RenderData:FC = () => {
                         break;
                 }
             }else{
-                const answerLevel:number = +msg.message.split("-")[0];
-                switch (qcounter-1) {
-                    case 4:
-                        setTest2([...test2,{id:(qcounter-10),answer:convertScoreTest2(answerLevel)}]);
-                        break;
-                    case 5:
-                        setTest2([...test2,{id:(qcounter-10),answer:convertScoreTest2(answerLevel)}]);
-                        break;
-                    case 7:
-                        setTest2([...test2,{id:(qcounter-10),answer:convertScoreTest2(answerLevel)}]);
-                        break;
-                    case 8:
-                        setTest2([...test2,{id:(qcounter-10),answer:convertScoreTest2(answerLevel)}]);
+                switch (qcounter-11) {
+                    case 1: case 7: case 10: case 13: case 17: case 21: case 25: case 29:
+                        setTest2([...test2,{id:(qcounter-11),answer:convertScoreTest2(answerLevel)}]);
                         break;
                     default:
-                        setTest2([...test2,{id:(qcounter-10),answer:answerLevel}]);
+                        setTest2([...test2,{id:(qcounter-11),answer:answerLevel}]);
                         break;
                 }
             }
-
-            console.log(test1);
-            console.log(test2);
 
             if (qcounter == 11) {
                 setMessages(m=>([...m,{isOptions:false,isUser:false,message:"First part of test was completed"}]));
                 setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Second part is about to start"}]));
             }
-    
+
             if (qcounter == 41) {
-                console.log(test1);
-                console.log(test2);
-    
-                setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Test complete!"}]));
                 return;
             }
 
 
-            if (qcounter < 11) {     
+            if (qcounter < 11) {
                 const found = pss_questions.find(f=>f.id==qcounter);
                 if (found) {
                     const ss = setTimeout(() => {
                         setMessages(m=>([...m,{isOptions:false,isUser:false,message:found.id + " - " +found.question}]));
-    
+
                         pss_choices.forEach((c, i, cArr)=>{
                             setMessages(m=>([...m,{isOptions:true,isUser:false,message:c.level + " - " + c.choice}]));
                         });
-    
+
                         setQcounter(qcounter + 1);
                         clearTimeout(ss);
                     });
@@ -183,11 +158,11 @@ const RenderData:FC = () => {
                 if (found) {
                     const ss = setTimeout(() => {
                         setMessages(m=>([...m,{isOptions:false,isUser:false,message:(found.id-10) + " - " +found.question}]));
-                        
+
                         questionnaire_choices.forEach((c, i, cArr)=>{
                             setMessages(m=>([...m,{isOptions:true,isUser:false,message:c.level + " - " + c.choice}]));
                         });
-    
+
                         setQcounter(qcounter + 1);
                         clearTimeout(ss);
                     });
@@ -253,15 +228,50 @@ const RenderData:FC = () => {
         console.log(questionnaire_questions);
     },[]);
 
+    useEffect(()=>{
+        if (qcounter == 41) {
+            var sum1 = getSum(test1);
+            var sum2 = getSum(test2);
+
+            var secondTestResult = (sum2-30) / 90
+
+            setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Your overall score is " + Math.abs(secondTestResult)}]));
+
+            if (sum1 >= 0 && sum1 <= 13) {
+                setMessages(m=>([...m,{isOptions:false,isUser:false,message:"You are having very low stress and doing well as of the moment. You are managing and handling stress appropriately."}]));
+            }else if (sum1 >= 14 && sum1 <= 26) {
+                setMessages(m=>([...m,{isOptions:false,isUser:false,message:"You are having a normal level of stress. Continue the positive coping strategies and stress management techniques that you are doing."}]));
+            } else {
+                setMessages(m=>([...m,{isOptions:false,isUser:false,message:"You are having a high level of stress. You need to improve your coping strategies and stress management techniques. You need to slow down and take a break from any stress related activities, interactions and engagements."}]));
+                setMessages(m=>([...m,{isOptions:false,isUser:false,message:"You can also consider the following alternatives. You need to seek help from your social support system like friends, colleagues, or family. Consider seeking professional help and doing counseling and psychotherapy. You need to adjust your daily activities and prioritize self-care  whether its physical, mental, emotional, spiritual, and social."}]));
+                setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Here are also some hotlines that we suggest that can help you if you ever want to talk to someone:"}]));
+                setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Hopeline Philippines:\nHotline: 2919 (for Globe and TM subscribers) or 804-HOPE (4673)\nAvailable 24/7\nHopeline Philippines is a crisis hotline that provides emotional support and intervention for individuals who are going through a difficult time, including students facing stress or mental health challenges."}]));
+                setMessages(m=>([...m,{isOptions:false,isUser:false,message:"The Natasha Goulbourn Foundation (NGF) Hopeline:\nHotline: (02) 8804-HOPE (4673) or 0917-558-HOPE (4673)\nAvailable 24/7\nNGF Hopeline is a mental health crisis hotline in partnership with the Department of Health (DOH) that offers support, information, and intervention for those in crisis."}]));
+                setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Silakbo PH:\nFacebook Page: Silakbo PH\nSilakbo PH is a community-driven initiative in the Philippines that provides a safe space for individuals to share their mental health experiences and receive support and information."}]));
+                setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Mental Health PH:\nWebsite: Mental Health PH\nMental Health PH is a website that provides information, resources, and support for mental health concerns. They have a directory of mental health professionals and facilities in the Philippines."}]));
+                setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Crisis Line Philippines (CLiP):\nHotline: 0917-899-8727 or 989-8727\nAvailable 24/7\nCLiP offers a helpline for crisis intervention, emotional support, and referrals to mental health professionals."}]));
+                setMessages(m=>([...m,{isOptions:false,isUser:false,message:"In Touch Community Services\nHotline: (02) 8893-7603\nAvailable Mon to Fri, 9:00 AM to 5:00 PM\nIn Touch Community Services provides a crisis line for emotional support and assistance, as well as information and referrals for mental health services."}]));
+            }
+        }
+    },[test2]);
+
+    const getSum = (test:any) => {
+        let sum = 0;
+        for (let i = 0; i < test.length; i++) {
+            sum += test[i].answer;
+        }
+        return sum;
+    }
+
     return (
-        <ScrollArea ref={chatRef}  className='text-sm h-full max-h-[20rem]'>
-            <div  className='py-2 flex flex-col overflow-y-auto space-y-1.5 space-y-reverse'>
+        <ScrollArea ref={chatRef}  className='text-sm h-full max-h-[28rem]'>
+            <div  className='py-2 flex flex-col overflow-y-auto space-y-1.5'>
                 {
-                (messages).map((msg, index) => 
+                (messages).map((msg, index) =>
                         <Fragment key={index}>
                             {!msg.isOptions?
                             <p
-                                className={cn('w-fit max-w-md p-4 rounded-lg dark:invert shadow',
+                                className={cn('whitespace-pre-line w-fit max-w-md p-4 rounded-lg dark:invert shadow',
                                                 msg.isUser?'ml-auto bg-blue-200':'bg-white')}>
                                 {msg.message}
                             </p>
