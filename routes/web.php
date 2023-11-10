@@ -103,9 +103,17 @@ Route::post('/reset', function (Request $request) {
 
     $user_name_check = User::where('user_name',$request->user_name)->first();
     $email_check = User::where('email',$request->email)->first();
-    if($user_name_check->id!=$email_check->id){
+
+
+    $id1=$user_name_check['id'];
+    $id2=$email_check['id'];
+    if($id1!=$id2){
         throw ValidationException::withMessages(['email'=>'User Name does not Match with the Email']);
     }
+
+    $user_name_check->update([
+        'password'=>bcrypt($request->password)
+    ]);
 
 })->name('reset_password');
 

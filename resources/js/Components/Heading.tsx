@@ -10,6 +10,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Label } from './ui/label';
 import { Input } from './ui/input';
 import { Separator } from '@radix-ui/react-dropdown-menu';
+import { toast } from 'sonner';
 
 const Heading:FC = () => {
     const user = usePage<PageProps>().props.auth.user;
@@ -77,7 +78,12 @@ const ForgotPasswordModal:FC<{open?:boolean;onClose:()=>void}> = ({open,onClose}
 
     const onSubmit:FormEventHandler<HTMLFormElement> = (e) =>{
         e.preventDefault();
-        post(route('reset_password'));
+        post(route('reset_password'),{
+            onSuccess:()=>{
+                onClose();
+                toast.success('Password Reset Succesful');
+            }
+        });
         
     }
 
@@ -97,29 +103,29 @@ const ForgotPasswordModal:FC<{open?:boolean;onClose:()=>void}> = ({open,onClose}
                 <form onSubmit={onSubmit} id='form' className='flex flex-col gap-y-4'>
                     <div className='flex flex-col space-y-1.5'>
                         <Label htmlFor='email'>Email</Label>
-                        <Input required autoFocus autoComplete='off' id='email' value={email} onChange={handleChange}/>
+                        <Input disabled={processing} required autoFocus autoComplete='off' id='email' value={email} onChange={handleChange}/>
                         {errors.email && <p className='text-destructive text-xs text-right -mt-3'>{errors.email}</p>}
                     </div>
                     <div className='flex flex-col space-y-1.5'>
                         <Label htmlFor='user_name'>User Name</Label>
-                        <Input required autoComplete='off' id='user_name' value={user_name} onChange={handleChange}/>
+                        <Input disabled={processing} required autoComplete='off' id='user_name' value={user_name} onChange={handleChange}/>
                         {errors.user_name && <p className='text-destructive text-xs text-right -mt-3'>{errors.user_name}</p>}
                     </div>
 
                     <div className='flex flex-col space-y-1.5'>
                         <Label htmlFor='password'>New Password</Label>
-                        <Input required autoComplete='off' type='password' id='password' value={password} onChange={handleChange}/>
+                        <Input disabled={processing} required autoComplete='off' type='password' id='password' value={password} onChange={handleChange}/>
                         {errors.password && <p className='text-destructive text-xs text-right -mt-3'>{errors.password}</p>}
                     </div>
                     <div className='flex flex-col space-y-1.5'>
                         <Label htmlFor='password_confirmation'>Current Password</Label>
-                        <Input required autoComplete='off' type='password' id='password_confirmation' value={password_confirmation} onChange={handleChange}/>
+                        <Input disabled={processing} required autoComplete='off' type='password' id='password_confirmation' value={password_confirmation} onChange={handleChange}/>
                         {errors.password_confirmation && <p className='text-destructive text-xs text-right -mt-3'>{errors.password_confirmation}</p>}
                     </div>
                 </form>
                 <AlertDialogFooter>
-                    <Button onClick={onClose}>Cancel</Button>
-                    <Button form='form'>Proceed</Button>
+                    <Button disabled={processing} onClick={onClose}>Cancel</Button>
+                    <Button disabled={processing} form='form'>Proceed</Button>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>
