@@ -9,14 +9,11 @@ import React, { useEffect } from 'react'
 export const APP_NAME = `${import.meta.env.VITE_APP_NAME}`
 
 const Welcome = () => {
-    // const {pss_choices,pss_questions,questionnaire_choices,questionnaire_questions} = usePage<PageProps>().props;
+    // const {test_taken_this_month} = usePage<PageProps>().props;
 
     // useEffect(()=>{
     //     console.log([
-    //         {pss_choices:pss_choices},
-    //         {pss_questions:pss_questions},
-    //         {questionnaire_choices:questionnaire_choices},
-    //         {questionnaire_questions:questionnaire_questions},
+    //         test_taken_this_month
     //     ]);
     // },[])
 

@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use App\Models\Choice;
 use App\Models\Document;
 use App\Models\Question;
+use App\Models\Result;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -35,6 +37,16 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+
+        // Get the current date and time
+        $now = Carbon::now();
+
+        // Get the start and end of the current month
+        $startOfMonth = $now->startOfMonth()->toDateTimeString();
+        $endOfMonth = $now->endOfMonth()->toDateTimeString();
+
+        // Query the results with created_at is within the current month
+        
         return [
             ...parent::share($request),
             'auth' => [
@@ -51,6 +63,7 @@ class HandleInertiaRequests extends Middleware
             'questionnaire_questions'=>Question::whereBetween('id',[11,40])->get(),
             'pss_choices'=>Choice::where('id','<',6)->get(),
             'questionnaire_choices'=>Choice::whereBetween('id',[6,9])->get(),
+            'test_taken_this_month'=> Result::where('id',Auth::id())->whereBetween('created_at', [$startOfMonth, $endOfMonth])->first()
         ];
     }
 }

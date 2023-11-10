@@ -17,6 +17,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -90,16 +92,20 @@ Route::get('/preview/{id}', function ($id) {
 
 
 Route::post('/reset', function (Request $request) {
-    $request->validate(([
+    $request->validate([
         'user_name'=>'required|exists:users,user_name',
         'email'=>'required|exists:users,email',
-        'password' => ['required', 'confirmed', Password::defaults(),'regex:/^(?=.*[!@#$%^&*()\-_=+{};:,<.>]).+$/'],[
+        'password' => ['required', 'confirmed', Password::defaults(),'regex:/^(?=.*[!@#$%^&*()\-_=+{};:,<.>]).+$/']
+    ],
+    [
         'password.regex'=>'Password must contain a special character',   
-        ]
-    ]));
+    ]);
 
     $user_name_check = User::where('user_name',$request->user_name)->first();
     $email_check = User::where('email',$request->email)->first();
+    if($user_name_check->id!=$email_check->id){
+        throw ValidationException::withMessages(['email'=>'User Name does not Match with the Email']);
+    }
 
 })->name('reset_password');
 

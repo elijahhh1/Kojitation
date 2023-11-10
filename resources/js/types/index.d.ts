@@ -18,6 +18,7 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
     questionnaire_questions:Question[];
     pss_choices:Choice[];
     questionnaire_choices:Choice[];
+    test_taken_this_month?:Result;
 };
 
 
