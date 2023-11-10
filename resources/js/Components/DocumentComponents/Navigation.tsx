@@ -126,7 +126,7 @@ const Navigation:FC = () => {
                     <Item onClick={()=>router.get(route('tasks.index'))} label='Task Manager' Icon={ClipboardList} />
                     <Item onClick={openSettings} label='Settings' Icon={Settings} />
                     <div className='border-b border-b-[#e3e3e3] my-2' />
-                    <Item onClick={()=>router.get(route('videos.index'))} label='Videos' Icon={Video} />
+                    <Item onClick={()=>router.get(route('videos.index'))} label={`Koji Admin's Videos`} Icon={Video} />
                     <Item onClick={openChat} label='Chatbot' Icon={Bot}  />
                     <div className='border-b border-b-[#e3e3e3] my-2' />
                     <div className='px-3 pt-3 pb-2 text-primary dark:text-[#E8DFF5]'>Gratitude Journal</div>

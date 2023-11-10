@@ -18,7 +18,7 @@ class VideoController extends Controller
     public function index()
     {
         return Inertia::render('Videos',[
-            'videos'=>Video::where('user_id',Auth::id())->get()
+            'videos'=>Video::all()
         ]);
     }
 

@@ -25,11 +25,16 @@ const Videos:FC<{videos:Video[]}> = ({videos}) => {
             <VideoLayout >
                 <div className='h-full flex flex-col relative overflow-hidden'>
                     <header className='flex items-center h-12 border-b border-b-muted-foreground relative'>
-                        <h1 className='text-center text-2xl font-semibold tracking-tight flex-1'>{user.name}'s Videos</h1>
-                        <Button onClick={onOpen} size='sm' className='font-medium text-md flex space-x-2 items-center justify-center absolute top-1 right-1' variant='outline'> 
-                            <VideoIcon className='h-5 w-5' />
-                            <span>Upload</span>
-                        </Button>
+                        <h1 className='text-center text-2xl font-semibold tracking-tight flex-1'>Koji Admin's Videos</h1>
+                        {
+                            user.level===1&&(
+                                <Button onClick={onOpen} size='sm' className='font-medium text-md flex space-x-2 items-center justify-center absolute top-1 right-1' variant='outline'> 
+                                    <VideoIcon className='h-5 w-5' />
+                                    <span>Upload</span>
+                                </Button>
+                            )
+                        }
+                        
                     </header>
 
                     {
