@@ -10,11 +10,15 @@ import { cn } from "@/lib/utils"
 import { Bot } from 'lucide-react';
 import { ScrollArea } from '../ui/scroll-area'
 import { useChatScroll } from '@/Hooks/useChatScroll'
-import { usePage } from '@inertiajs/react';
-import { PageProps } from '@/types';
+import { usePage, router } from '@inertiajs/react';
+import { PageProps, Result } from '@/types';
 
-const ChatModal:FC = () => {
+const ChatModal:FC<{is_done:Result[]}> = (is_done) => {
     const {isOpen,onClose} = useChatbotModal();
+
+    useEffect(()=>{
+        console.log(is_done);
+    });
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
@@ -223,10 +227,10 @@ const RenderData:FC = () => {
     });
 
     useEffect(()=>{
-        console.log(pss_choices);
-        console.log(pss_questions);
-        console.log(questionnaire_choices);
-        console.log(questionnaire_questions);
+        // console.log(pss_choices);
+        // console.log(pss_questions);
+        // console.log(questionnaire_choices);
+        // console.log(questionnaire_questions);
     },[]);
 
     useEffect(()=>{
@@ -241,11 +245,15 @@ const RenderData:FC = () => {
 
             setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Your overall score is " + sumResult}]));
 
+            var stressResult = "";
             if (sum1 >= 0 && sum1 <= 13) {
+                stressResult = "You are having very low stress and doing well as of the moment. You are managing and handling stress appropriately.";
                 setMessages(m=>([...m,{isOptions:false,isUser:false,message:"You are having very low stress and doing well as of the moment. You are managing and handling stress appropriately."}]));
             }else if (sum1 >= 14 && sum1 <= 26) {
+                stressResult = "You are having a normal level of stress. Continue the positive coping strategies and stress management techniques that you are doing.";
                 setMessages(m=>([...m,{isOptions:false,isUser:false,message:"You are having a normal level of stress. Continue the positive coping strategies and stress management techniques that you are doing."}]));
             } else {
+                stressResult = "You are having a high level of stress. You need to improve your coping strategies and stress management techniques. You need to slow down and take a break from any stress related activities, interactions and engagements.";
                 setMessages(m=>([...m,{isOptions:false,isUser:false,message:"You are having a high level of stress. You need to improve your coping strategies and stress management techniques. You need to slow down and take a break from any stress related activities, interactions and engagements."}]));
                 setMessages(m=>([...m,{isOptions:false,isUser:false,message:"You can also consider the following alternatives. You need to seek help from your social support system like friends, colleagues, or family. Consider seeking professional help and doing counseling and psychotherapy. You need to adjust your daily activities and prioritize self-care  whether its physical, mental, emotional, spiritual, and social."}]));
                 setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Here are also some hotlines that we suggest that can help you if you ever want to talk to someone:"}]));
@@ -256,6 +264,8 @@ const RenderData:FC = () => {
                 setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Crisis Line Philippines (CLiP):\nHotline: 0917-899-8727 or 989-8727\nAvailable 24/7\nCLiP offers a helpline for crisis intervention, emotional support, and referrals to mental health professionals."}]));
                 setMessages(m=>([...m,{isOptions:false,isUser:false,message:"In Touch Community Services\nHotline: (02) 8893-7603\nAvailable Mon to Fri, 9:00 AM to 5:00 PM\nIn Touch Community Services provides a crisis line for emotional support and assistance, as well as information and referrals for mental health services."}]));
             }
+
+            router.post(route('chatbot.store', {'description':sumResult, 'remarks':stressResult}));
         }
     },[test2]);
 

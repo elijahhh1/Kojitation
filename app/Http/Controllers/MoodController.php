@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mood;
+use App\Models\Result;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -79,7 +80,10 @@ class MoodController extends Controller
 
     public function test()
     {
-        $moods = Mood::where('user_id', Auth::id())->whereMonth('start', now()->month)->get();
-        dd($moods);
+        $test = Result::where('user_id', Auth::id())
+                ->whereMonth('created_at', now()->month)
+                ->get()?true:false;
+
+        dd($test);
     }
 }

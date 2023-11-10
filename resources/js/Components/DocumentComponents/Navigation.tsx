@@ -110,7 +110,7 @@ const Navigation:FC = () => {
 
     return (
         <>
-            <aside ref={sidebarRef} className={cn('group/sidebar max-h-screen overflow-hidden h-full bg-secondary overflow-y-auto relative flex flex-col w-60 z-[100000] ',
+            <aside ref={sidebarRef} className={cn('group/sidebar max-h-screen overflow-hidden h-full bg-gradient-to-b from-[#DDEDEA] via-[#DAEAFF] to-[#E8DFF5] overflow-y-auto relative flex flex-col w-60 z-[100000] ',
                     isResetting && 'transition-all ease-in-out duration-300',
                     isMobile && 'w-0'
                     )}>
@@ -126,11 +126,11 @@ const Navigation:FC = () => {
                     <Item onClick={()=>router.get(route('tasks.index'))} label='Task Manager' Icon={ClipboardList} />
                     <Item onClick={openSettings} label='Settings' Icon={Settings} />
                     <div className='border-b border-b-[#e3e3e3] my-2' />
-                    <Item onClick={()=>router.get(route('videos.index'))} label={`Koji Admin's Videos`} Icon={Video} />
+                    <Item onClick={()=>router.get(route('videos.index'))} label={`Videos`} Icon={Video} />
                     <Item onClick={openChat} label='Chatbot' Icon={Bot}  />
                     <div className='border-b border-b-[#e3e3e3] my-2' />
                     <div className='px-3 pt-3 pb-2 text-primary dark:text-[#E8DFF5]'>Gratitude Journal</div>
-                    <Item onClick={onOpen} label='Search' Icon={Search} isSearch />
+                    {/* <Item onClick={onOpen} label='Search' Icon={Search} isSearch /> */}
                 </div>
                 <div className='flex-1 flex flex-col overflow-hidden'>
                     <div className='h-auto'>

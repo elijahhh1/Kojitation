@@ -158,7 +158,7 @@ const RenderLineChart:FC<{linedata:{"name":string; "icon":number;}[]}> = ({lined
             <LineChart width={500} height={300} data={linedata}>
                 <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                 <Line type="monotone" dataKey="icon" stroke="#8884d8" />
-                <XAxis dataKey="name" angle={-40} textAnchor={"end"} height={50} interval={5} />
+                <XAxis dataKey="name" angle={-40} textAnchor={"end"} height={50} />
                 <YAxis dataKey="icon" ticks={[0,1,2,3,4,5]} domain={[0, 5]} tick={renderCustomAxisTick}/>
                 <Tooltip labelClassName='dark:invert' content={<CustomTooltip/>} />
             </LineChart>
