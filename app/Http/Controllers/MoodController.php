@@ -80,9 +80,11 @@ class MoodController extends Controller
 
     public function test()
     {
-        $test = Result::where('user_id', Auth::id())
-                ->whereMonth('created_at', now()->month)
-                ->get()?true:false;
+        $now = Carbon::now();
+        $startOfMonth = $now->startOfMonth()->toDateTimeString();
+        $endOfMonth = $now->endOfMonth()->toDateTimeString();
+
+        $test = Result::where('user_id',5)->whereMonth('created_at', now()->month)->first();
 
         dd($test);
     }

@@ -63,7 +63,7 @@ class HandleInertiaRequests extends Middleware
             'questionnaire_questions'=>Question::whereBetween('id',[11,40])->get(),
             'pss_choices'=>Choice::where('id','<',6)->get(),
             'questionnaire_choices'=>Choice::whereBetween('id',[6,9])->get(),
-            'test_taken_this_month'=> Result::where('id',Auth::id())->whereBetween('created_at', [$startOfMonth, $endOfMonth])->first()
+            'test_taken_this_month'=> Result::where('user_id',Auth::id())->whereBetween('created_at', [$startOfMonth, $endOfMonth])->first()?true:false
         ];
     }
 }

@@ -13,12 +13,13 @@ import { useChatScroll } from '@/Hooks/useChatScroll'
 import { usePage, router } from '@inertiajs/react';
 import { PageProps, Result } from '@/types';
 
-const ChatModal:FC<{is_done:Result[]}> = (is_done) => {
+const ChatModal:FC = () => {
     const {isOpen,onClose} = useChatbotModal();
+    const {test_taken_this_month} = usePage<PageProps>().props;
 
     useEffect(()=>{
-        console.log(is_done);
-    });
+        console.log(test_taken_this_month);
+    }, [test_taken_this_month]);
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
@@ -29,7 +30,7 @@ const ChatModal:FC<{is_done:Result[]}> = (is_done) => {
                         <span className='text-lg font-medium'>Koji Bot</span>
                     </DialogTitle>
                 </DialogHeader>
-                <RenderData />
+                <RenderData is_done={test_taken_this_month}/>
             </DialogContent>
         </Dialog>
     )
@@ -37,7 +38,7 @@ const ChatModal:FC<{is_done:Result[]}> = (is_done) => {
 
 export default ChatModal
 
-const RenderData:FC = () => {
+const RenderData:FC<{is_done:any}> = (is_done) => {
 
     const chatRef = useRef<HTMLDivElement>(null);
     const bottomRef = useRef<HTMLDivElement>(null);
@@ -231,6 +232,8 @@ const RenderData:FC = () => {
         // console.log(pss_questions);
         // console.log(questionnaire_choices);
         // console.log(questionnaire_questions);
+        console.log(is_done.is_done);
+        
     },[]);
 
     useEffect(()=>{
@@ -281,21 +284,24 @@ const RenderData:FC = () => {
         <ScrollArea ref={chatRef}  className='text-sm h-full max-h-[30rem] px-4'>
             <div  className='py-2 flex flex-col overflow-y-auto space-y-1.5'>
                 {
-                (messages).map((msg, index) =>
-                        <Fragment key={index}>
-                            {!msg.isOptions?
-                            <p
-                                className={cn('whitespace-pre-line w-fit max-w-md p-4 rounded-lg shadow text-gray-900',
-                                                msg.isUser?'ml-auto bg-blue-300':'bg-white')}>
+                (is_done.is_done==false)?
+                    (messages).map((msg, index) =>
+                    <Fragment key={index}>
+                        {!msg.isOptions?
+                        <p
+                            className={cn('whitespace-pre-line w-fit max-w-md p-4 rounded-lg shadow text-gray-900',
+                                            msg.isUser?'ml-auto bg-blue-300':'bg-white')}>
+                            {msg.message}
+                        </p>
+                        :
+                        <button onClick={() => (msg.message!="menu")?selectTitle(msg):loadMenu()}
+                            className='text-sm w-fit max-w-md text-left rounded-2xl px-4 py-1.5 shadow border border-blue-500 bg-blue-300 text-gray-900'>
                                 {msg.message}
-                            </p>
-                            :
-                            <button onClick={() => (msg.message!="menu")?selectTitle(msg):loadMenu()}
-                                className='text-sm w-fit max-w-md text-left rounded-2xl px-4 py-1.5 shadow border border-blue-500 bg-blue-300 text-gray-900'>
-                                    {msg.message}
-                            </button>}
-                        </Fragment>
-                        )
+                        </button>}
+                    </Fragment>
+                    )
+                :
+                    <p className='text-center'>You can only take this test once a month</p>
                 }
 
             </div>
