@@ -95,3 +95,13 @@ export interface Choice{
     created_at:string;
     updated_at:string;
 }
+
+
+export interface Result{
+    id:number;
+    user_id:number;
+    description:string;
+    remarks:string;
+    created_at:string;
+    updated_at:string;
+}

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Chatbot;
 use Illuminate\Http\Request;
+use App\Models\Result;
+use Illuminate\Support\Facades\Auth;
 
 class ChatbotController extends Controller
 {
@@ -13,7 +15,11 @@ class ChatbotController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Chatbot');
+        return Inertia::render('Chatbot',[
+            'is_done' => Result::where('user_id', Auth::id())
+                ->whereMonth('created_at', now()->month)
+                ->get()
+        ]);
     }
 
     /**
@@ -29,7 +35,11 @@ class ChatbotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Result::create([
+            'user_id'=>Auth::id(),
+            'description'=>$request->description,
+            'remarks'=>$request->remarks
+        ]);
     }
 
     /**
