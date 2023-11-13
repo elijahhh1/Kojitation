@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { ChevronLeft, MenuIcon, Plus, PlusCircle, Recycle, Search, Settings, LineChart, CalendarCheck2, Video, Bot, ClipboardList } from 'lucide-react'
+import { ChevronLeft, MenuIcon, Plus, PlusCircle, Recycle, Search, Settings, LineChart, CalendarCheck2, Video, Bot, ClipboardList, HelpCircle, Send } from 'lucide-react'
 import React, { ElementRef, FC, MouseEventHandler, useEffect, useRef, useState } from 'react'
 import {useMediaQuery}  from 'usehooks-ts';
 import UserNav from '../UserNav';
@@ -14,9 +14,11 @@ import Trashbox from './Trashbox';
 import { useSearch } from '@/Hooks/useSearch';
 import { useSettings } from '@/Hooks/useSettings';
 import { useChatbotModal } from '@/Hooks/useChatbotModal';
+import { useFAQModal } from '@/Hooks/useFAQModal';
 import NavBar from '../DocumentViewComponents/NavBar';
 import { format } from 'date-fns';
 import { Separator } from '@radix-ui/react-dropdown-menu';
+import { useSendFeedbackModal } from '@/Hooks/useSendFeedback';
 const Navigation:FC = () => {
 
 
@@ -33,6 +35,8 @@ const Navigation:FC = () => {
     const {onOpen} = useSearch();
     const {onOpen:openSettings} = useSettings();
     const {onOpen:openChat} = useChatbotModal();
+    const {onOpen:openFAQ} = useFAQModal();
+    const {onOpen:openSendFeedback} = useSendFeedbackModal();
 
     const handleMouseDown:MouseEventHandler<HTMLDivElement> = e =>{
         e.preventDefault();
@@ -124,10 +128,12 @@ const Navigation:FC = () => {
                     <Item onClick={()=>router.get(route('dashboard.index'))} label='Dashboard' Icon={LineChart} iconColor=''/>
                     <Item onClick={()=>router.get(route('mood.index'))} label='Mood Calendar' Icon={CalendarCheck2}  />
                     <Item onClick={()=>router.get(route('tasks.index'))} label='Task Manager' Icon={ClipboardList} />
-                    <Item onClick={openSettings} label='Settings' Icon={Settings} />
-                    <div className='border-b border-b-[#e3e3e3] my-2' />
                     <Item onClick={()=>router.get(route('videos.index'))} label={`Videos`} Icon={Video} />
                     <Item onClick={openChat} label='Chatbot' Icon={Bot}  />
+                    <div className='border-b border-b-[#e3e3e3] my-2' />
+                    <Item onClick={openFAQ} label='FAQs' Icon={HelpCircle} />
+                    <Item onClick={openSendFeedback} label='Send Feedback' Icon={Send} />
+                    <Item onClick={openSettings} label='Settings' Icon={Settings} />
                     <div className='border-b border-b-[#e3e3e3] my-2' />
                     <div className='px-3 pt-3 pb-2 text-primary dark:text-[#E8DFF5]'>Gratitude Journal</div>
                     {/* <Item onClick={onOpen} label='Search' Icon={Search} isSearch /> */}

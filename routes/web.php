@@ -13,6 +13,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskItemController;
+use App\Http\Controllers\SendFeedbackController;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -80,6 +81,10 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('chatbot')->name('chatbot.')->group(function () {
         Route::get('/', [ChatbotController::class, 'index'])->name('index');
         Route::post('/store', [ChatbotController::class, 'store'])->name('store');
+    });
+
+    Route::prefix('send_feedback')->name('feedback.')->group(function () {
+        Route::post('/store', [SendFeedbackController::class, 'store'])->name('store');
     });
 });
 

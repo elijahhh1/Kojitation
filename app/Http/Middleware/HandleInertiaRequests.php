@@ -6,6 +6,7 @@ use App\Models\Choice;
 use App\Models\Document;
 use App\Models\Question;
 use App\Models\Result;
+use App\Models\SendFeedback;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,7 +64,8 @@ class HandleInertiaRequests extends Middleware
             'questionnaire_questions'=>Question::whereBetween('id',[11,40])->get(),
             'pss_choices'=>Choice::where('id','<',6)->get(),
             'questionnaire_choices'=>Choice::whereBetween('id',[6,9])->get(),
-            'test_taken_this_month'=> Result::where('user_id',Auth::id())->whereBetween('created_at', [$startOfMonth, $endOfMonth])->first()?true:false
+            'test_taken_this_month'=> Result::where('user_id',Auth::id())->whereBetween('created_at', [$startOfMonth, $endOfMonth])->first()?true:false,
+            'sent_feedback_today'=> SendFeedback::where('user_id',Auth::id())->whereDate('created_at', Carbon::today())->first()?true:false
         ];
     }
 }
