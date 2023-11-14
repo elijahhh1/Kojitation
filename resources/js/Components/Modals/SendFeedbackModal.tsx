@@ -31,7 +31,7 @@ const SendFeedbackModal:FC = () => {
     }
 
     useEffect(()=>{
-
+        console.log(sent_feedback_today)
     },);
 
     return (
@@ -47,17 +47,17 @@ const SendFeedbackModal:FC = () => {
                 </DialogHeader>
 
                 {
-                    (sent_feedback_today)?
+                    (sent_feedback_today==false)?
                     <>
-                    <form onSubmit={onSubmit} id='form' className='flex flex-col space-y-2.5'>
-                        <div>
-                            <Label>Message</Label>
-                            <Input required value={message} onChange={({target})=>setMessage(target.value)} autoComplete='off' disabled={loading} />
-                        </div>
-                    </form>
-                    <DialogFooter>
-                        <Button disabled={loading} form='form' size='sm' type="submit">Send</Button>
-                    </DialogFooter>
+                        <form onSubmit={onSubmit} id='form' className='flex flex-col space-y-2.5'>
+                            <div>
+                                <Label>Message</Label>
+                                <Input required value={message} onChange={({target})=>setMessage(target.value)} autoComplete='off' disabled={loading} />
+                            </div>
+                        </form>
+                        <DialogFooter>
+                            <Button disabled={loading} form='form' size='sm' type="submit">Send</Button>
+                        </DialogFooter>
                     </>
                     :
                     <p className='text-center'>Thanks for sending a feedback. You've sent a feedback today!</p>

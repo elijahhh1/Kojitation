@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Mood;
 use App\Models\Dashboard;
+use App\Models\SendFeedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,8 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', [
             'moods' => Mood::where('user_id', Auth::id())
                 ->whereMonth('start', now()->month)
-                ->get()
+                ->get(),
+            'feedbacks' => SendFeedback::get()
         ]);
     }
 

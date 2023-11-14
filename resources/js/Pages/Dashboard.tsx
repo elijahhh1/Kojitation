@@ -1,6 +1,6 @@
 import { Button } from '@/Components/ui/button';
 import DashboardLayout from '@/Layouts/DashboardLayout'
-import { Document, PageProps, Mood } from '@/types';
+import { Document, PageProps, Mood, Feedback } from '@/types';
 import { Head, router, usePage } from '@inertiajs/react'
 import { PlusCircle } from 'lucide-react';
 import {FC,useEffect,useMemo, useState} from 'react'
@@ -25,7 +25,7 @@ import {
     DropdownMenuCheckboxItem
   } from "@/Components/ui/dropdown-menu";
 
-const Dashboard:FC<{moods:Mood[]}> = ({moods}) => {
+const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[]}> = ({moods,feedbacks}) => {
 
     const qParam = new URLSearchParams(window.location.search)
     const type = qParam.get("month")
@@ -52,6 +52,10 @@ const Dashboard:FC<{moods:Mood[]}> = ({moods}) => {
             });
         }
     }
+
+    useEffect(()=>{
+        console.error(feedbacks)
+    })
 
     return (
         <>
@@ -88,6 +92,20 @@ const Dashboard:FC<{moods:Mood[]}> = ({moods}) => {
                             </div>
                         </div>
                     </div>
+
+                    {/* <div className='m-4 p-4 bg-white shadow rounded'>
+                        {
+                        (user.level==1)?
+                            feedbacks.map(f=>
+                                <div>
+                                    <p>{f.message}</p>
+                                </div>
+                            )
+                            :
+                            <></>
+                        }
+                    </div> */}
+
                 </div>
             </DashboardLayout>
         </>

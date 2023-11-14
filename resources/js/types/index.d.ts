@@ -52,6 +52,15 @@ export interface Mood{
     mood_level:number;
 }
 
+export interface Feedback {
+    id:number;
+    user_id:number;
+    user:User;
+    message:string;
+    updated_at:string;
+    created_at:string;
+}
+
 export interface Video{
     id:number;
     user_id:number;
