@@ -146,7 +146,7 @@ const RenderLineChart:FC<{linedata:{"name":string; "icon":number;}[]}> = ({lined
                 break;
         }
         return (
-            <div className='dark:invert bg-white bg-opacity-80 w-[6rem] text-center shadow-md rounded-md p-4'>
+            <div className='bg-white dark:bg-gray-950 bg-opacity-80 w-[6rem] text-center shadow-md rounded-md p-4'>
                 <p className='text-2xl'>{mood}</p>
                 <p>{label}</p>
             </div>

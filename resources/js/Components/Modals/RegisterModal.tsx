@@ -44,10 +44,10 @@ const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) =
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] bg-[#DAEAFF] dark:text-gray-900">
                 <DialogHeader>
                     <DialogTitle>SIGN UP</DialogTitle>
-                    <DialogDescription>
+                    <DialogDescription className='dark:text-gray-700'>
                         Enter Login Credentials
                     </DialogDescription>
                 </DialogHeader>
@@ -56,7 +56,8 @@ const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) =
                         <Label htmlFor="name" className="text-right">
                             Fullname
                         </Label>
-                        <Input required value={data.name} onChange={({target})=>setData('name',target.value)} disabled={processing} id="name" className="col-span-3" autoFocus autoComplete='off'/>
+                        <Input required value={data.name} onChange={({target})=>setData('name',target.value)} disabled={processing} id="name" 
+                            className="col-span-3 bg-[#bfdcff]" autoFocus autoComplete='off'/>
                     </div>
                     {errors.name && <p className='text-destructive text-xs text-right -mt-3'>{errors.name}</p>}
 
@@ -64,7 +65,8 @@ const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) =
                         <Label htmlFor="user_name" className="text-right">
                             UserName
                         </Label>
-                        <Input required value={data.user_name} onChange={({target})=>setData('user_name',target.value)} disabled={processing} id="user_name" className="col-span-3" autoComplete='off'/>
+                        <Input required value={data.user_name} onChange={({target})=>setData('user_name',target.value)} disabled={processing} id="user_name" 
+                            className="col-span-3 bg-[#bfdcff]" autoComplete='off'/>
                     </div>
                     {errors.user_name && <p className='text-destructive text-xs text-right -mt-3'>{errors.user_name}</p>}
 
@@ -72,7 +74,8 @@ const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) =
                         <Label htmlFor="email" className="text-right">
                             Email
                         </Label>
-                        <Input required value={data.email} onChange={({target})=>setData('email',target.value)} disabled={processing} id="email" className="col-span-3" autoComplete='off'/>
+                        <Input required value={data.email} onChange={({target})=>setData('email',target.value)} disabled={processing} id="email" 
+                            className="col-span-3 bg-[#bfdcff]" autoComplete='off'/>
                     </div>
                     {errors.email && <p className='text-destructive text-xs text-right -mt-3'>{errors.email}</p>}
 
@@ -80,7 +83,8 @@ const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) =
                         <Label htmlFor="password" className="text-right">
                             Password
                         </Label>
-                        <Input required type='password' value={data.password} onChange={({target})=>setData('password',target.value)} disabled={processing} id="password" className="col-span-3" />
+                        <Input required type='password' value={data.password} onChange={({target})=>setData('password',target.value)} disabled={processing} id="password" 
+                            className="col-span-3 bg-[#bfdcff]" />
                     </div>
                     {errors.password && <p className='text-destructive text-xs text-right -mt-3'>{errors.password}</p>}
 
@@ -88,12 +92,13 @@ const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) =
                         <Label htmlFor="password_confirmation" className="text-right">
                             Confirm Password
                         </Label>
-                        <Input required type='password' value={data.password_confirmation} onChange={({target})=>setData('password_confirmation',target.value)} disabled={processing} id="password_confirmation" className="col-span-3" />
+                        <Input required type='password' value={data.password_confirmation} onChange={({target})=>setData('password_confirmation',target.value)} disabled={processing} id="password_confirmation" 
+                            className="col-span-3 bg-[#bfdcff]" />
                     </div>
                     {errors.password_confirmation && <p className='text-destructive text-xs text-right -mt-3'>{errors.password_confirmation}</p>}
                 </form>
                 <DialogFooter>
-                    <Button variant='outline' disabled={processing} size='sm' form='auth' type="submit">
+                    <Button variant='outline' disabled={processing} size='sm' form='auth' type="submit" className='bg-[#86bdff] hover:bg-[#bfdcff] dark:hover:text-gray-900'>
                         {processing ? <Spinner />: <ArrowRightSquare className='h-5 w-5' /> }
                     </Button>
                 </DialogFooter>

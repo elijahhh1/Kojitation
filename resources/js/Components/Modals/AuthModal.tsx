@@ -39,10 +39,10 @@ const AuthModal:FC = () => {
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] bg-[#E8DFF5] text-gray-900">
                 <DialogHeader>
                     <DialogTitle>LOGIN</DialogTitle>
-                    <DialogDescription>
+                    <DialogDescription className='dark:text-gray-600'>
                         Enter Login Credentials
                     </DialogDescription>
                 </DialogHeader>
@@ -51,19 +51,21 @@ const AuthModal:FC = () => {
                         <Label htmlFor="email" className="text-right">
                             UserName/Email
                         </Label>
-                        <Input required value={data.email} onChange={({target})=>setData('email',target.value)} disabled={processing} id="email" className="col-span-3" autoFocus autoComplete='off'/>
+                        <Input required value={data.email} onChange={({target})=>setData('email',target.value)} disabled={processing} id="email" 
+                            className="col-span-3 dark:bg-[#e3cfff]" autoFocus autoComplete='off'/>
                     </div>
                     {errors.email && <p className='text-destructive text-xs text-right -mt-3'>{errors.email}</p>}
                     <div className="flex flex-col items-start justify-center space-y-1.5">
                         <Label htmlFor="password" className="text-right">
                             Password
                         </Label>
-                        <Input required type='password' value={data.password} onChange={({target})=>setData('password',target.value)} disabled={processing} id="password" className="col-span-3" />
+                        <Input required type='password' value={data.password} onChange={({target})=>setData('password',target.value)} disabled={processing} id="password" 
+                            className="col-span-3 dark:bg-[#e3cfff]" />
                     </div>
                     {errors.password && <p className='text-destructive text-xs text-right -mt-3'>{errors.password}</p>}
                 </form>
                 <DialogFooter>
-                    <Button variant='outline' disabled={processing} size='sm' form='auth' type="submit">
+                    <Button variant='outline' disabled={processing} size='sm' form='auth' type="submit" className='dark:bg-[#e3cfff] dark:hover:text-gray-700'>
                         {processing ? <Spinner />: <ArrowRightSquare className='h-5 w-5' /> }
                     </Button>
                 </DialogFooter>

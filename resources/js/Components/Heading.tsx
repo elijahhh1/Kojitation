@@ -35,7 +35,7 @@ const Heading:FC = () => {
                 {
                     !user?(
                         <div className='flex flex-col space-y-2'>
-                            <Button variant='outline' onClick={()=>setRegisterOpen(true)} className='bg-blue-200 mx-auto'>Hi! I'm a new user</Button>
+                            <Button variant='outline' onClick={()=>setRegisterOpen(true)} className='bg-blue-200 dark:text-gray-900 mx-auto'>Hi! I'm a new user</Button>
                             <a href="#" onClick={onOpen} className='text-sm mx-auto hover:underline transition duration-300'>I already have an account</a>
                             <Button onClick={()=>SetResetPasswordOpen(true)} variant='link' className='text-xs text-muted-foreground leading-10 italic'>Forgot Password?</Button>
                         </div>

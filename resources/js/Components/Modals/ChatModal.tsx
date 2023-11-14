@@ -23,9 +23,9 @@ const ChatModal:FC = () => {
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className='bg-gradient-to-b from-[#DDEDEA] via-[#DAEAFF] to-[#E8DFF5]'>
+            <DialogContent className='bg-gradient-to-b from-[#DDEDEA] via-[#DAEAFF] to-[#E8DFF5] dark:text-gray-900'>
                 <DialogHeader>
-                    <DialogTitle className='flex border-b pb-2.5 dark:text-gray-700'>
+                    <DialogTitle className='flex border-b pb-2.5 dark:text-gray-900'>
                         <Bot className='mr-2'/>
                         <span className='text-lg font-medium'>Koji Bot</span>
                     </DialogTitle>
@@ -301,7 +301,7 @@ const RenderData:FC<{is_done:any}> = (is_done) => {
                     </Fragment>
                     )
                 :
-                    <p className='text-center'>You can only take this test once a month</p>
+                    <p className='dark:text-gray-700 text-center'>You can only take this test once a month</p>
                 }
 
             </div>

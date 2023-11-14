@@ -12,14 +12,14 @@ const FaqModal:FC = () => {
     const {isOpen,onClose} = useFAQModal();
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent>
-                <DialogHeader>
+            <DialogContent className='bg-gradient-to-b from-[#DDEDEA] via-[#DAEAFF] to-[#E8DFF5] dark:text-gray-900'>
+                <DialogHeader className='dark:text-gray-900'>
                     <DialogTitle className='border-b pb-2.5'>
                         <span className='text-lg font-medium'>FAQs</span>
                     </DialogTitle>
                 </DialogHeader>
 
-                <div className='max-h-[30rem] overflow-auto'>
+                <div className='max-h-[30rem] overflow-auto dark:text-gray-900'>
                     <div className='bg-[#FCE1E4] shadow rounded p-4'>
                         <h1 className='font-bold'>MOOD CALENDAR</h1>
                         <div className='py-4 px-2 border-b border-[#dea4ab]'>

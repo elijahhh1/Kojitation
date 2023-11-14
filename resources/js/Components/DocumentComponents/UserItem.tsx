@@ -13,7 +13,7 @@ const UserItem = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <div role='button' className='flex items-center justify-center text-sm p-2.5 w-full hover:bg-primary/5'>
+                <div role='button' className='flex items-center justify-center text-sm p-2.5 mb-4 w-full hover:bg-primary/5'>
                     <div className='gap-x-1.5 flex items-center justify-center max-w-[9.375rem]'>
                         {/* <Avatar className='h-5 w-5'>
                             <AvatarImage src="" alt="@shadcn" />
@@ -33,9 +33,6 @@ const UserItem = () => {
                         {/* <p className="text-xs leading-none text-primary">{user.email}</p> */}
                     </div>
                 </DropdownMenuLabel>
-                <DropdownMenuItem>
-                    FAQ
-                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={()=>router.post(route('logout'))}>
                     Log out
