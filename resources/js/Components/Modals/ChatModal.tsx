@@ -12,14 +12,29 @@ import { ScrollArea } from '../ui/scroll-area'
 import { useChatScroll } from '@/Hooks/useChatScroll'
 import { usePage, router } from '@inertiajs/react';
 import { PageProps, Result } from '@/types';
+import axios from 'axios'
 
 const ChatModal:FC = () => {
     const {isOpen,onClose} = useChatbotModal();
     const {test_taken_this_month} = usePage<PageProps>().props;
+    const [isDone, setIsDone] = useState<Boolean | undefined>(false);
 
     useEffect(()=>{
-        console.log(test_taken_this_month);
-    }, [test_taken_this_month]);
+        axios.get('/chatbot/show')
+            .then(function (response) {
+                if (response.data){
+                    if (response.data.is_test_taken)
+                    {
+                        setIsDone(response.data.is_test_taken)
+                    }else{
+                        setIsDone(test_taken_this_month)
+                    }
+                }
+                })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }, [isOpen]);
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
@@ -30,7 +45,7 @@ const ChatModal:FC = () => {
                         <span className='text-lg font-medium'>Koji Bot</span>
                     </DialogTitle>
                 </DialogHeader>
-                <RenderData is_done={test_taken_this_month}/>
+                <RenderData is_done={isDone}/>
             </DialogContent>
         </Dialog>
     )
@@ -228,12 +243,7 @@ const RenderData:FC<{is_done:any}> = (is_done) => {
     });
 
     useEffect(()=>{
-        // console.log(pss_choices);
-        // console.log(pss_questions);
-        // console.log(questionnaire_choices);
-        // console.log(questionnaire_questions);
-        console.log(is_done.is_done);
-        
+        //console.log(is_done.is_done);
     },[]);
 
     useEffect(()=>{
@@ -267,8 +277,18 @@ const RenderData:FC<{is_done:any}> = (is_done) => {
                 setMessages(m=>([...m,{isOptions:false,isUser:false,message:"Crisis Line Philippines (CLiP):\nHotline: 0917-899-8727 or 989-8727\nAvailable 24/7\nCLiP offers a helpline for crisis intervention, emotional support, and referrals to mental health professionals."}]));
                 setMessages(m=>([...m,{isOptions:false,isUser:false,message:"In Touch Community Services\nHotline: (02) 8893-7603\nAvailable Mon to Fri, 9:00 AM to 5:00 PM\nIn Touch Community Services provides a crisis line for emotional support and assistance, as well as information and referrals for mental health services."}]));
             }
+            //router.post(route('chatbot.store', {'description':sumResult, 'remarks':stressResult}));
 
-            router.post(route('chatbot.store', {'description':sumResult, 'remarks':stressResult}));
+            axios.post('/chatbot/store', {
+                description: sumResult,
+                remarks: stressResult
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
         }
     },[test2]);
 

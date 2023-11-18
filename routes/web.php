@@ -80,6 +80,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('chatbot')->name('chatbot.')->group(function () {
         Route::get('/', [ChatbotController::class, 'index'])->name('index');
+        Route::get('/show', [ChatbotController::class, 'show'])->name('show');
         Route::post('/store', [ChatbotController::class, 'store'])->name('store');
     });
 
@@ -97,29 +98,30 @@ Route::get('/preview/{id}', function ($id) {
 
 
 Route::post('/reset', function (Request $request) {
-    $request->validate([
-        'user_name'=>'required|exists:users,user_name',
-        'email'=>'required|exists:users,email',
-        'password' => ['required', 'confirmed', Password::defaults(),'regex:/^(?=.*[!@#$%^&*()\-_=+{};:,<.>]).+$/']
-    ],
-    [
-        'password.regex'=>'Password must contain a special character',   
-    ]);
+    $request->validate(
+        [
+            'user_name' => 'required|exists:users,user_name',
+            'email' => 'required|exists:users,email',
+            'password' => ['required', 'confirmed', Password::defaults(), 'regex:/^(?=.*[!@#$%^&*()\-_=+{};:,<.>]).+$/']
+        ],
+        [
+            'password.regex' => 'Password must contain a special character',
+        ]
+    );
 
-    $user_name_check = User::where('user_name',$request->user_name)->first();
-    $email_check = User::where('email',$request->email)->first();
+    $user_name_check = User::where('user_name', $request->user_name)->first();
+    $email_check = User::where('email', $request->email)->first();
 
 
-    $id1=$user_name_check['id'];
-    $id2=$email_check['id'];
-    if($id1!=$id2){
-        throw ValidationException::withMessages(['email'=>'User Name does not Match with the Email']);
+    $id1 = $user_name_check['id'];
+    $id2 = $email_check['id'];
+    if ($id1 != $id2) {
+        throw ValidationException::withMessages(['email' => 'User Name does not Match with the Email']);
     }
 
     $user_name_check->update([
-        'password'=>bcrypt($request->password)
+        'password' => bcrypt($request->password)
     ]);
-
 })->name('reset_password');
 
 

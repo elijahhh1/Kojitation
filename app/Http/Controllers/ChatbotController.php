@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Inertia\Inertia;
-use App\Models\Chatbot;
-use Illuminate\Http\Request;
 use App\Models\Result;
+use App\Models\Chatbot;
+use App\Models\SendFeedback;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ChatbotController extends Controller
@@ -15,7 +17,7 @@ class ChatbotController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Chatbot',[
+        return Inertia::render('Chatbot', [
             'is_done' => Result::where('user_id', Auth::id())
                 ->whereMonth('created_at', now()->month)
                 ->get()
@@ -36,18 +38,29 @@ class ChatbotController extends Controller
     public function store(Request $request)
     {
         Result::create([
-            'user_id'=>Auth::id(),
-            'description'=>$request->description,
-            'remarks'=>$request->remarks
+            'user_id' => Auth::id(),
+            'description' => $request->description,
+            'remarks' => $request->remarks
         ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Chatbot $chatbot)
+    public function show()
     {
-        //
+        // Get the current date and time
+        $now = Carbon::now();
+
+        // Get the start and end of the current month
+        $startOfMonth = $now->startOfMonth()->toDateTimeString();
+        $endOfMonth = $now->endOfMonth()->toDateTimeString();
+
+        $data = ([
+            'is_test_taken' => Result::where('user_id', Auth::id())->whereBetween('created_at', [$startOfMonth, $endOfMonth])->first() ? true : false
+        ]);
+
+        return $data;
     }
 
     /**
