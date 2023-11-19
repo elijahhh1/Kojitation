@@ -121,5 +121,14 @@
 }
 
 .carousel {
-    @apply !h-[22rem]
+    @apply !h-[22rem] 
+}
+
+.carousel.carousel-slider{
+  @apply !relative
+}
+
+
+.next-button{
+  @apply !right-0 !bottom-0 !fixed
 }
