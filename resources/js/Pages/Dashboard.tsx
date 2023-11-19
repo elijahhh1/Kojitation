@@ -2,7 +2,7 @@ import { Button } from '@/Components/ui/button';
 import DashboardLayout from '@/Layouts/DashboardLayout'
 import { Document, PageProps, Mood, Feedback } from '@/types';
 import { Head, router, usePage } from '@inertiajs/react'
-import { PlusCircle } from 'lucide-react';
+import { PlusCircle, X } from 'lucide-react';
 import {FC,useEffect,useMemo, useState} from 'react'
 import { APP_NAME } from './Welcome';
 import { format } from 'date-fns';
@@ -201,8 +201,9 @@ const IntroModal:FC = () => {
         <Dialog open={isOpen}>
             <DialogContent className='dark:text-gray-900'>
                 <DialogHeader className='dark:text-gray-900'>
-                    <DialogTitle className='border-b pb-2.5'>
-                        <span className='text-lg font-medium'>Quick Tour</span>
+                    <DialogTitle className='border-b pb-2.5 flex items-center'>
+                        <span className='text-primary text-lg font-medium'>Quick Tour</span>
+                        <X className='text-primary ml-auto' onClick={()=>{setIsOpen(false)}}/>
                     </DialogTitle>
 
                     <Carousel showArrows={true} showStatus={false} showThumbs={false} emulateTouch>
