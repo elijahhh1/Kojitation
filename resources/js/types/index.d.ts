@@ -37,8 +37,12 @@ export interface Document{
     user:User;
     document?:Document;
     documents:Document[];
+    favorite_moment:string;
+    looking_forward_to:string;
     updated_at:string;
     created_at:string;
+    happenings:Happening[]
+    gratefuls:Grateful[]
 }
 
 export interface Mood{
@@ -112,6 +116,26 @@ export interface Result{
     id:number;
     user_id:number;
     description:string;
+    remarks:string;
+    created_at:string;
+    updated_at:string;
+}
+
+export interface Happening{
+    id:number;
+    document_id:number;
+    document:Document;
+    title:string;
+    remarks:string;
+    created_at:string;
+    updated_at:string;
+}
+
+export interface Grateful{
+    id:number;
+    document_id:number;
+    document:Document;
+    title:string;
     remarks:string;
     created_at:string;
     updated_at:string;

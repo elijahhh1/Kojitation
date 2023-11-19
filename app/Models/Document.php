@@ -10,7 +10,7 @@ class Document extends Model
 {
     use HasFactory;
     protected $guarded=[];
-    protected $with =['documents'];
+    protected $with =['documents','happenings','gratefuls'];
     public function documents():HasMany{
         return $this->hasMany(Document::class)->where('is_archived',0);
     }
@@ -23,5 +23,13 @@ class Document extends Model
         if($value && str_contains( strtolower($value),'http')){return $value;}
         if(!$value){return null;}
         return url('/').'/'. $value;
+    }
+
+    public function happenings(){
+        return $this->hasMany(Happening::class);
+    }
+
+    public function gratefuls(){
+        return $this->hasMany(Grateful::class);
     }
 }

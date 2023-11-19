@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Document;
+use App\Models\Grateful;
+use App\Models\Happening;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -102,8 +104,46 @@ class DocumentController extends Controller
         }
         
 
+        Grateful::truncate();
+        Happening::truncate();
 
-        $input = $request->except(['cover_image']);
+        Grateful::create([
+            'document_id'=>$id,
+            'title'=>$request->grateful1 ?? ""
+        ]);
+
+        Grateful::create([
+            'document_id'=>$id,
+            'title'=>$request->grateful2 ?? ""
+        ]);
+
+        Grateful::create([
+            'document_id'=>$id,
+            'title'=>$request->grateful3 ?? ""
+        ]);
+
+        Happening::create([
+            'document_id'=>$id,
+            'title'=>$request->happenings_today1 ?? ""
+        ]);
+
+        Happening::create([
+            'document_id'=>$id,
+            'title'=>$request->happenings_today2 ?? ""
+        ]);
+
+        Happening::create([
+            'document_id'=>$id,
+            'title'=>$request->happenings_today3 ?? ""
+        ]);
+
+
+        $input = $request->except(['cover_image','grateful1',
+            'grateful2',
+            'grateful3',
+            'happenings_today1',
+            'happenings_today2',
+            'happenings_today3']);
 
         $document->update($input);
     }

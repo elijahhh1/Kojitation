@@ -116,7 +116,7 @@ const EmojiChoices:FC<EmojiChoicesProps> = ({children,onSelect}) =>{
             <PopoverTrigger asChild>
                 {children}
             </PopoverTrigger>
-            <PopoverContent side='right' >
+            <PopoverContent side='bottom' >
                 <p className='w-full font-semibold'>Choose Mood Icon</p>
                 <div  className='flex items-center justify-center gap-x-1 '>
                     {emojis.map((emoji)=><p role='button' onClick={()=>handleSelect(emoji)} key={emoji.id} className='text-4xl p-1 text-center '>{emoji.icon}</p>)}
