@@ -8,6 +8,7 @@ import { APP_NAME } from './Welcome';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip, TooltipProps  } from 'recharts';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/Components/ui/dialog'
 import {
     ValueType,
     NameType,
@@ -24,6 +25,9 @@ import {
     DropdownMenuSeparator,
     DropdownMenuCheckboxItem
   } from "@/Components/ui/dropdown-menu";
+import { useIntroModal } from '@/Hooks/useIntroModal';
+import { Carousel } from 'react-responsive-carousel'
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[]}> = ({moods,feedbacks}) => {
 
@@ -106,6 +110,8 @@ const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[]}> = ({moods,feedbacks}) =
                         }
                     </div> */}
 
+                    {/* <IntroModal /> */}
+
                 </div>
             </DashboardLayout>
         </>
@@ -182,3 +188,35 @@ const RenderLineChart:FC<{linedata:{"name":string; "icon":number;}[]}> = ({lined
             </LineChart>
         </ResponsiveContainer>
   );}
+
+
+
+const IntroModal:FC = () => {
+    const [isOpen, setIsOpen] = useState(true);
+    const [test, setTest] = useState(["hello","world"]);
+
+    return (
+        <Dialog open={isOpen} onOpenChange={()=>setIsOpen(false)}>
+            <DialogContent className='dark:text-gray-900'>
+                <DialogHeader className='dark:text-gray-900'>
+                    <DialogTitle className='border-b pb-2.5'>
+                        <span className='text-lg font-medium'>Introduction</span>
+                    </DialogTitle>
+
+                    <Carousel showArrows={true} showStatus={false} emulateTouch>
+                        <div>
+                            <img src={`${route('welcome')}/images/welcome.png`} />
+                        </div>
+                        <div>
+                            <img src={`${route('welcome')}/images/account.png`} />
+                        </div>
+                        <div>
+                            <img src="assets/1.jpeg" />
+                        </div>
+                    </Carousel>
+
+                </DialogHeader>
+            </DialogContent>
+        </Dialog>
+    )
+};
