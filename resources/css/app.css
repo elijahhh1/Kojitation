@@ -121,14 +121,16 @@
 }
 
 .carousel {
-    @apply !h-[22rem] 
+    @apply !h-[24rem]
 }
 
-.carousel.carousel-slider{
+/* .carousel.carousel-slider{
   @apply !relative
-}
-
+} */
 
 .next-button{
-  @apply !right-0 !bottom-0 !fixed
+  @apply !right-4 !bottom-4 !fixed !z-10
+}
+.prev-button{
+  @apply !left-4 !bottom-4 !fixed !z-10
 }

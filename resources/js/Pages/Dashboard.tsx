@@ -28,6 +28,8 @@ import {
 import { useIntroModal } from '@/Hooks/useIntroModal';
 import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { AlertDialog, AlertDialogPortal, AlertDialogTitle } from '@radix-ui/react-alert-dialog';
+import { AlertDialogContent, AlertDialogHeader } from '@/Components/ui/alert-dialog';
 
 const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[]}> = ({moods,feedbacks}) => {
 
@@ -196,43 +198,55 @@ const IntroModal:FC = () => {
     const [test, setTest] = useState(["hello","world"]);
 
     const renderArrowNext = (clickHandler: () => void, hasNext: boolean, label: string) => <Button className='next-button' onClick={clickHandler}>Next</Button>
-    
-    
+    const renderArrowPrev = (clickHandler: () => void, hasPrev: boolean, label: string) => <Button className='prev-button' onClick={clickHandler}>Back</Button>
 
     return (
-        <Dialog open={isOpen}>
-            <DialogContent className='dark:text-gray-900'>
-                <DialogHeader className='dark:text-gray-900'>
-                    <DialogTitle className='border-b pb-2.5 flex items-center'>
-                        <span className='text-primary text-lg font-medium'>Quick Tour</span>
-                        <X className='text-primary ml-auto' onClick={()=>{setIsOpen(false)}}/>
-                    </DialogTitle>
+        <AlertDialog open={isOpen}>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogTitle className='flex items-center'>
+                        <span className='text-center text-primary text-lg font-medium'>Quick Tour</span>
+                        <X className='text-primary ml-auto cursor-pointer' onClick={()=>{setIsOpen(false)}}/>
+                    </AlertDialogTitle>
+                </AlertDialogHeader>
 
-                    <Carousel renderArrowNext={renderArrowNext}  showArrows showStatus={false} showThumbs={false} emulateTouch>
-                        <div>
-                            <img src={`${route('welcome')}/images/welcome.png`} />
-                            <p className='my-4'>Let's take a quick tour to introduce you to key features. Click "Next" to continue</p>
-                        </div>
-                        <div>
-                            <img src={`${route('welcome')}/images/account.png`} />
-                            <p>Explore Your Dashboard</p>
-                            <p>This is your dashboard. Discover key sections and features that will help you navigate through Kojitation.</p>
-                        </div>
-                        <div>
-                            <img src={`${route('welcome')}/images/account.png`} />
-                            <p>Start Journaling</p>
-                            <p>Begin your journey by creating your first journal entry. Click "Next" to learn how.</p>
-                        </div>
-                        <div>
-                            <img src={`${route('welcome')}/images/account.png`} />
-                            <p>Track Your Mood</p>
-                            <p>Kojitation allows you to track your mood. Learn how to record and view your mood status by clicking "Next."</p>
-                        </div>
-                    </Carousel>
-                    {/* <button onClick={onPrevious}>Previous</button> */}
-
-                </DialogHeader>
-            </DialogContent>
-        </Dialog>
+                <Carousel renderArrowNext={renderArrowNext} renderArrowPrev={renderArrowPrev}  showArrows showStatus={false} showThumbs={false} emulateTouch>
+                    <div>
+                        <img src={`${route('welcome')}/images/welcome.png`} />
+                        <p className='my-4'>Let's take a quick tour to introduce you to key features. Click "Next" to continue</p>
+                    </div>
+                    <div>
+                        <img src={`${route('welcome')}/images/account.png`} className='h-[260px] object-cover'  />
+                        <p>Explore Your Dashboard</p>
+                        <p>Your dashboard will help you to track your mood.</p>
+                    </div>
+                    <div>
+                        <img src={`${route('welcome')}/images/journal.png`} className='h-[260px] object-cover' />
+                        <p>Start Journaling</p>
+                        <p>Begin your journey by creating your first journal entry.</p>
+                    </div>
+                    <div>
+                        <img src={`${route('welcome')}/images/Happy.png`} className='h-[260px] object-cover' />
+                        <p>Track Your Mood</p>
+                        <p>Kojitation allows you to track your mood.</p>
+                    </div>
+                    <div>
+                        <img src={`${route('welcome')}/images/task.png`} className='h-[260px] object-cover' />
+                        <p>Stay Organized</p>
+                        <p>Keep track of your tasks with Kojitation.</p>
+                    </div>
+                    <div>
+                        <img src={`${route('welcome')}/images/video.png`} className='h-[260px] object-cover' />
+                        <p>Enjoy Videos</p>
+                        <p>Explore video content on Kojitation.</p>
+                    </div>
+                    <div>
+                        <img src={`${route('welcome')}/images/bot.png`} className='w-[460px] max-w-[463px] h-[260px] object-cover' />
+                        <p>Chat with the Bot</p>
+                        <p>Engage with our chatbot to manage your stress.</p>
+                    </div>
+                </Carousel>
+            </AlertDialogContent>
+        </AlertDialog>
     )
 };
