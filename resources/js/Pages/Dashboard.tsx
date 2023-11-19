@@ -110,7 +110,7 @@ const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[]}> = ({moods,feedbacks}) =
                         }
                     </div> */}
 
-                    {/* <IntroModal /> */}
+                    <IntroModal />
 
                 </div>
             </DashboardLayout>
@@ -195,25 +195,38 @@ const IntroModal:FC = () => {
     const [isOpen, setIsOpen] = useState(true);
     const [test, setTest] = useState(["hello","world"]);
 
+    const renderArrowPrev = (clickHander:()=>void) => <button onClick={clickHander}>Previous</button>
+
     return (
-        <Dialog open={isOpen} onOpenChange={()=>setIsOpen(false)}>
+        <Dialog open={isOpen}>
             <DialogContent className='dark:text-gray-900'>
                 <DialogHeader className='dark:text-gray-900'>
                     <DialogTitle className='border-b pb-2.5'>
-                        <span className='text-lg font-medium'>Introduction</span>
+                        <span className='text-lg font-medium'>Quick Tour</span>
                     </DialogTitle>
 
-                    <Carousel showArrows={true} showStatus={false} emulateTouch>
+                    <Carousel showArrows={true} showStatus={false} showThumbs={false} emulateTouch>
                         <div>
                             <img src={`${route('welcome')}/images/welcome.png`} />
+                            <p className='my-4'>Let's take a quick tour to introduce you to key features. Click "Next" to continue</p>
                         </div>
                         <div>
                             <img src={`${route('welcome')}/images/account.png`} />
+                            <p>Explore Your Dashboard</p>
+                            <p>This is your dashboard. Discover key sections and features that will help you navigate through Kojitation.</p>
                         </div>
                         <div>
-                            <img src="assets/1.jpeg" />
+                            <img src={`${route('welcome')}/images/account.png`} />
+                            <p>Start Journaling</p>
+                            <p>Begin your journey by creating your first journal entry. Click "Next" to learn how.</p>
+                        </div>
+                        <div>
+                            <img src={`${route('welcome')}/images/account.png`} />
+                            <p>Track Your Mood</p>
+                            <p>Kojitation allows you to track your mood. Learn how to record and view your mood status by clicking "Next."</p>
                         </div>
                     </Carousel>
+                    {/* <button onClick={onPrevious}>Previous</button> */}
 
                 </DialogHeader>
             </DialogContent>

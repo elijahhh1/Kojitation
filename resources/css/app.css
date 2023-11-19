@@ -115,3 +115,11 @@
 .rbc-show-more{
   @apply !text-primary !bg-transparent
 }
+
+.control-dots {
+    bottom: -10px !important;
+}
+
+.carousel {
+    @apply !h-[22rem]
+}
