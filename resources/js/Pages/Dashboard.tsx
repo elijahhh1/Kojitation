@@ -195,7 +195,9 @@ const IntroModal:FC = () => {
     const [isOpen, setIsOpen] = useState(true);
     const [test, setTest] = useState(["hello","world"]);
 
-    const renderArrowPrev = (clickHander:()=>void) => <button onClick={clickHander}>Previous</button>
+    const renderArrowNext = (clickHandler: () => void, hasNext: boolean, label: string) => <Button className='next-button' onClick={clickHandler}>Next</Button>
+    
+    
 
     return (
         <Dialog open={isOpen}>
@@ -205,7 +207,7 @@ const IntroModal:FC = () => {
                         <span className='text-lg font-medium'>Quick Tour</span>
                     </DialogTitle>
 
-                    <Carousel showArrows={true} showStatus={false} showThumbs={false} emulateTouch>
+                    <Carousel renderArrowNext={renderArrowNext}  showArrows showStatus={false} showThumbs={false} emulateTouch>
                         <div>
                             <img src={`${route('welcome')}/images/welcome.png`} />
                             <p className='my-4'>Let's take a quick tour to introduce you to key features. Click "Next" to continue</p>
