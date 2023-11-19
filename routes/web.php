@@ -38,6 +38,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::get('/show/{month}', [DashboardController::class, 'show'])->name('show');
+    Route::get('/store', [DashboardController::class, 'store'])->name('store');
 });
 
 Route::middleware(['auth'])->group(function () {

@@ -31,7 +31,7 @@ const SendFeedbackModal:FC = () => {
     }
 
     useEffect(()=>{
-        console.log(sent_feedback_today)
+        // console.log(sent_feedback_today)
     },);
 
     return (
@@ -40,7 +40,7 @@ const SendFeedbackModal:FC = () => {
                 <DialogHeader>
                     <DialogTitle className='border-b pb-2.5'>
                         <span className='flex items-center text-lg font-medium'>
-                            <Send className='mr-2'/> 
+                            <Send className='mr-2'/>
                             Send Feedback
                         </span>
                     </DialogTitle>

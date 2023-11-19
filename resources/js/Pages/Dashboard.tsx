@@ -60,7 +60,7 @@ const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[]}> = ({moods,feedbacks}) =
     }
 
     useEffect(()=>{
-        console.error(feedbacks)
+        // console.error(user.show_introduction)
     })
 
     return (
@@ -194,11 +194,19 @@ const RenderLineChart:FC<{linedata:{"name":string; "icon":number;}[]}> = ({lined
 
 
 const IntroModal:FC = () => {
-    const [isOpen, setIsOpen] = useState(true);
+    const user = usePage<PageProps>().props.auth.user;
+
+    const [isOpen, setIsOpen] = useState((user.show_introduction==1)?false:true);
     const [test, setTest] = useState(["hello","world"]);
 
-    const renderArrowNext = (clickHandler: () => void, hasNext: boolean, label: string) => <Button className='next-button' onClick={clickHandler}>Next</Button>
-    const renderArrowPrev = (clickHandler: () => void, hasPrev: boolean, label: string) => <Button className='prev-button' onClick={clickHandler}>Back</Button>
+    const renderArrowNext = (clickHandler: () => void, hasNext: boolean, label: string) =>
+        <Button className='w-20 next-button' onClick={hasNext?clickHandler:updateIntroduction}>{hasNext?'Next':'Got it'}</Button>
+    const renderArrowPrev = (clickHandler: () => void, hasPrev: boolean, label: string) => <Button className='w-20 prev-button' onClick={clickHandler}>Back</Button>
+
+    const updateIntroduction = () => {
+        router.get(route('dashboard.store'));
+        setIsOpen(false);
+    }
 
     return (
         <AlertDialog open={isOpen}>
@@ -210,9 +218,10 @@ const IntroModal:FC = () => {
                     </AlertDialogTitle>
                 </AlertDialogHeader>
 
-                <Carousel renderArrowNext={renderArrowNext} renderArrowPrev={renderArrowPrev}  showArrows showStatus={false} showThumbs={false} emulateTouch>
+                <Carousel renderArrowNext={renderArrowNext} renderArrowPrev={renderArrowPrev}  showArrows showStatus={false} showThumbs={false} emulateTouch
+                    className='max-w-sm md:max-w-md'>
                     <div>
-                        <img src={`${route('welcome')}/images/welcome.png`} />
+                        <img src={`${route('welcome')}/images/welcome.png`} className='h-[260px] object-cover' />
                         <p className='my-4'>Let's take a quick tour to introduce you to key features. Click "Next" to continue</p>
                     </div>
                     <div>
@@ -241,9 +250,14 @@ const IntroModal:FC = () => {
                         <p>Explore video content on Kojitation.</p>
                     </div>
                     <div>
-                        <img src={`${route('welcome')}/images/bot.png`} className='w-[460px] max-w-[463px] h-[260px] object-cover' />
+                        <img src={`${route('welcome')}/images/bot.png`} className='h-[260px] object-cover' />
                         <p>Chat with the Bot</p>
                         <p>Engage with our chatbot to manage your stress.</p>
+                    </div>
+                    <div>
+                        <img src={`${route('welcome')}/images/support.png`} className='h-[260px] object-cover' />
+                        <p>Need Help?</p>
+                        <p>If you have questions or encounter issues, Access FAQs or contact our support team.</p>
                     </div>
                 </Carousel>
             </AlertDialogContent>

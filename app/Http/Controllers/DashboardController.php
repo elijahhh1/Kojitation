@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Mood;
 use App\Models\Dashboard;
 use App\Models\SendFeedback;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +38,9 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::find(Auth::id());
+        $user->show_introduction = 1;
+        $user->update();
     }
 
     /**

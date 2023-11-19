@@ -45,7 +45,7 @@ const DocumentView:FC = () => {
         e.preventDefault();
         post(route('documents.update',{id:selected_document.id}));
     }
-    
+
     return (
         <>
             <Head title='Documents' />
@@ -55,57 +55,65 @@ const DocumentView:FC = () => {
                     <form onSubmit={onSubmit} ref={formRef}>
                         <div className='md:max-w-3xl lg:max-w-4xl mx-auto'>
                             <ToolBar initialData={selected_document!} />
-                            <div className='flex flex-col gap-y-3.5'>   
+                            <div className='flex flex-col gap-y-3.5 mt-10'>
                                 <div className='flex flex-col space-y-2.5 md:flex-row md:space-x-2.5 md:space-y-0 w-full items-center justify-center md:justify-between'>
-                                    <div className='w-full md:w-1/2 border border-muted-foreground   p-4'>   
-                                        <p className='text-lg tracking-tight font-semibold pb-6'>3 Things I AM Grateful For Today</p>
+                                    <div className='w-full md:w-1/2 border border-fuchsia-200 bg-fuchsia-50 dark:border-slate-700 dark:bg-slate-900 rounded-lg px-4 py-6'>
+                                        <p className='text-center text-lg tracking-tight font-semibold pb-6 text-primary'>3 Things I Am Grateful For Today</p>
                                         <div className='flex flex-col space-y-2.5'>
                                             <div className='flex items-end space-x-1.5'>
-                                                <Label htmlFor='grateful1' className='text-lg leading-none'>1.</Label>
-                                                <input onBlur={onBlur} id='grateful1' value={data.grateful1} onChange={onChange} className='w-full rounded-none border-0 border-b-2 px-3 p-0 bg-transparent disabled:opacity-50' />
+                                                <Label htmlFor='grateful1' className='text-lg leading-none'></Label>
+                                                <input onBlur={onBlur} id='grateful1' value={data.grateful1} onChange={onChange}
+                                                    className='w-full rounded p-1.5 border-b-2 bg-fuchsia-100 dark:bg-slate-800 disabled:opacity-50' />
                                             </div>
                                             <div className='flex items-end space-x-1.5'>
-                                                <Label htmlFor='grateful2' className='text-lg leading-none'>2.</Label>
-                                                <input onBlur={onBlur} id='grateful2' value={data.grateful2} onChange={onChange} className='w-full rounded-none border-0 border-b-2 px-3 p-0 bg-transparent disabled:opacity-50' />
+                                                <Label htmlFor='grateful2' className='text-lg leading-none'></Label>
+                                                <input onBlur={onBlur} id='grateful2' value={data.grateful2} onChange={onChange}
+                                                    className='w-full rounded p-1.5 border-b-2 bg-fuchsia-100 dark:bg-slate-800 disabled:opacity-50' />
                                             </div>
                                             <div className='flex items-end space-x-1.5'>
-                                                <Label htmlFor='grateful3' className='text-lg leading-none'>3.</Label>
-                                                <input onBlur={onBlur} id='grateful3' value={data.grateful3} onChange={onChange} className='w-full rounded-none border-0 border-b-2 px-3 p-0 bg-transparent disabled:opacity-50' />
+                                                <Label htmlFor='grateful3' className='text-lg leading-none'></Label>
+                                                <input onBlur={onBlur} id='grateful3' value={data.grateful3} onChange={onChange}
+                                                    className='w-full rounded p-1.5 border-b-2 bg-fuchsia-100 dark:bg-slate-800 disabled:opacity-50' />
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className='w-full md:w-1/2 border border-muted-foreground   p-4'>   
-                                        <p className='text-lg tracking-tight font-semibold pb-6'>3 Good Things That Happened Today</p>
+                                    <div className='w-full md:w-1/2 border border-indigo-200 bg-indigo-50 dark:border-neutral-600 dark:bg-neutral-900 rounded-lg px-4 py-6'>
+                                        <p className='text-center text-lg tracking-tight font-semibold pb-6'>3 Good Things That Happened Today</p>
                                         <div className='flex flex-col space-y-2.5'>
                                             <div className='flex items-end space-x-1.5'>
-                                                <Label htmlFor='happenings_today1' className='text-lg leading-none'>1.</Label>
-                                                <input onBlur={onBlur} id='happenings_today1' value={data.happenings_today1} onChange={onChange} className='w-full rounded-none border-0 border-b-2 px-3 p-0 bg-transparent disabled:opacity-50' />
+                                                <Label htmlFor='happenings_today1' className='text-lg leading-none'></Label>
+                                                <input onBlur={onBlur} id='happenings_today1' value={data.happenings_today1} onChange={onChange}
+                                                    className='w-full rounded p-1.5 border-b-2 bg-indigo-100 dark:bg-neutral-800 disabled:opacity-50' />
                                             </div>
                                             <div className='flex items-end space-x-1.5'>
-                                                <Label htmlFor='happenings_today2' className='text-lg leading-none'>2.</Label>
-                                                <input onBlur={onBlur} id='happenings_today2' value={data.happenings_today2} onChange={onChange} className='w-full rounded-none border-0 border-b-2 px-3 p-0 bg-transparent disabled:opacity-50' />
+                                                <Label htmlFor='happenings_today2' className='text-lg leading-none'></Label>
+                                                <input onBlur={onBlur} id='happenings_today2' value={data.happenings_today2} onChange={onChange}
+                                                    className='w-full rounded p-1.5 border-b-2 bg-indigo-100 dark:bg-neutral-800 disabled:opacity-50' />
                                             </div>
                                             <div className='flex items-end space-x-1.5'>
-                                                <Label htmlFor='happenings_today3' className='text-lg leading-none'>3.</Label>
-                                                <input onBlur={onBlur} id='happenings_today3' value={data.happenings_today3} onChange={onChange} className='w-full rounded-none border-0 border-b-2 px-3 p-0 bg-transparent disabled:opacity-50' />
+                                                <Label htmlFor='happenings_today3' className='text-lg leading-none'></Label>
+                                                <input onBlur={onBlur} id='happenings_today3' value={data.happenings_today3} onChange={onChange}
+                                                    className='w-full rounded p-1.5 border-b-2 bg-indigo-100 dark:bg-neutral-800 disabled:opacity-50' />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className='pt-10'>
-                                    <div>
-                                        <p className='w-full text-center text-lg tracking-tight font-semibold pb-6'>My Favorite Moment of the Day</p>
-                                        <input onBlur={onBlur} id='favorite_moment' value={data.favorite_moment} onChange={onChange} className='w-full rounded-none border-0 border-b-2 px-3 p-0 bg-transparent disabled:opacity-50' />
+                                    <div className='px-4 py-6 rounded bg-rose-100 border border-rose-300 dark:bg-[#170129] dark:border-[#42017a] mb-6'>
+                                        <p className='w-full text-center text-lg tracking-tight font-semibold pb-2'>My Favorite Moment of the Day</p>
+                                        <input onBlur={onBlur} id='favorite_moment' value={data.favorite_moment} onChange={onChange}
+                                            className='w-full rounded p-1.5 border-b-2 bg-rose-200 dark:bg-[#21112f] disabled:opacity-50' />
                                     </div>
-                                    <div>
-                                        <p className='w-full text-center text-lg tracking-tight font-semibold pb-6'>My Favorite Moment of the Day</p>
-                                        <input onBlur={onBlur} id='looking_forward_to' value={data.looking_forward_to} onChange={onChange} className='w-full rounded-none border-0 border-b-2 px-3 p-0 bg-transparent disabled:opacity-50' />
+                                    <div className='px-4 py-6 rounded bg-cyan-50 border border-cyan-300 dark:bg-[#35122f] dark:border-[#2f132a] mb-6'>
+                                        <p className='w-full text-center text-lg tracking-tight font-semibold pb-2'>Tommorow, I Look Forward To</p>
+                                        <input onBlur={onBlur} id='looking_forward_to' value={data.looking_forward_to} onChange={onChange}
+                                            className='w-full rounded p-1.5 border-b-2 bg-cyan-100 dark:bg-[#290f25] disabled:opacity-50' />
                                     </div>
                                 </div>
-                                
+
                             </div>
-                            
+
                             <div className='pt-20 w-full flex'>
                                 <Button size='lg' className='ml-auto font-bold text-2xl'>
                                     <SaveIcon className='w-6 h-6 mr-2' />
@@ -114,7 +122,7 @@ const DocumentView:FC = () => {
                             </div>
                         </div>
                     </form>
-                    
+
                 </div>
             </DocumentsLayout>
         </>
