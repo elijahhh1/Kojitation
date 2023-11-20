@@ -25,7 +25,7 @@ const Tasks:FC<{tasks:Task[]}> = ({tasks}) => {
                     <header className='flex items-center h-12 border-b border-b-muted-foreground relative'>
                         <h1 className='text-center text-2xl font-semibold tracking-tight flex-1'>{user.name}'s Tasks</h1>
                         <NewTaskList>
-                            <Button onClick={()=>{}} size='sm' className='font-medium text-md flex space-x-2 items-center justify-center absolute top-1 right-1' variant='outline'> 
+                            <Button onClick={()=>{}} size='sm' className='z-[10000000] font-medium text-md flex space-x-2 items-center justify-center absolute top-1 right-1' variant='outline'> 
                                 <CalendarPlus className='h-5 w-5' />
                                 <span>New Task List</span>
                             </Button>

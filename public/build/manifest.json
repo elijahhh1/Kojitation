@@ -215,7 +215,7 @@
     "dynamicImports": [
       "resources/js/Components/Editor.tsx"
     ],
-    "file": "assets/DocumentView-c6a5cae3.js",
+    "file": "assets/DocumentView-603ad4bd.js",
     "imports": [
       "resources/js/app.tsx",
       "_index-99d872a8.js",
@@ -262,7 +262,7 @@
     "css": [
       "assets/MoodCalendar-bd556087.css"
     ],
-    "file": "assets/MoodCalendar-ecc5ae76.js",
+    "file": "assets/MoodCalendar-eff99032.js",
     "imports": [
       "_index-99d872a8.js",
       "_moment-fbc5633a.js",
@@ -301,7 +301,7 @@
     "src": "resources/js/Pages/Public.tsx"
   },
   "resources/js/Pages/Tasks.tsx": {
-    "file": "assets/Tasks-104ac3f9.js",
+    "file": "assets/Tasks-37c37444.js",
     "imports": [
       "_index-99d872a8.js",
       "_alert-dialog-a411af93.js",
@@ -351,12 +351,12 @@
     "src": "resources/js/Pages/Welcome.tsx"
   },
   "resources/js/app.css": {
-    "file": "assets/app-7c6c4093.css",
+    "file": "assets/app-8262d4e5.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.tsx": {
     "css": [
-      "assets/app-7c6c4093.css"
+      "assets/app-8262d4e5.css"
     ],
     "dynamicImports": [
       "resources/js/Pages/Auth/Login.tsx",
@@ -371,7 +371,7 @@
       "resources/js/Pages/Videos.tsx",
       "_Heading-a85d16c7.js"
     ],
-    "file": "assets/app-b74b1393.js",
+    "file": "assets/app-f0f7dc69.js",
     "imports": [
       "_index-99d872a8.js"
     ],
