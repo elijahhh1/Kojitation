@@ -57,8 +57,8 @@ const MoodCalendar:FC<{moods:Mood[]}> = ({moods}) => {
                 <div className='flex flex-col overflow-hidden max-w-5xl mx-auto px-2.5 h-full '>
 
 
-                    <div className='pt-2.5 mb-3.5 border-b border-b-muted-foreground/40 pb-6 flex items-center '>
-                        <p className='flex-1 font-bold tracking-tight text-xl text-start pl-7 md:pl-0 md:text-3xl md:text-center'>Mood Calendar</p>
+                    <div className='pt-2.5 mb-3.5 border-b border-b-muted-foreground/40 pb-6 flex flex-col items-end md:flex-row md:items-center '>
+                        <p className='md:flex-1 font-bold tracking-tight text-xl text-start pl-7 md:pl-0 md:text-3xl md:text-center'>Mood Calendar</p>
 
                         <Button onClick={handleOpen} size='sm' variant='outline'>
                             <PlusCircle  className='w-5 h-5' />

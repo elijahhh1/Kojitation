@@ -36,7 +36,7 @@ class TaskController extends Controller
         Task::create([
             'user_id'=>Auth::id(),
             'name'=>$request->name,
-            'target_date'=>Carbon::parse($request->target_date)
+            'target_date'=>Carbon::parse($request->target_date)->addDay()
         ]);
     }
 

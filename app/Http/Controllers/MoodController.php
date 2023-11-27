@@ -36,13 +36,14 @@ class MoodController extends Controller
      */
     public function store(Request $request)
     {
+        $dt = Carbon::now();
         Mood::create([
             'user_id' => Auth::id(),
             'mood_level' => $request->mood_level,
             'icon' => $request->icon,
             'description' => $request->description,
-            'start' => now(),
-            'end' => Carbon::now()->addHour()
+            'start' => $dt->toDateString(),
+            'end' => $dt->toDateString()
         ]);
     }
 
