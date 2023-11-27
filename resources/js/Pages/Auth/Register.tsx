@@ -76,6 +76,8 @@ export default function Register() {
                         onChange={(e) => setData('password', e.target.value)}
                         required
                     />
+                    <p>Password should have at least 8 characters</p>
+                    <p>Password should contain at least 1 special character</p>
 
                     {errors.email&& <p className='text-xs text-destructive'>{errors.password}</p> }
                 </div>

@@ -120,6 +120,7 @@ export interface Result{
     remarks:string;
     created_at:string;
     updated_at:string;
+    user:User;
 }
 
 export interface Happening{

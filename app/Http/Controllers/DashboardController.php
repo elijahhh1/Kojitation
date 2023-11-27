@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Mood;
 use App\Models\Dashboard;
+use App\Models\Result;
 use App\Models\SendFeedback;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,11 +18,19 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $user = User::find(Auth::id());
+        if ($user->level == 1) {
+            $user = User::where('level', '!=', 1)->first();
+        }
+
         return Inertia::render('Dashboard', [
-            'moods' => Mood::where('user_id', Auth::id())
+            'moods' => Mood::where('user_id', $user->id)
                 ->whereMonth('start', now()->month)
                 ->get(),
-            'feedbacks' => SendFeedback::get()
+            'feedbacks' => SendFeedback::with(['user'])->get(),
+            'stress_results' => Result::with(['user'])->get(),
+            'users' => User::where('level', '!=', 1)->get(),
+            'current_user' => $user->id //for debugging purposes
         ]);
     }
 
@@ -53,6 +62,16 @@ class DashboardController extends Controller
                 ->whereMonth('start', $dashboard->month)
                 ->get()
         ]);
+    }
+
+    public function show_user_mood(Request $dashboard)
+    {
+        $mood = Mood::where('user_id', $dashboard->user_id)
+            ->whereMonth('start', $dashboard->month)
+            ->get();
+        //return [$dashboard->user_id, $dashboard->month];
+
+        return $mood;
     }
 
     /**

@@ -39,6 +39,7 @@ Route::middleware(['auth'])->prefix('dashboard')->name('dashboard.')->group(func
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::get('/show/{month}', [DashboardController::class, 'show'])->name('show');
     Route::get('/store', [DashboardController::class, 'store'])->name('store');
+    Route::post('/show_user_mood', [DashboardController::class, 'show_user_mood'])->name('show_user_mood');
 });
 
 Route::middleware(['auth'])->group(function () {

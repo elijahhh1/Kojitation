@@ -16,7 +16,7 @@ const Heading:FC = () => {
     const user = usePage<PageProps>().props.auth.user;
     const {onOpen} = useAuthModal();
     const [registerOpen, setRegisterOpen] = useState(false);
-    
+
     const [resetPasswordOpen, SetResetPasswordOpen] = useState(false);
 
     return (
@@ -37,7 +37,6 @@ const Heading:FC = () => {
                         <div className='flex flex-col space-y-2'>
                             <Button variant='outline' onClick={()=>setRegisterOpen(true)} className='bg-blue-200 dark:text-gray-900 mx-auto'>Hi! I'm a new user</Button>
                             <a href="#" onClick={onOpen} className='text-sm mx-auto hover:underline transition duration-300'>I already have an account</a>
-                            <Button onClick={()=>SetResetPasswordOpen(true)} variant='link' className='text-xs text-muted-foreground leading-10 italic'>Forgot Password?</Button>
                         </div>
                         ):(
                         <Button onClick={()=>router.get(route('dashboard.index'))} className='mx-auto'>
@@ -48,86 +47,8 @@ const Heading:FC = () => {
                 }
 
                 <RegisterModal isOpen={registerOpen} onClose={()=>setRegisterOpen(false)} />
-                <ForgotPasswordModal open={resetPasswordOpen} onClose={()=>SetResetPasswordOpen(false)} />
         </div>
     )
 }
 
 export default Heading;
-
-
-const ForgotPasswordModal:FC<{open?:boolean;onClose:()=>void}> = ({open,onClose}) =>{
-
-    const {data,setData,errors,reset,processing,post} = useForm({
-        email:"",
-        user_name:"",
-        password:"",
-        password_confirmation:""
-    });
-
-    const {email,
-        user_name,
-        password,
-        password_confirmation
-    } = data;
-
-    const handleChange:ChangeEventHandler<HTMLInputElement> = ({target}) =>{
-        const {id,value} = target as {id:'email'|'user_name'|'password'|'password_confirmation';value:string;};
-        setData(id,value);
-    }
-
-    const onSubmit:FormEventHandler<HTMLFormElement> = (e) =>{
-        e.preventDefault();
-        post(route('reset_password'),{
-            onSuccess:()=>{
-                onClose();
-                toast.success('Password Reset Succesful');
-            }
-        });
-        
-    }
-
-    useEffect(()=>{
-        if(!open) reset();
-    },[open])
-
-    return(
-        <AlertDialog open={open} onOpenChange={onClose}>
-            <AlertDialogContent>
-                <AlertDialogHeader>
-                <AlertDialogTitle>Reset Password</AlertDialogTitle>
-                    <AlertDialogDescription>
-                        Enter your User Name and Email to reset password...
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
-                <form onSubmit={onSubmit} id='form' className='flex flex-col gap-y-4'>
-                    <div className='flex flex-col space-y-1.5'>
-                        <Label htmlFor='email'>Email</Label>
-                        <Input disabled={processing} required autoFocus autoComplete='off' id='email' value={email} onChange={handleChange}/>
-                        {errors.email && <p className='text-destructive text-xs text-right -mt-3'>{errors.email}</p>}
-                    </div>
-                    <div className='flex flex-col space-y-1.5'>
-                        <Label htmlFor='user_name'>User Name</Label>
-                        <Input disabled={processing} required autoComplete='off' id='user_name' value={user_name} onChange={handleChange}/>
-                        {errors.user_name && <p className='text-destructive text-xs text-right -mt-3'>{errors.user_name}</p>}
-                    </div>
-
-                    <div className='flex flex-col space-y-1.5'>
-                        <Label htmlFor='password'>New Password</Label>
-                        <Input disabled={processing} required autoComplete='off' type='password' id='password' value={password} onChange={handleChange}/>
-                        {errors.password && <p className='text-destructive text-xs text-right -mt-3'>{errors.password}</p>}
-                    </div>
-                    <div className='flex flex-col space-y-1.5'>
-                        <Label htmlFor='password_confirmation'>Current Password</Label>
-                        <Input disabled={processing} required autoComplete='off' type='password' id='password_confirmation' value={password_confirmation} onChange={handleChange}/>
-                        {errors.password_confirmation && <p className='text-destructive text-xs text-right -mt-3'>{errors.password_confirmation}</p>}
-                    </div>
-                </form>
-                <AlertDialogFooter>
-                    <Button disabled={processing} onClick={onClose}>Cancel</Button>
-                    <Button disabled={processing} form='form'>Proceed</Button>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
-    );
-}

@@ -35,7 +35,7 @@ const Item:FC<ItemProps> = ({Icon,label,onClick,id,documentIcon,active,expanded,
         e.stopPropagation();
         if(!id) return;
         router.post(route('documents.store'),{
-            title:`Koji: ${format(new Date(),'Pp')}`,
+            title:`Gratitude Journal: ${format(new Date(),'Pp')}`,
             document_id:id
         },{
             onSuccess:()=>{
@@ -70,17 +70,17 @@ const Item:FC<ItemProps> = ({Icon,label,onClick,id,documentIcon,active,expanded,
             onError:()=>toast.error('Something Went Wrong. Please try again....')
         });
     }
-    
+
 
     return (
-        <div onClick={onClick} role='button' 
-            style={{ paddingLeft: level >0? `${(level*0.75)+0.75}rem` :'0.75rem' }} 
+        <div onClick={onClick} role='button'
+            style={{ paddingLeft: level >0? `${(level*0.75)+0.75}rem` :'0.75rem' }}
             className={cn('group min-h-[1.688rem] textt-sm py-1  pr-3 w-full hover:bg-primary/5 flex items-center text-muted-foreground font-medium transition ' + fontColor,
                 active && 'bg-primary/5 text-primary'
             )}>
             {!!id && <div role='button' className='h-full rounded-sm opacity-70 hover:opacity-100 hover:bg-secondary transition mr-1' onClick={handleExpand}><ChevronIcon className='h-4 w-4 shrink-0 text-muted-foreground/50' /></div>}
             {documentIcon?<div className='shrink-0 mr-2 text-[1.125rem]'>{documentIcon}</div>:<Icon className={cn('shrink-0 h-[1.125rem] w-[1.125rem] mr-2 text-muted-foreground ' + iconColor,isDone&&'dark:text-green-400 text-green-500')} />}
-            
+
             <span className={cn('truncate',isDone&&'dark:text-green-400 text-green-500')}>{label}</span>
             {
                 isSearch && (

@@ -100,7 +100,7 @@ const Navigation:FC = () => {
 
     const handleCreate = () =>{
         router.post(route('documents.store'),{
-            title:`Koji: ${format(new Date(),'Pp')}`
+            title:`Gratitude Journal: ${format(new Date(),'Pp')}`
         },{
             preserveScroll:true,
             preserveState:false,
@@ -126,38 +126,57 @@ const Navigation:FC = () => {
                 <div>
                     <UserItem />
                     <Item onClick={()=>router.get(route('dashboard.index'))} label='Dashboard' Icon={LineChart} iconColor='text-[#f72585] dark:text-[#FCE1E4]' fontColor='text-gray-700 dark:text-[#FCE1E4]'/>
-                    <Item onClick={()=>router.get(route('mood.index'))} label='Mood Calendar' Icon={CalendarCheck2}  iconColor='text-[#b5179e] dark:text-[#DAEAFF]' fontColor='text-gray-700 dark:text-[#DAEAFF]'/>
-                    <Item onClick={()=>router.get(route('tasks.index'))} label='Task Manager' Icon={ClipboardList} iconColor='text-[#7209b7] dark:text-[#E8DFF5]' fontColor='text-gray-700 dark:text-[#E8DFF5]'/>
-                    <Item onClick={()=>router.get(route('videos.index'))} label={`Videos`} Icon={Video} iconColor='text-[#560bad] dark:text-[#DDEDEA]' fontColor='text-gray-700 dark:text-[#DDEDEA]'/>
-                    <Item onClick={openChat} label='Chatbot' Icon={Bot}  iconColor='text-[#480ca8] dark:text-[#ECD8A0]' fontColor='text-gray-700 dark:text-[#ECD8A0]'/>
+                    {
+                        user.level==0?
+                        <>
+                        <Item onClick={()=>router.get(route('mood.index'))} label='Mood Calendar' Icon={CalendarCheck2}  iconColor='text-[#b5179e] dark:text-[#DAEAFF]' fontColor='text-gray-700 dark:text-[#DAEAFF]'/>
+                        <Item onClick={()=>router.get(route('tasks.index'))} label='Task Manager' Icon={ClipboardList} iconColor='text-[#7209b7] dark:text-[#E8DFF5]' fontColor='text-gray-700 dark:text-[#E8DFF5]'/>
+                        <Item onClick={()=>router.get(route('videos.index'))} label={`Videos`} Icon={Video} iconColor='text-[#560bad] dark:text-[#DDEDEA]' fontColor='text-gray-700 dark:text-[#DDEDEA]'/>
+                        <Item onClick={openChat} label='Chatbot' Icon={Bot}  iconColor='text-[#480ca8] dark:text-[#ECD8A0]' fontColor='text-gray-700 dark:text-[#ECD8A0]'/>
+                        </>
+                        :
+                        <></>
+                    }
                     <div className='border-b border-b-[#e3e3e3] dark:border-b-[#202020] my-2' />
-                    <Item onClick={openFAQ} label='FAQs' Icon={HelpCircle} iconColor='text-[#3a0ca3] dark:text-[#FCE1E4]' fontColor='text-gray-700 dark:text-[#FCE1E4]'/>
-                    <Item onClick={openSendFeedback} label='Send Feedback' Icon={Send} iconColor='text-[#3f37c9] dark:text-[#DAEAFF]' fontColor='text-gray-700 dark:text-[#DAEAFF]'/>
+                    {
+                        user.level==0?
+                        <>
+                            <Item onClick={openFAQ} label='FAQs' Icon={HelpCircle} iconColor='text-[#3a0ca3] dark:text-[#FCE1E4]' fontColor='text-gray-700 dark:text-[#FCE1E4]'/>
+                            <Item onClick={openSendFeedback} label='Send Feedback' Icon={Send} iconColor='text-[#3f37c9] dark:text-[#DAEAFF]' fontColor='text-gray-700 dark:text-[#DAEAFF]'/>
+                        </>
+                        :
+                        <></>
+                    }
                     <Item onClick={openSettings} label='Settings' Icon={Settings} iconColor='text-[#4361ee] dark:text-[#E8DFF5]' fontColor='text-gray-700 dark:text-[#E8DFF5]'/>
                     <div className='border-b border-b-[#e3e3e3] dark:border-b-[#202020] my-2' />
                     {/* <Item onClick={onOpen} label='Search' Icon={Search} isSearch /> */}
                 </div>
-                <div className='flex-1 flex flex-col overflow-hidden'>
-                    <div className='px-3 pt-3 pb-2 text-gray-700 dark:text-[#FCE1E4] flex items-center font-medium'>
-                        <Book className='h-[1.125rem] w-[1.125rem] mr-2 dark:text-[#FCE1E4]'/>
-                        Gratitude Journal
+                {
+                    user.level==0?
+                    <div className='flex-1 flex flex-col overflow-hidden'>
+                        <div className='px-3 pt-3 pb-2 text-gray-700 dark:text-[#FCE1E4] flex items-center font-medium'>
+                            <Book className='h-[1.125rem] w-[1.125rem] mr-2 dark:text-[#FCE1E4]'/>
+                            Gratitude Journal
+                        </div>
+                        <div className='h-auto'>
+                            <Popover>
+                                <PopoverTrigger className='w-full'>
+                                    <Item label='Archives' Icon={Recycle} iconColor='text-[#d55d92] dark:text-[#DAEAFF]' fontColor='text-gray-700 dark:text-[#DAEAFF]'/>
+                                </PopoverTrigger>
+                                <PopoverContent className='p-0 w-72' side={isMobile?'bottom':'right'}>
+                                    <Trashbox />
+                                </PopoverContent>
+                            </Popover>
+                            <Item onClick={handleCreate} Icon={Plus} label='Add new' iconColor='text-[#007f5f] dark:text-[#80b918]' fontColor='text-gray-700 dark:text-[#80b918]'/>
+                        </div>
+                        <div className='flex-1 overflow-y-auto'>
+                            <DocumentList documents={documents} />
+                        </div>
                     </div>
-                    <div className='h-auto'>
-                        <Popover>
-                            <PopoverTrigger className='w-full'>
-                                <Item label='Archives' Icon={Recycle} iconColor='text-[#d55d92] dark:text-[#DAEAFF]' fontColor='text-gray-700 dark:text-[#DAEAFF]'/>
-                            </PopoverTrigger>
-                            <PopoverContent className='p-0 w-72' side={isMobile?'bottom':'right'}>
-                                <Trashbox />
-                            </PopoverContent>
-                        </Popover>
-                        <Item onClick={handleCreate} Icon={Plus} label='Add new' iconColor='text-[#007f5f] dark:text-[#80b918]' fontColor='text-gray-700 dark:text-[#80b918]'/>
-                    </div>
-                    <div className='flex-1 overflow-y-auto'>
-                        <DocumentList documents={documents} />
-                    </div>
-                </div>
-                <div onMouseDown={handleMouseDown} onClick={resetWidth} 
+                    :
+                    <></>
+                }
+                <div onMouseDown={handleMouseDown} onClick={resetWidth}
                     className='hopacity-0 hover:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-gradient-to-b from-pink-300 via-purple-300 to-indigo-400 dark:from-[#191308] dark:via-[#DAEAFF] dark:to-[#322a26] right-0 top-0' />
             </aside>
             <div ref={navBarRef} className={cn('absolute top-0 z-[100000] left-60 w-[calc(100%-15rem)]',

@@ -37,7 +37,7 @@ const ToolBar:FC<ToolBarProps> = ({initialData,preview}) => {
     const onInput = (val:string) =>{
         setVal(val);
         router.post(route('documents.update',{id}),{
-            title:val||`Koji: ${format(new Date(),'Pp')}`
+            title:val||`Gratitude Journal: ${format(new Date(),'Pp')}`
         },{
             preserveState:true
         });
@@ -91,7 +91,7 @@ const ToolBar:FC<ToolBarProps> = ({initialData,preview}) => {
             </div>
             {
                 (isEditing && !preview) ? <RTAUS ref={inputRef} onBlur={disableInput} onKeyDown={onKeyDown} value={val} onChange={({target})=>onInput(target.value)} className='text-5xl bg-transparent font-bold break-words outline-none text-primary/75 resize-none' />:(
-                    <div onClick={enableInput} className='pb-[0.719rem] text-5xl font-bold break-words outline-none text-primary/75'>
+                    <div className='pb-[0.719rem] text-4xl font-bold break-words outline-none text-primary/75'>
                         {initialData.title}
                     </div>
                 )

@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { Button } from '../ui/button';
 import { router } from '@inertiajs/react';
 import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
 
 interface Props{
     item:TaskIndividualItem;
@@ -45,7 +46,8 @@ const TaskItem:FC<Props> = ({item}) => {
             </TableCell>
             <TableCell>{is_completed===1&& <span>{format(new Date(updated_at),'PPp')}</span>}</TableCell>
             <TableCell className='flex items-center justify-end space-x-1.5'>
-                <Button disabled={loading} onClick={onComplete} size='sm' className='border-green-500 dark:border-green-400' variant='outline'>
+                <Button disabled={loading} onClick={onComplete} size='sm' variant='outline'
+                    className={cn('border-green-500 dark:border-green-400', (is_completed===1)?'hidden':'')}>
                     Complete
                 </Button>
                 <Button disabled={loading} onClick={onDelete} size='sm' variant='destructive'>

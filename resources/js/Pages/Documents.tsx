@@ -14,7 +14,7 @@ const Documents:FC = () => {
     const user = usePage<PageProps>().props.auth.user;
     const handleCreate = () =>{
         router.post(route('documents.store'),{
-            title:`Koji: ${format(new Date(),'Pp')}`
+            title:`Gratitude Journal: ${format(new Date(),'Pp')}`
         },{
             onError:()=>toast.error('Something Went Wrong. Please try again....')
         });
