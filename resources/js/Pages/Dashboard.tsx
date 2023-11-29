@@ -211,8 +211,8 @@ const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[], stress_results:Result[],
                                 </div>
                             </div>
 
-                            <div className='flex flex-col md:flex-row space-y-1 md:space-y-0'>
-                                <div className='w-full md:w-2/3 p-4'>
+                            <div className='flex flex-col lg:flex-row space-y-1 md:space-y-0'>
+                                <div className='w-full lg:w-2/3 p-4'>
                                     <div className='bg-purple-50 dark:bg-slate-800 rounded-md p-4'>
                                         <h1 className='text-purple-600 dark:text-purple-200 font-bold mb-4'>User Feedbacks</h1>
                                         <div className='h-[20rem] md:h-[25rem] overflow-y-auto space-y-2'>
@@ -229,7 +229,7 @@ const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[], stress_results:Result[],
                                     </div>
                                 </div>
 
-                                <div className='w-full md:w-1/3 p-4'>
+                                <div className='w-full lg:w-1/3 p-4'>
                                     <div className='bg-cyan-50 dark:bg-slate-800 rounded-md p-4'>
                                         <h1 className='text-cyan-600 dark:text-cyan-200 font-bold mb-4'>User Stress Results</h1>
                                         <div className='h-[20rem] md:h-[25rem] overflow-y-auto space-y-2'>
@@ -321,7 +321,6 @@ const RenderLineChart:FC<{linedata:{"name":string; "icon":number;}[]}> = ({lined
     return (
         <ResponsiveContainer>
             <LineChart width={500} height={300} data={linedata}>
-                <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                 <Line type="monotone" dataKey="icon" stroke="#8884d8" />
                 <XAxis dataKey="name" angle={-40} textAnchor={"end"} height={50} />
                 <YAxis dataKey="icon" ticks={[0,1,2,3,4,5]} domain={[0, 5]} tick={renderCustomAxisTick}/>

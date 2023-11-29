@@ -131,7 +131,14 @@ const Navigation:FC = () => {
                         <>
                         <Item onClick={()=>router.get(route('mood.index'))} label='Mood Calendar' Icon={CalendarCheck2}  iconColor='text-[#b5179e] dark:text-[#DAEAFF]' fontColor='text-gray-700 dark:text-[#DAEAFF]'/>
                         <Item onClick={()=>router.get(route('tasks.index'))} label='Task Manager' Icon={ClipboardList} iconColor='text-[#7209b7] dark:text-[#E8DFF5]' fontColor='text-gray-700 dark:text-[#E8DFF5]'/>
+                        </>
+                        :
+                        <></>
+                    }
                         <Item onClick={()=>router.get(route('videos.index'))} label={`Videos`} Icon={Video} iconColor='text-[#560bad] dark:text-[#DDEDEA]' fontColor='text-gray-700 dark:text-[#DDEDEA]'/>
+                    {
+                        user.level==0?
+                        <>
                         <Item onClick={openChat} label='Chatbot' Icon={Bot}  iconColor='text-[#480ca8] dark:text-[#ECD8A0]' fontColor='text-gray-700 dark:text-[#ECD8A0]'/>
                         </>
                         :
