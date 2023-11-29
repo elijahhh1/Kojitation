@@ -14,7 +14,7 @@ const VideoItem:FC<VideoItemProps> = ({video}) => {
         vid.current.currentTime=1
     },[vid])
     return (
-        <div className='w-full aspect-video relative py-12'>
+        <div className='w-full aspect-video relative py-12 h-full'>
             <p className='text-sm absolute top-0 inset-x-0 bg-gray-900/20 text-white truncate'>
                 {video.name}
             </p>

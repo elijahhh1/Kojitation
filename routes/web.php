@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ResetCodeController;
 use App\Http\Controllers\ChatbotController;
 use Inertia\Inertia;
 use App\Models\Document;
@@ -14,9 +15,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskItemController;
 use App\Http\Controllers\SendFeedbackController;
+use App\Mail\SendPasswordResetCode;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 
@@ -98,33 +100,15 @@ Route::get('/preview/{id}', function ($id) {
     ]);
 })->name('preview');
 
+Route::post('generate-code',[ResetCodeController::class,'generate'])->name('generate');
+Route::post('reset_password',[ResetCodeController::class,'reset_password'])->name('reset_password');
+Route::get('reset_password',function(){
+    return redirect()->to(route('welcome'));
+});
+Route::post('password_confirmation',[ResetCodeController::class,'password_confirmation'])->name('password_confirmation');
 
-Route::post('/reset', function (Request $request) {
-    $request->validate(
-        [
-            'user_name' => 'required|exists:users,user_name',
-            'email' => 'required|exists:users,email',
-            'password' => ['required', 'confirmed', Password::defaults(), 'regex:/^(?=.*[!@#$%^&*()\-_=+{};:,<.>]).+$/']
-        ],
-        [
-            'password.regex' => 'Password must contain a special character',
-        ]
-    );
-
-    $user_name_check = User::where('user_name', $request->user_name)->first();
-    $email_check = User::where('email', $request->email)->first();
-
-
-    $id1 = $user_name_check['id'];
-    $id2 = $email_check['id'];
-    if ($id1 != $id2) {
-        throw ValidationException::withMessages(['email' => 'User Name does not Match with the Email']);
-    }
-
-    $user_name_check->update([
-        'password' => bcrypt($request->password)
-    ]);
-})->name('reset_password');
-
+Route::get('/test',function(){
+    return Inertia::render('Auth/PasswordReset');
+});
 
 require __DIR__ . '/auth.php';

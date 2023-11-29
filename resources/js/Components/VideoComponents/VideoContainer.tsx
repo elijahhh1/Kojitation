@@ -5,8 +5,8 @@ import VideoItem from './VideoItem'
 
 const VideoContainer:FC<{videos:Video[]}> = ({videos}) => {
     return (
-        <div className='p-6 flex-1 flex flex-col overflow-hidden'>
-            <Carousel className='flex-1' emulateTouch infiniteLoop showThumbs onClickThumb={()=>{}}  swipeable>
+        <div className='p-6 flex-1 flex flex-col overflow-hidden h-full'>
+            <Carousel className='h-full aspect-video ' emulateTouch infiniteLoop showThumbs onClickThumb={()=>{}}  swipeable>
                 {videos.map(video=><VideoItem key={video.id} video={video} />)}
             </Carousel>
         </div>
