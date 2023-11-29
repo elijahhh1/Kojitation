@@ -353,7 +353,7 @@ const IntroModal:FC = () => {
                 <AlertDialogHeader>
                     <AlertDialogTitle className='flex items-center'>
                         <span className='text-center text-primary text-lg font-medium'>Quick Tour</span>
-                        <X className='text-primary ml-auto cursor-pointer' onClick={()=>{setIsOpen(false)}}/>
+                        {/* <X className='text-primary ml-auto cursor-pointer' onClick={()=>{setIsOpen(false)}}/> */}
                     </AlertDialogTitle>
                 </AlertDialogHeader>
 
