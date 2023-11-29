@@ -374,7 +374,7 @@ const IntroModal:FC = () => {
                         <p>Begin your journey by creating your first journal entry.</p>
                     </div>
                     <div>
-                        <img src={`${route('welcome')}/images/Happy.png`} className='h-[260px] object-cover' />
+                        <img src={`${route('welcome')}/images/happy.png`} className='h-[260px] object-cover' />
                         <p>Track Your Mood</p>
                         <p>Kojitation allows you to track your mood.</p>
                     </div>
