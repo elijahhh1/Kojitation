@@ -13,7 +13,7 @@ import {
     ValueType,
     NameType,
 } from 'recharts/types/component/DefaultTooltipContent';
-import { log } from 'console';
+import { Console, log } from 'console';
 import { emojis } from '@/Components/Modals/MoodModal';
 import moment from 'moment';
 import {
@@ -40,7 +40,12 @@ const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[], stress_results:Result[],
     const user = usePage<PageProps>().props.auth.user;
     var data = [{name: 'Page A', uv: "", pv: 2400, amt: 2400}, {name: 'Page B', uv: "", pv: 2500, amt: 2500}];
 
-    var lineMoods= useMemo(()=>moods.map(({start,mood_level})=>({name:moment(String(start)).format('MMM DD'),icon:mood_level})),[moods]);
+    const [selectedUser, setSelectedUser] = useState<User>(users[0]);
+
+    const [childMoods, setChildMoods] = useState<Mood[]>(moods);
+    var lineMoods= useMemo(
+        ()=>childMoods.map(({start,mood_level})=>({name:moment(String(start)).format('MMM DD'),icon:mood_level})),[childMoods]
+    );
 
     const months = [{id:1,month:"January"},{id:2,month:"February"},{id:3,month:"March"},{id:4,month:"April"},
                     {id:5,month:"May"},{id:6,month:"June"},{id:7,month:"July"},{id:8,month:"August"},
@@ -76,29 +81,26 @@ const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[], stress_results:Result[],
     }
 
     const onUserChange = (user_id:number,month:string) => {
-        const found = users.find(u=>u.id==user_id);
+        const foundUser = users.find(u=>u.id==user_id);
         const foundMonth = months.find(f=>month==f.month);
-        var comp = this;
 
-        if (found && foundMonth) {
+        if (foundUser && foundMonth) {
             axios.post(route('dashboard.show_user_mood'),
             {
                 month:foundMonth?.id,
-                user_id:user_id,
+                user_id:foundUser?.id,
             })
             .then(function (response)
             {
-                onMoodsChange(response.data);
+                setSelectedUser(foundUser)
+                setselectedMonth(foundMonth?.month);
+                setChildMoods(response.data)
             })
             .catch(function (error)
             {
                 console.error(error);
             })
         }
-    }
-
-    const onMoodsChange = (newMoods:Mood[]) => {
-        lineMoods = useMemo(()=>newMoods.map(({start,mood_level})=>({name:moment(String(start)).format('MMM DD'),icon:mood_level})),[newMoods]);
     }
 
     const openUserFeedbackItem = (uFeedback:Feedback) => {
@@ -112,8 +114,8 @@ const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[], stress_results:Result[],
     }
 
     useEffect(()=>{
-        console.log(current_user)
-    }, [current_user])
+        //console.log(childMoods)
+    }, [childMoods])
 
     useEffect(()=>{
         if (user.level === 1) {
@@ -174,7 +176,7 @@ const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[], stress_results:Result[],
                                             <DropdownMenu>
                                                 <DropdownMenuTrigger asChild>
                                                     <Button variant="outline">
-                                                        <span>{users[0].name + "'s Mood Graph"}</span>
+                                                        <span>{selectedUser.name + "'s Mood Graph"}</span>
                                                     </Button>
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="start">
@@ -197,7 +199,7 @@ const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[], stress_results:Result[],
                                                 <DropdownMenuContent align="start">
                                                     {
                                                         months.map(m=>
-                                                        <DropdownMenuItem key={m.id} onClick={() => onAdminMonthChange(m.id)}>
+                                                        <DropdownMenuItem key={m.id} onClick={() => onUserChange(selectedUser.id,m.month)}>
                                                             {m.month}
                                                         </DropdownMenuItem>)
                                                     }
