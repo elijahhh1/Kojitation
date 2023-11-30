@@ -83,11 +83,17 @@ class VideoController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Video $video)
+    
+    public function destroy(Request $request)
     {
-        //
+        
+        if(Auth::user()->level!=1) abort(403);
+        
+        $video = Video::findOrFail($request->id);
+        
+        
+        @unlink(public_path($video->getAttributes()['path']));
+        
+        $video->delete();
     }
 }

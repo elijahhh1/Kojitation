@@ -119,10 +119,10 @@
 .control-dots {
     bottom: -10px !important;
 }
-
+/* 
 .carousel {
     @apply !h-[24rem]
-}
+} */
 
 /* .carousel.carousel-slider{
   @apply !relative

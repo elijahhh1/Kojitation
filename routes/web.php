@@ -67,6 +67,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('videos')->name('videos.')->group(function () {
         Route::get('/', [VideoController::class, 'index'])->name('index');
         Route::post('/store', [VideoController::class, 'store'])->name('store');
+        Route::post('/destroy', [VideoController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('tasks')->name('tasks.')->group(function () {
