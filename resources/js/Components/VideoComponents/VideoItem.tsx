@@ -1,10 +1,10 @@
-import { Video } from '@/types'
+import { PageProps, Video } from '@/types'
 import { format } from 'date-fns';
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { Button } from '../ui/button';
 import { Loader2, Trash2 } from 'lucide-react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/Components/ui/alert-dialog';
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import { toast } from 'sonner';
 
 interface VideoItemProps{
@@ -12,6 +12,7 @@ interface VideoItemProps{
 }
 
 const VideoItem:FC<VideoItemProps> = ({video}) => {
+    const user = usePage<PageProps>().props.auth.user;
     
     const [showConfirmation,setShowConfirmation] = useState(false);
     const vid=useRef<HTMLVideoElement>(null);
@@ -22,9 +23,9 @@ const VideoItem:FC<VideoItemProps> = ({video}) => {
     return (
         <>
             <div className='w-full relative h-auto flex flex-col group'>
-                <Button onClick={()=>setShowConfirmation(true)} className='opacity-0 group-hover:opacity-100 transition duration-300 absolute top-6 right-6 z-50' size='icon' variant='destructive'>
+                {user.level===1&&  <Button onClick={()=>setShowConfirmation(true)} className='opacity-0 group-hover:opacity-100 transition duration-300 absolute top-6 right-6 z-50' size='icon' variant='destructive'>
                     <Trash2 className='h-5 w-5' />
-                </Button>
+                </Button>}
                 <p className='text-sm absolute top-0 inset-x-0 bg-gray-900/20 text-white truncate'>
                     {video.name}
                 </p>
