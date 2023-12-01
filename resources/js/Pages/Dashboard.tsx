@@ -239,6 +239,7 @@ const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[], stress_results:Result[],
                                             <div key={s.id} className='bg-white dark:bg-slate-600 p-4 rounded-md'>
                                                 <h1 className='text-sm mb-2 text-cyan-500 dark:text-cyan-300 font-bold'>{ s.user.name }</h1>
                                                 <button onClick={()=>openUserStressResultItem(s)} className='w-full mb-2'>
+                                                    <p className='text-left font-bold text-md my-1'>{s.description}</p>
                                                     <p className='text-left truncate'>{s.remarks}</p>
                                                 </button>
                                                 <p className='text-xs'>{moment(String(s.created_at)).format('MMM DD, yyyy hh:mm')}</p>
@@ -434,6 +435,7 @@ const ViewAdminUserStressResult:FC<{openStressResult:boolean|undefined, onClose:
                 <DialogDescription>
                     {moment(String(userStressResult?.created_at)).format('MMM DD, yyyy hh:mm')}
                 </DialogDescription>
+                <p className='text-left font-bold text-md'>{userStressResult?.description}</p>
                 {userStressResult?.remarks}
                 <DialogFooter>
                 </DialogFooter>

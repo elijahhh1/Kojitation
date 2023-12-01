@@ -8,9 +8,12 @@ import { ArrowRightSquare, EyeIcon, EyeOff, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import Spinner from '../Spinner'
 import { cn } from '@/lib/utils'
+import { Checkbox } from '../ui/checkbox'
 
 
 const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) => {
+
+    const [isAgree, setIsAgree] = useState(false);
 
     const {data,setData,processing,errors,reset,post} = useForm({
         name:"",
@@ -115,11 +118,22 @@ const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) =
                     </div>
                     {errors.password_confirmation && <p className='text-destructive text-xs text-right -mt-3'>{errors.password_confirmation}</p>}
                 </form>
-                <DialogFooter>
-                    <Button variant='outline' disabled={processing} size='sm' form='auth' type="submit" className='bg-[#86bdff] hover:bg-[#bfdcff] dark:hover:text-gray-900'>
+
+                <div className='flex items-center'>
+                    <div className='flex items-center'>
+                        <Checkbox id="agree" onCheckedChange={()=>isAgree?setIsAgree(true):setIsAgree(false)} 
+                            className='border-gray-700 mr-2' />
+
+                        <Label htmlFor='agree'>
+                            I agree to terms and user privacy
+                        </Label>
+                    </div>
+
+                    <Button variant='outline' disabled={processing?true:(isAgree?false:true)} size='sm' form='auth' type="submit" 
+                        className='bg-[#86bdff] hover:bg-[#bfdcff] dark:hover:text-gray-900 ml-auto'>
                         {processing ? <Spinner />: <ArrowRightSquare className='h-5 w-5' /> }
                     </Button>
-                </DialogFooter>
+                </div>
             </DialogContent>
         </Dialog>
     )
