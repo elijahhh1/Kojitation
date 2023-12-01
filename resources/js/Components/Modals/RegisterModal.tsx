@@ -1,12 +1,13 @@
-import React, { FC, FormEventHandler, useEffect, ChangeEventHandler } from 'react'
+import React, { FC, FormEventHandler, useEffect, ChangeEventHandler, useState } from 'react'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { useForm } from '@inertiajs/react'
-import { ArrowRightSquare, Loader2 } from 'lucide-react'
+import { ArrowRightSquare, EyeIcon, EyeOff, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import Spinner from '../Spinner'
+import { cn } from '@/lib/utils'
 
 
 const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) => {
@@ -40,6 +41,18 @@ const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) =
             },
             onError:(e)=>console.log(e)
         });
+    }
+
+    const [viewPassword, setViewPassword] = useState(false)
+    const ViewPasswordComponent = () => {
+        return(
+            <i onClick={()=>setViewPassword((!viewPassword))} className='absolute bottom-2 right-2 cursor-pointer w-6 h-6'>
+                <div className='relative'>
+                    <EyeIcon className={cn('absolute', viewPassword===true?'':'hidden')} />
+                    <EyeOff className={cn('absolute', viewPassword===false?'':'hidden')} />
+                </div>
+            </i>
+        )
     }
 
     return (
@@ -79,12 +92,15 @@ const RegisterModal:FC<{isOpen:boolean,onClose:()=>void}> = ({isOpen,onClose}) =
                     </div>
                     {errors.email && <p className='text-destructive text-xs text-right -mt-3'>{errors.email}</p>}
 
-                    <div className="flex flex-col items-start justify-center space-y-1.5">
+                    <div className="relative flex flex-col items-start justify-center space-y-1.5">
                         <Label htmlFor="password" className="text-right">
                             Password
                         </Label>
-                        <Input required type='password' value={data.password} onChange={({target})=>setData('password',target.value)} disabled={processing} id="password"
+                        <Input required type={viewPassword===true?'text':'password'} value={data.password} onChange={({target})=>setData('password',target.value)} disabled={processing} id="password"
                             className="col-span-3 dark:bg-[#bfdcff]" />
+                        <ViewPasswordComponent/>
+                    </div>
+                    <div>
                         <p className='m-0 text-gray-600 text-xs'>Password should have at least 8 characters</p>
                         <p className='m-0 text-gray-600 text-xs'>Password should contain at least 1 special character</p>
                     </div>

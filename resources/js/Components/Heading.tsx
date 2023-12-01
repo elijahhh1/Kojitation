@@ -38,7 +38,7 @@ const Heading:FC = () => {
                             <Button variant='outline' onClick={()=>setRegisterOpen(true)} className='bg-blue-200 dark:text-gray-900 mx-auto'>Hi! I'm a new user</Button>
                             <a href="#" onClick={onOpen} className='text-sm mx-auto hover:underline transition duration-300'>I already have an account</a>
 
-                            <Button onClick={()=>setResetPasswordOpen(true)} variant='link' className='text-muted-foreground text-sm italic' >Forgot Password? Click here to reset password</Button>
+                            {/* <Button onClick={()=>setResetPasswordOpen(true)} variant='link' className='text-muted-foreground text-sm italic' >Forgot Password? Click here to reset password</Button> */}
                         </div>
                         ):(
                         <Button onClick={()=>router.get(route('dashboard.index'))} className='mx-auto'>
@@ -75,7 +75,7 @@ const ResetPasswordModal:FC<ResetPasswordModalProps> = ({open,onClose}) =>{
             onError:()=>toast.error('Something went Wrong. Please try again')
         });
     }
-    
+
 
     const onSubmit:FormEventHandler<HTMLFormElement> = (e) =>{
         e.preventDefault();
@@ -113,10 +113,10 @@ const ResetPasswordModal:FC<ResetPasswordModalProps> = ({open,onClose}) =>{
                         <Input autoComplete='off' autoFocus required onChange={({target})=>setEmailData('email',target.value)} disabled={processingEmail || processing} />
                         <Button type='submit' className='font-semibold' disabled={processingEmail || processing}> {processingEmail && <Loader2 className='h-5 w-5 animate-spin' />} {emailSent&&'Re-'}Send{processingEmail&&'ing'} Email</Button>
                     </div>
-                    
+
                     <p className='text-destructive text-sm font-semibold'>{emailErrors.email&&emailErrors.email}</p>
                 </form>
-                
+
                 {
                     emailSent&&(
                         <form onSubmit={onSubmit} id='reset-form' className='flex flex-col gap-y-2 items-center'>
@@ -127,7 +127,7 @@ const ResetPasswordModal:FC<ResetPasswordModalProps> = ({open,onClose}) =>{
                         </form>
                     )
                 }
-                
+
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
                 </AlertDialogFooter>
