@@ -7,7 +7,9 @@ use App\Models\Mood;
 use App\Models\Dashboard;
 use App\Models\Result;
 use App\Models\SendFeedback;
+use App\Models\Task;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +32,8 @@ class DashboardController extends Controller
             'feedbacks' => SendFeedback::with(['user'])->get(),
             'stress_results' => Result::with(['user'])->get(),
             'users' => User::where('level', '!=', 1)->get(),
-            'current_user' => $user->id //for debugging purposes
+            'current_user' => $user->id, //for debugging purposes
+            'tasks' => Task::with(['task_items'])->where('user_id', Auth::id())->whereDate('target_date', '<=', now())->get()
         ]);
     }
 

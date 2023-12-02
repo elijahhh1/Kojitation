@@ -1,6 +1,6 @@
 import { Button } from '@/Components/ui/button';
 import DashboardLayout from '@/Layouts/DashboardLayout'
-import { Document, PageProps, Mood, Feedback, Result, User } from '@/types';
+import { Document, PageProps, Mood, Feedback, Result, User, Task } from '@/types';
 import { Head, router, usePage } from '@inertiajs/react'
 import { PlusCircle, X } from 'lucide-react';
 import {FC,useEffect,useMemo, useState} from 'react'
@@ -32,7 +32,8 @@ import { AlertDialog, AlertDialogPortal, AlertDialogTitle } from '@radix-ui/reac
 import { AlertDialogContent, AlertDialogHeader } from '@/Components/ui/alert-dialog';
 import axios from 'axios';
 
-const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[], stress_results:Result[], users:User[], current_user:any}> = ({moods,feedbacks,stress_results,users,current_user}) => {
+const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[], stress_results:Result[], users:User[], current_user:any, tasks:Task[]}> =
+({moods,feedbacks,stress_results,users,current_user,tasks}) => {
 
     const qParam = new URLSearchParams(window.location.search)
     const type = qParam.get("month")
@@ -114,8 +115,17 @@ const Dashboard:FC<{moods:Mood[], feedbacks:Feedback[], stress_results:Result[],
     }
 
     useEffect(()=>{
-        //console.log(childMoods)
-    }, [childMoods])
+        if(tasks.length>0) {
+            for (let i = 0; i < tasks.length; i++) {
+                const t = tasks[i];
+                if (t.target_date === moment(new Date).format('yyyy-MM-DD')){
+                    toast.info("Your task is due today : " + t.name);
+                }else{
+                    toast.error("You are overdue to your task : " + t.name);
+                }
+            }
+        }
+    }, [tasks])
 
     useEffect(()=>{
         if (user.level === 1) {

@@ -13,7 +13,7 @@ interface VideoItemProps{
 
 const VideoItem:FC<VideoItemProps> = ({video}) => {
     const user = usePage<PageProps>().props.auth.user;
-    
+
     const [showConfirmation,setShowConfirmation] = useState(false);
     const vid=useRef<HTMLVideoElement>(null);
     useEffect(()=>{
@@ -26,13 +26,16 @@ const VideoItem:FC<VideoItemProps> = ({video}) => {
                 {user.level===1&&  <Button onClick={()=>setShowConfirmation(true)} className='opacity-0 group-hover:opacity-100 transition duration-300 absolute top-6 right-6 z-50' size='icon' variant='destructive'>
                     <Trash2 className='h-5 w-5' />
                 </Button>}
-                <p className='text-sm absolute top-0 inset-x-0 bg-gray-900/20 text-white truncate'>
-                    {video.name}
-                </p>
                 <video ref={vid} controls className=' object-fill ' src={`${video.path}#t=5,5`} />
-                <p className='text-xs absolute bottom-0 inset-x-0 bg-gray-900/20 text-white truncate'>
-                    Uploaded On:&nbsp;{format(new Date(video.created_at),'PPpp')}
-                </p>
+
+                <div className='absolute flex items-center bottom-10 p-4 bg-gray-950/80 w-full opacity-0 group-hover:opacity-100 transition duration-300'>
+                    <p className='text-lg text-white truncate mr-4'>
+                        {video.name.split(".")[0]}
+                    </p>
+                    <p className='text-lg text-white truncate'>
+                        {format(new Date(video.created_at),"MMM dd, yyyy")}
+                    </p>
+                </div>
             </div>
             <DeleteConfirmation id={video.id} open={showConfirmation} onClose={()=>setShowConfirmation(false)} />
         </>
