@@ -5,12 +5,11 @@ import { Calendar } from '@/Components/ui/calendar';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/Components/ui/dialog';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
-import { Popover, PopoverContent, PopoverTrigger } from '@/Components/ui/popover';
+import { Popover, PopoverContent, PopoverTrigger,PopoverClose } from '@/Components/ui/popover';
 import DocumentsLayout from '@/Layouts/DocumentsLayout';
 import { cn } from '@/lib/utils';
 import { PageProps, Task } from '@/types';
 import { Head, useForm, usePage } from '@inertiajs/react';
-import { PopoverClose } from '@radix-ui/react-popover';
 import { format } from 'date-fns';
 import { CalendarIcon, CalendarPlus } from 'lucide-react';
 import { FC, FormEventHandler, ReactNode, useEffect, useRef } from 'react'
