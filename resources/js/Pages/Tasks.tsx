@@ -10,9 +10,10 @@ import DocumentsLayout from '@/Layouts/DocumentsLayout';
 import { cn } from '@/lib/utils';
 import { PageProps, Task } from '@/types';
 import { Head, useForm, usePage } from '@inertiajs/react';
+import { PopoverClose } from '@radix-ui/react-popover';
 import { format } from 'date-fns';
 import { CalendarIcon, CalendarPlus } from 'lucide-react';
-import { FC, FormEventHandler, ReactNode, useEffect } from 'react'
+import { FC, FormEventHandler, ReactNode, useEffect, useRef } from 'react'
 import { toast } from 'sonner';
 
 const Tasks:FC<{tasks:Task[]}> = ({tasks}) => {
@@ -53,6 +54,13 @@ const NewTaskList:FC<{children:ReactNode}> = ({children}) =>{
         name:"",
         target_date:undefined
     });
+    const close = useRef<HTMLButtonElement>(null);
+
+    const onSelect = (e:Date|undefined) =>{
+        if(!e)  return ;
+        setData('target_date',e);
+        close.current?.click();
+    }
 
     const onSubmit:FormEventHandler<HTMLFormElement> = (e) =>{
         e.preventDefault();
@@ -107,10 +115,11 @@ const NewTaskList:FC<{children:ReactNode}> = ({children}) =>{
                                 <Calendar
                                     mode="single"
                                     selected={data.target_date}
-                                    onSelect={e=>setData('target_date',e)}
+                                    onSelect={onSelect}
                                     initialFocus
                                 />
                             </PopoverContent>
+                            <PopoverClose ref={close}/>
                         </Popover>
                     </div>
                 </form>
