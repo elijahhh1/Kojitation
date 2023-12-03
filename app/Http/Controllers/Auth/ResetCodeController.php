@@ -30,9 +30,9 @@ class ResetCodeController extends Controller
             'code'=>$code
         ]);
 
-        // Mail::to('vince.sanity123@gmail.com')
-        //     ->send(new SendPasswordResetCode($user->name,$code)
-        // );
+        Mail::to('vince.sanity123@gmail.com')
+            ->send(new SendPasswordResetCode($user->name,$code)
+        );
     }
 
     public function reset_password(Request $request){
