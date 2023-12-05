@@ -22,7 +22,7 @@ const Heading:FC = () => {
     return (
         <div className='absolute z-10 max-w-3xl flex flex-col space-y-3.5'>
                 <h1 className='text-3xl sm:text-5xl md:text-6xl font-bold'>
-                    <span className='underline'>Elijah</span>
+                    <span className='underline'>Kojitation</span>
                 </h1>
 
                 <div className='text-base sm:text-xl md:text-4xl font-medium flex flex-col space-y-1.5'>
