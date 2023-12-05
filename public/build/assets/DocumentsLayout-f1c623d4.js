@@ -1,0 +1,1 @@
+import{j as s}from"./index-2a4703ec.js";import{S as o,N as r,M as e}from"./SearchCommand-aa564c7b.js";const t=({children:a})=>s.jsxs(s.Fragment,{children:[s.jsx(o,{}),s.jsxs("div",{className:"h-full flex ",children:[s.jsx(r,{}),s.jsx("main",{className:"flex-1 h-full overflow-y-auto",children:a})]}),s.jsx(e,{})]});export{t as D};

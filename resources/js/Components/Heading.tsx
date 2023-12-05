@@ -27,7 +27,7 @@ const Heading:FC = () => {
 
                 <div className='text-base sm:text-xl md:text-4xl font-medium flex flex-col space-y-1.5'>
                     <p className='font-bold'>Hello</p>
-                    <p>we are happy to be with you</p>
+                    <p>We are happy to be with you</p>
                     <p>in your small journey of</p>
                     <p>assessing <span className='font-bold'>stress</span> </p>
                 </div>
