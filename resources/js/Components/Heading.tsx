@@ -22,12 +22,12 @@ const Heading:FC = () => {
     return (
         <div className='absolute z-10 max-w-3xl flex flex-col space-y-3.5'>
                 <h1 className='text-3xl sm:text-5xl md:text-6xl font-bold'>
-                    <span className='underline'>{APP_NAME}</span>
+                    <span className='underline'>Kojitation</span>
                 </h1>
 
                 <div className='text-base sm:text-xl md:text-4xl font-medium flex flex-col space-y-1.5'>
                     <p className='font-bold'>Hello</p>
-                    <p>we are happy to be with you</p>
+                    <p>We are happy to be with you</p>
                     <p>in your small journey of</p>
                     <p>assessing <span className='font-bold'>stress</span> </p>
                 </div>
@@ -40,12 +40,14 @@ const Heading:FC = () => {
 
                             {/* <Button onClick={()=>setResetPasswordOpen(true)} variant='link' className='text-muted-foreground text-sm italic' >Forgot Password? Click here to reset password</Button> */}
                         </div>
-                        ):(
+                        ):(   
+                          
+                           
                         <Button onClick={()=>router.get(route('dashboard.index'))} className='mx-auto'>
-                            Enter {APP_NAME}
-                            <ArrowRight className='h-4 w-4 ml-2' />
-                        </Button>
-                    )
+                             Enter {APP_NAME}
+                             <ArrowRight className='h-4 w-4 ml-2' />
+                         </Button>
+                    )  
                 }
 
                 <RegisterModal isOpen={registerOpen} onClose={()=>setRegisterOpen(false)} />
