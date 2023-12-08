@@ -125,7 +125,7 @@ const ResetPasswordModal:FC<ResetPasswordModalProps> = ({open,onClose}) =>{
 
     const onSubmit:FormEventHandler<HTMLFormElement> = (e) =>{
         e.preventDefault();
-        post(route('reset_password'),{
+        post(route('reset_password',{email:emailData.email}),{
             onError:()=>toast.error('Something went Wrong. Please try again')
         });
     }
