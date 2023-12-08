@@ -40,12 +40,14 @@ const Heading:FC = () => {
 
                             {/* <Button onClick={()=>setResetPasswordOpen(true)} variant='link' className='text-muted-foreground text-sm italic' >Forgot Password? Click here to reset password</Button> */}
                         </div>
-                        ):(
+                        ):(   
+                          
+                           
                         <Button onClick={()=>router.get(route('dashboard.index'))} className='mx-auto'>
-                            Enter {APP_NAME}
-                            <ArrowRight className='h-4 w-4 ml-2' />
-                        </Button>
-                    )
+                             Enter {APP_NAME}
+                             <ArrowRight className='h-4 w-4 ml-2' />
+                         </Button>
+                    )  
                 }
 
                 <RegisterModal isOpen={registerOpen} onClose={()=>setRegisterOpen(false)} />
