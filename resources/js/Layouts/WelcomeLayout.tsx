@@ -41,11 +41,7 @@ const NavBar:FC = () =>{
                 )}>
                 <Logo />
                 <div className='md:ml-auto md:justify-end justify-between w-full flex items-center gap-x-2'>
-<<<<<<< HEAD
-                    {/* {user&&<Button onClick={()=>router.get(route('documents.index'))} variant='ghost'>Enter {APP_NAME}</Button>} */}
-=======
                    {/* {user&&<Button onClick={()=>router.get(route('documents.index'))} variant='ghost'>Enter {APP_NAME}</Button>} */}
->>>>>>> d775fe41aac6133927a781ba6866932e07854f97
                     {/* {!user?<Button onClick={onOpen} variant='ghost'>Log In</Button>: <UserNav />} */}
                     <ModeToggle />
                 </div>
