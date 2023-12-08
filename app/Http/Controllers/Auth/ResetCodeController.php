@@ -41,7 +41,10 @@ class ResetCodeController extends Controller
     {
         // Use Carbon to get the current time and subtract 60 minutes
         $one_hour_ago = Carbon::now()->subMinutes(60)->toDateTimeString();
-        $reset_code = PasswordResetCode::with(['user'])->where('code', $request->pin)->where('created_at', '>=', $one_hour_ago)->first();
+        $user = User::where('email', $email)->first();
+        $reset_code = PasswordResetCode::with(['user'])->where('user_id', $user->id)->where('code', $request->pin)
+            ->where('created_at', '<=', $one_hour_ago)
+            ->first();
 
         if (!$reset_code) throw ValidationException::withMessages(['pin' => 'This is either an Invalid Code or the Code has  already expired']);
         return Inertia::render('Auth/PasswordReset', [
