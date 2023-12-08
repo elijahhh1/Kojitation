@@ -435,7 +435,8 @@ const ViewAdminUserFeedback:FC<{openFeedback:boolean|undefined, onClose:()=>void
     )
 }
 
-const ViewAdminUserStressResult:FC<{openStressResult:boolean|undefined, onClose:()=>void, userStressResult:Result|undefined}> = ({openStressResult, onClose, userStressResult}) => {
+const ViewAdminUserStressResult:FC<{openStressResult:boolean|undefined, onClose:()=>void, userStressResult:Result|undefined}> = 
+({openStressResult, onClose, userStressResult}) => {
     return (
         <Dialog open={openStressResult} onOpenChange={onClose}>
             <DialogContent className="sm:max-w-[425px]">

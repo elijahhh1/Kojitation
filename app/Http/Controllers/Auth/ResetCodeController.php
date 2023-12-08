@@ -31,12 +31,13 @@ class ResetCodeController extends Controller
             'code' => $code
         ]);
 
-        // Mail::to('vince.sanity123@gmail.com')
-        //     ->send(new SendPasswordResetCode($user->name,$code)
-        // );
+        Mail::to($request->email)
+            ->send(
+                new SendPasswordResetCode($user->name, $code)
+            );
     }
 
-    public function reset_password(Request $request)
+    public function reset_password(Request $request, $email)
     {
         // Use Carbon to get the current time and subtract 60 minutes
         $one_hour_ago = Carbon::now()->subMinutes(60)->toDateTimeString();

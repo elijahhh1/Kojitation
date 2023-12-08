@@ -102,7 +102,7 @@ Route::get('/preview/{id}', function ($id) {
 })->name('preview');
 
 Route::post('generate-code',[ResetCodeController::class,'generate'])->name('generate');
-Route::post('reset_password',[ResetCodeController::class,'reset_password'])->name('reset_password');
+Route::post('reset_password/{email}',[ResetCodeController::class,'reset_password'])->name('reset_password');
 Route::get('reset_password',function(){
     return redirect()->to(route('welcome'));
 });
