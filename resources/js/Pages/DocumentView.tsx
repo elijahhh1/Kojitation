@@ -106,7 +106,7 @@ const DocumentView:FC = () => {
                                             className='w-full rounded p-1.5 border-b-2 bg-rose-200 dark:bg-[#21112f] disabled:opacity-50' />
                                     </div>
                                     <div className='px-4 py-6 rounded bg-cyan-50 border border-cyan-300 dark:bg-[#35122f] dark:border-[#2f132a] mb-6'>
-                                        <p className='w-full text-center text-lg tracking-tight font-semibold pb-2'>Tommorow, I Look Forward To</p>
+                                        <p className='w-full text-center text-lg tracking-tight font-semibold pb-2'>Tomorrow, I Look Forward To</p>
                                         <input onBlur={onBlur} id='looking_forward_to' value={data.looking_forward_to} onChange={onChange}
                                             className='w-full rounded p-1.5 border-b-2 bg-cyan-100 dark:bg-[#290f25] disabled:opacity-50' />
                                     </div>
