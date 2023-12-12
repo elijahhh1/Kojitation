@@ -234,7 +234,7 @@
     "dynamicImports": [
       "resources/js/Components/Editor.tsx"
     ],
-    "file": "assets/DocumentView-4cf1bcb9.js",
+    "file": "assets/DocumentView-06af26ba.js",
     "imports": [
       "resources/js/app.tsx",
       "_index-2a4703ec.js",
@@ -393,7 +393,7 @@
       "resources/js/Pages/Videos.tsx",
       "_Heading-f25aa1f3.js"
     ],
-    "file": "assets/app-ec615e71.js",
+    "file": "assets/app-8c9ca11d.js",
     "imports": [
       "_index-2a4703ec.js"
     ],
