@@ -24,9 +24,9 @@ const TaskListItem:FC<TaskListItem> = ({task}) => {
     const {data,setData,processing,reset,post} = useForm({
         name:task.name
     });
-    
+
     const [renaming,setRenaming] = useState(false);
-    
+
 
     const handleShowOptions:MouseEventHandler<HTMLDivElement> = (e) =>{
         e.preventDefault();
@@ -53,9 +53,9 @@ const TaskListItem:FC<TaskListItem> = ({task}) => {
 
     return (
         <>
-            <AccordionItem className='w-full' key={task.id} value={task.id.toString()}>
-                <AccordionTrigger className='w-full p-1.5 bg-primary-foreground mt-1 rounded-md'>
-                    
+            <AccordionItem className='w-full dark:bg-zinc-800 rounded shadow my-4' key={task.id} value={task.id.toString()}>
+                <AccordionTrigger className='w-full bg-gray-200 dark:bg-zinc-600 rounded-tl rounded-tr p-4'>
+
                     <div className='w-full flex items-center justify-between '>
                         <div className='capitalize font-bold tracking-tight flex items-center space-x-2'>
                             {
@@ -68,29 +68,29 @@ const TaskListItem:FC<TaskListItem> = ({task}) => {
                                     </form>
                                 ):(
                                     <>
-                                        <span>{task.name}</span>
                                         <TaskOptions  onFinish={()=>{}} onDelete={onDelete} onRename={()=>setRenaming(true)} >
                                             <div onClick={handleShowOptions} role='button' className='border rounded-md p-1 aspect-square hover:opacity-70 transition' >
                                                 <MoreHorizontal className="h-4 w-4" />
                                             </div>
                                         </TaskOptions>
+                                        <span>{task.name}</span>
                                     </>
                                 )
                             }
-                            
+
                         </div>
-                        <p>Target Date:&nbsp;<span className='font-semibold tracking-tight'>{!!task.target_date&&format(new Date(task.target_date),'PP')}</span></p>
+                        <p className='text-sm'>Target Date:&nbsp;<span className=''>{!!task.target_date&&format(new Date(task.target_date),'PP')}</span></p>
                     </div>
-                    
+
                 </AccordionTrigger>
-                <AccordionContent className='w-full py-3'>     
+                <AccordionContent className='w-full pb-0'>
                     <Table>
                         <TableHeader>
                             <TableRow>
                             <TableHead className='w-96'>Task Item</TableHead>
                             <TableHead >Status</TableHead>
                             <TableHead>Completed Date</TableHead>
-                            <TableHead className='text-right'>Actions</TableHead>
+                            <TableHead className='hidden text-right'>Actions</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -99,15 +99,15 @@ const TaskListItem:FC<TaskListItem> = ({task}) => {
                             }
                         </TableBody>
                     </Table>
-                    <Button onClick={()=>onOpen(id)} size='sm' variant='outline' className='flex space-x-2.5 items-center justify-center'>
+                    <Button onClick={()=>onOpen(id)} size='sm' className='bg-gradient-to-r from-cyan-500 to-blue-500 flex space-x-2.5 items-center justify-center mt-4'>
                         <PlusSquare className='h-5 w-5' />
                         <span>Add A New Task</span>
                     </Button>
                 </AccordionContent>
             </AccordionItem>
-            
-            
-            
+
+
+
         </>
     )
 }

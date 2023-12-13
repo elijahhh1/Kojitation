@@ -435,7 +435,7 @@ const ViewAdminUserFeedback:FC<{openFeedback:boolean|undefined, onClose:()=>void
     )
 }
 
-const ViewAdminUserStressResult:FC<{openStressResult:boolean|undefined, onClose:()=>void, userStressResult:Result|undefined}> = 
+const ViewAdminUserStressResult:FC<{openStressResult:boolean|undefined, onClose:()=>void, userStressResult:Result|undefined}> =
 ({openStressResult, onClose, userStressResult}) => {
     return (
         <Dialog open={openStressResult} onOpenChange={onClose}>

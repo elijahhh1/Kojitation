@@ -15,11 +15,11 @@ interface TaskContainerProps{
 
 const TaskContainer:FC<TaskContainerProps> = ({tasks,className}) => {
 
-    
+
 
     return (
         <>
-            <div className={cn('px-3.5 bg-background/70 overflow-x-hidden',className)}>
+            <div className={cn('p-4 lg:p-10 bg-background/70 overflow-x-hidden',className)}>
                 <Accordion type="single" defaultValue={tasks[0].id.toString()} collapsible className="w-full">
                     {tasks.map(task=><TaskListItem key={task.id} task={task} />)}
                 </Accordion>

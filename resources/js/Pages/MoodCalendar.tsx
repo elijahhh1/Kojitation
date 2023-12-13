@@ -61,7 +61,8 @@ const MoodCalendar:FC<{moods:Mood[]}> = ({moods}) => {
                         <p className='md:flex-1 font-bold tracking-tight text-xl text-start pl-7 md:pl-0 md:text-3xl md:text-center'>Mood Calendar</p>
 
                         <Button onClick={handleOpen} size='sm' variant='outline'>
-                            <PlusCircle  className='w-5 h-5' />
+                            <PlusCircle  className='w-5 h-5 mr-2' />
+                            <p>Add Mood</p>
                         </Button>
 
                     </div>

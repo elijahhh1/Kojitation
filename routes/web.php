@@ -72,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('tasks')->name('tasks.')->group(function () {
         Route::get('/', [TaskController::class, 'index'])->name('index');
+        Route::get('/updateTaskIntro', [TaskController::class, 'updateTaskIntro'])->name('update_task');
         Route::post('/store', [TaskController::class, 'store'])->name('store');
         Route::post('/destroy/{id}', [TaskController::class, 'destroy'])->name('destroy');
         Route::post('/update/{id}', [TaskController::class, 'update'])->name('update');
@@ -101,14 +102,14 @@ Route::get('/preview/{id}', function ($id) {
     ]);
 })->name('preview');
 
-Route::post('generate-code',[ResetCodeController::class,'generate'])->name('generate');
-Route::post('reset_password/{email}',[ResetCodeController::class,'reset_password'])->name('reset_password');
-Route::get('reset_password',function(){
+Route::post('generate-code', [ResetCodeController::class, 'generate'])->name('generate');
+Route::post('reset_password/{email}', [ResetCodeController::class, 'reset_password'])->name('reset_password');
+Route::get('reset_password', function () {
     return redirect()->to(route('welcome'));
 });
-Route::post('password_confirmation',[ResetCodeController::class,'password_confirmation'])->name('password_confirmation');
+Route::post('password_confirmation', [ResetCodeController::class, 'password_confirmation'])->name('password_confirmation');
 
-Route::get('/test',function(){
+Route::get('/test', function () {
     return Inertia::render('Auth/PasswordReset');
 });
 

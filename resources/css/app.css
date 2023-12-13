@@ -93,7 +93,7 @@
 }
 
 .rbc-calendar {
-  @apply !h-[30rem]
+  @apply !h-[35rem]
 }
 
 .rbc-off-range-bg{
@@ -119,7 +119,7 @@
 .control-dots {
     bottom: -10px !important;
 }
-/* 
+/*
 .carousel {
     @apply !h-[24rem]
 } */

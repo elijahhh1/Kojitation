@@ -9,10 +9,13 @@ import { Popover, PopoverContent, PopoverTrigger,PopoverClose } from '@/Componen
 import DocumentsLayout from '@/Layouts/DocumentsLayout';
 import { cn } from '@/lib/utils';
 import { PageProps, Task } from '@/types';
-import { Head, useForm, usePage } from '@inertiajs/react';
+import { Head, router, useForm, usePage } from '@inertiajs/react';
+import { AlertDialog, AlertDialogTitle } from '@radix-ui/react-alert-dialog';
+import { AlertDialogContent, AlertDialogHeader } from '@/Components/ui/alert-dialog';
 import { format } from 'date-fns';
 import { CalendarIcon, CalendarPlus } from 'lucide-react';
-import { FC, FormEventHandler, ReactNode, useEffect, useRef } from 'react'
+import { FC, FormEventHandler, ReactNode, useEffect, useRef, useState } from 'react'
+import { Carousel } from 'react-responsive-carousel';
 import { toast } from 'sonner';
 
 const Tasks:FC<{tasks:Task[]}> = ({tasks}) => {
@@ -25,7 +28,7 @@ const Tasks:FC<{tasks:Task[]}> = ({tasks}) => {
                     <header className='flex items-center h-12 border-b border-b-muted-foreground relative'>
                         <h1 className='text-center text-2xl font-semibold tracking-tight flex-1'>{user.name}'s Tasks</h1>
                         <NewTaskList>
-                            <Button onClick={()=>{}} size='sm' className='z-[10000000] font-medium text-md flex space-x-2 items-center justify-center absolute top-1 right-1' variant='outline'> 
+                            <Button onClick={()=>{}} size='sm' className='z-[10000000] font-medium text-md flex space-x-2 items-center justify-center absolute top-1 right-1' variant='outline'>
                                 <CalendarPlus className='h-5 w-5' />
                                 <span>New Task List</span>
                             </Button>
@@ -39,6 +42,7 @@ const Tasks:FC<{tasks:Task[]}> = ({tasks}) => {
                         )
                     }
                 </div>
+                <TaskIntroModal/>
             </DocumentsLayout>
             <NewTaskItemModal />
         </>
@@ -64,7 +68,7 @@ const NewTaskList:FC<{children:ReactNode}> = ({children}) =>{
     const onSubmit:FormEventHandler<HTMLFormElement> = (e) =>{
         e.preventDefault();
         if(data.name.length<1) return toast.error('Name is Empty');
-        if(!data.target_date) return toast.error('Set the Target Date');   
+        if(!data.target_date) return toast.error('Set the Target Date');
         post(route('tasks.store'),{
             onSuccess:()=>{
                 toast.success('Task List Created! Add New Task To the List!');
@@ -128,4 +132,48 @@ const NewTaskList:FC<{children:ReactNode}> = ({children}) =>{
             </DialogContent>
         </Dialog>
     );
+}
+
+
+const TaskIntroModal:FC = () => {
+    const user = usePage<PageProps>().props.auth.user;
+
+    const [isOpen, setIsOpen] = useState((user.show_task==1)?false:true);
+
+    const updateIntroduction = () => {
+        router.get(route('tasks.update_task'));
+        setIsOpen(false);
+    }
+
+    return (
+        <AlertDialog open={isOpen}>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogTitle className='flex items-center'>
+                        <span className='text-center text-primary text-lg font-medium'>Task Tips</span>
+                    </AlertDialogTitle>
+                </AlertDialogHeader>
+
+                <div>
+                    To ensure organized task management, please follow these steps:
+                    <ul className='list-decimal px-4 text-sm space-y-4 my-5'>
+                       <li>
+                       Create a Task List by navigating to the 'Task Lists' button.
+                       </li>
+                       <li>
+                       Once the Task List is created, proceed to the 'Task Items' button.
+                       </li>
+                       <li>
+                       Now, you can create a Task Item within the selected Task List.
+                       </li>
+                       <li>
+                       Fill in the necessary details for the Task Item you desire to complete the process.
+                       </li>
+                    </ul>
+                </div>
+                <Button onClick={updateIntroduction}>Got it!</Button>
+
+            </AlertDialogContent>
+        </AlertDialog>
+    )
 }
